@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Morilog\Jalali\Facades\jDate;
 
-class TagTableSeeder extends Seeder
+class TagsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

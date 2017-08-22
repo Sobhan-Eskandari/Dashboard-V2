@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Morilog\Jalali\Facades\jDate;
 
-class PostTableSeeder extends Seeder
+class PostsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

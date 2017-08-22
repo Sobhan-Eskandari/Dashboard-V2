@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Morilog\Jalali\Facades\jDate;
 
-class FriendTableSeeder extends Seeder
+class FriendsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Morilog\Jalali\Facades\jDate;
 use Faker\Factory as Faker;
 
-class InboxTableSeeder extends Seeder
+class InboxesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

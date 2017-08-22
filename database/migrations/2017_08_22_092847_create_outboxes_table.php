@@ -14,8 +14,16 @@ class CreateOutboxesTable extends Migration
     public function up()
     {
         Schema::create('outboxes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('inbox_id');
+            $table->string('subject');
+            $table->text('message');
+            $table->unsignedBigInteger('created_by')->nullable(true);
+//            $table->dateTime('created_at')->nullable(true);
+//            $table->dateTime('updated_at')->nullable(true);
+//            $table->dateTime('deleted_at')->nullable(true);
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable(true);
         });
     }
 

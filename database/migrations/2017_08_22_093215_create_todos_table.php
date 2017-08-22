@@ -14,8 +14,14 @@ class CreateTodosTable extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->text('task')->nullable(false);
+            $table->boolean('done')->default(false);
+            $table->unsignedBigInteger('user_id')->nullable(false);
+//            $table->dateTime('created_at')->nullable(true);
+//            $table->dateTime('updated_at')->nullable(true);
             $table->timestamps();
+            $table->timestamp('done_at')->nullable(true);
         });
     }
 
