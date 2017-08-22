@@ -174,6 +174,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -247,7 +248,7 @@ return [
         'jDate' => Morilog\Jalali\Facades\jDate::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 
