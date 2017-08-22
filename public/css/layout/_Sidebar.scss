@@ -1,0 +1,104 @@
+/* ============[ Main Body ]=========== */
+#MainBody{
+  margin-top: 80px;
+}
+
+/* ============[ Side Bar ]=========== */
+.Sidebar{
+  background-color: $sormeieTire;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid #eee;
+}
+
+/* ============[ Sidebar Logo ]=========== */
+.Sidebar_logo{
+  display: flex;
+  border-bottom: 1px solid grey;
+  height: 64px;
+  transition: all 0.3s ease;
+
+  h1{
+    font-size: 20px;
+    text-align: right;
+    font-weight: $font-weight--light;
+    line-height: 60px;
+    position: absolute;
+    right: 95px;
+  }
+  img{
+    width: 55px;
+    height: 50px;
+    position: absolute;
+    top: 5px;
+    right: 30px;
+  }
+
+  &:hover{
+    -webkit-filter: brightness(150%);
+  }
+}
+
+/* ============[ Fixing the menu styles after adding wave jquery ]=========== */
+#home,#posts,#gallery,#messages,#users,#comments,#admins,#settings,#backup{
+  width: 100%;
+  box-shadow: none;
+  text-align: right;
+  transition: all 0.3s ease;
+  padding-left: 30px;
+  padding-right: 20px;
+
+  &:hover,&:focus{
+    .Sidebar_menu_link{
+      color: #12a3d9 !important;
+      text-decoration: none !important;
+    }
+  }
+}
+
+/* ============[ Submenu styling of navigation menu ]=========== */
+.Sidebar_menu_link{
+  color: whitesmoke !important;
+  text-decoration: none;
+  text-align: right;
+  transition: color 0.3s ease;
+  font-weight: $font-weight--thin;
+  font-size: 17px;
+
+  &:hover,&:focus{
+    color: #12a3d9 !important;
+    text-decoration: none !important;
+  }
+
+  .fa-chevron-left{
+    float: left;
+  }
+
+  .countBadge{
+    font-weight: $font-weight--thin;
+    padding-top: 6px;
+  }
+}
+
+/* ============[ Submenu styling of navigation menu ]=========== */
+.subMenu{
+  color: #b0b7c7;
+  padding-right: 65px;
+  font-size: 15px;
+  cursor: pointer;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  list-style: none;
+  transition: all 0.3s ease;
+
+  &:hover, &:focus{
+    color: #12a3d9 !important;
+    text-decoration: none !important;
+  }
+}

@@ -1,0 +1,327 @@
+.hi-profileCard {
+  border-radius: 8px;
+  box-shadow: 0 0 5px $darkGray;
+}
+
+.card-header.hi-profileCard_cardHeader {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.hi-profileCard_cardHeader {
+  height: auto;
+  padding-top: 44.8px;
+  padding-bottom: 44.8px;
+  background-color: #546e7a;
+}
+
+.hi-profileCard_PictureSelectorBox {
+  margin-top: -72px;
+}
+
+.hi-profileCard_PictureSelectorBox_picture {
+  border-radius: 62px;
+  border: 4px solid white;
+}
+
+/* Zoom In #1 */
+.hi-profileCard_PictureSelectorBox_pictureBox_hover figure img {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.hi-profileCard_PictureSelectorBox_pictureBox_hover figure:hover img {
+  -webkit-transform: scale(1.03);
+  transform: scale(1.03);
+}
+.hi-profileCard_PictureSelectorBox_selector_first{
+  margin-left: -17px;
+}
+.hi-profileCard_PictureSelectorBox_selector {
+  /* --- RESET --- */
+  ul {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 10px;
+    vertical-align: baseline;
+  }
+
+  .dropdown {
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -ms-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+    position: relative;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+.col-4{
+  border: 1px solid red;
+  background-color: #00acc1;
+}
+  .dropdown:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+  }
+
+  .dropdown select {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 10px;
+  }
+
+  /* --- DEMO METRO THEME --- */
+
+  /* PREFIXED CSS */
+
+  .metro,
+  .metro div,
+  .metro li,
+  .metro div::after,
+  .metro .carat,
+  .metro .carat:after,
+  .metro .selected::after,
+  .metro:after {
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -ms-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+  }
+  .metro .selected::after,
+  .metro.scrollable div::after {
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    -ms-pointer-events: none;
+    pointer-events: none;
+  }
+
+  /* WRAPPER */
+
+  .metro {
+    position: relative;
+    width: 103px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    font-weight: 200;
+    background: white;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .metro.open {
+    z-index: 2;
+  }
+
+  .metro:after {
+    content: '';
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    top: 2px;
+    width: 30px;
+    background: transparent;
+  }
+
+  /*change squere carat color*/
+
+  .metro.focus:after {
+    background-color: transparent;
+  }
+
+  /* CARAT */
+
+  .metro .carat,
+  .metro .carat:after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    margin-top: -4px;
+    border: 8px solid transparent;
+    border-top: 8px solid #000;
+    z-index: 2;
+    -webkit-transform-origin: 50% 20%;
+    -moz-transform-origin: 50% 20%;
+    -ms-transform-origin: 50% 20%;
+    transform-origin: 50% 20%;
+  }
+
+  .metro .carat:after {
+    margin-top: -10px;
+    left: -8px;
+    border-top-color: white;
+    /* change the color of apart of carat*/
+  }
+
+  .metro:hover .carat:after {
+    border-top-color: white;
+  }
+
+  .metro.focus .carat {
+    border-top: 8px solid #000;
+  }
+
+  .metro.focus .carat:after {
+    border-top-color: white;
+  }
+
+  .metro.open .carat {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  /* OLD SELECT (HIDDEN) */
+
+  .metro .old {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+  }
+
+  .metro select {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+
+  .metro.touch select {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  /* SELECTED FEEDBACK ITEM */
+
+  .metro .selected,
+  .metro li {
+    display: block;
+    font-size: 12px;
+    line-height: 1;
+    color: #000;
+    padding: 9px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .metro span {
+    text-align: right;
+  }
+
+  .metro .selected::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    border-radius: 0 2px 2px 0;
+  }
+  /* DROP DOWN WRAPPER */
+
+  .metro div {
+    position: absolute;
+    height: 0;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin-top: -1px;
+    background: white;
+    overflow: hidden;
+    opacity: 0;
+    border: 1px solid #3B4452;
+  }
+
+  .metro:hover div {
+    background: white;
+  }
+
+  /* Height is adjusted by JS on open */
+
+  .metro.open div {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  /* FADE OVERLAY FOR SCROLLING LISTS */
+
+  .metro.scrollable div::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    box-shadow: inset 0 -50px 30px -35px #f8f8f8;
+  }
+
+  .metro.scrollable:hover div::after {
+    box-shadow: inset 0 -50px 30px -35px #f4f4f4;
+  }
+
+  .metro.scrollable.bottom div::after {
+    opacity: 0;
+  }
+
+  /* DROP DOWN LIST */
+
+  .metro ul {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    overflow: hidden;
+  }
+
+  .metro.scrollable.open ul {
+    overflow-y: auto;
+  }
+
+  /* DROP DOWN LIST ITEMS */
+
+  .metro li {
+    list-style: none;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 12px !important;
+  }
+
+  /* .focus class is also added on hover */
+
+  .metro li.focus {
+    background: #3B4452;;
+    position: relative;
+    z-index: 3;
+    color: #fff;
+  }
+
+  .metro li.active {
+    background: #3B4452;
+    color: #fff;
+  }
+}
+
+.hi-profileCard_formBox_input {
+  border: 1px solid $light-text;
+}
+
+.hi-profileCard_formBox_input:focus {
+  border: 1px solid #3B4452;
+}

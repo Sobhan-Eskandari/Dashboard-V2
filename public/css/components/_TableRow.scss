@@ -1,0 +1,90 @@
+/* ============[ Global Table Stykes ]=========== */
+.admins_trashTable,.comments_table,.comments_trashTable,
+.media_table,.media_trashTable,.messages_inbox_table,
+.messages_inbox_trashTable,.messages_outbox_trashTable,.messages_outbox_table
+,.posts_table,.posts_trashTable,.sliders_table,.users_table,.users_trashTable{
+  direction: rtl;
+  text-align: right;
+  width: 100%;
+
+  /* ==========[ Table Header Style ]========= */
+  th{
+    text-align: center;
+    font-weight: $font-weight--bold;
+  }
+  .table_tableHeader{
+    background-color: $sormeieRoshan !important;
+
+    th{
+      padding: 12px;
+    }
+  }
+
+  td{
+    text-align: center;
+    font-weight: $font-weight--thin;
+    vertical-align: middle;
+    border-top: transparent;
+
+    /* ==========[ More button right border ]========= */
+    &:last-child{
+      border-right: 1px solid #C6CBD0;
+    }
+  }
+
+  /* ==========[ Each Table Row Style ]========= */
+  tr{
+    border: 1px solid #C6CBD0;
+  }
+  .active_row{
+    background-color: #D7DFE8;
+  }
+}
+
+/* ==========[ Table Dropdown Style ]========= */
+.table_dropDown{
+  .dropdown-menu{
+    min-width: 7rem !important;
+  }
+
+  .dropdown-toggle::after{
+    content: ' ' !important;
+    display: none;
+  }
+}
+.slider_table_dropDown{
+  line-height: 1.0 !important;
+
+  #dropdownMenuButton{
+    color: black !important;
+    border: 1px solid lightgray !important;
+    border-radius: 0px !important;
+
+    &:hover{
+      -webkit-filter: brightness(100%) !important;
+    }
+  }
+  .dropdown-menu{
+    min-width: 3rem !important;
+  }
+  .dropdown-toggle::after{
+    font-family: "FontAwesome";
+    display: none;
+  }
+  .dropdown-divider{
+    margin-top: -5px !important;
+  }
+}
+
+/* ==========[ Users Table Style ]========= */
+.userInfoPlace{
+  display: flex;
+}
+.username{
+  margin: auto 10px;
+}
+
+.userConfirmTick{
+  width: 30px;
+  height: 20px;
+}

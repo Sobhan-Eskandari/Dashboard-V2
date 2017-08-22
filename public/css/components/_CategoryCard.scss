@@ -1,0 +1,100 @@
+.hi-roundedDashboardTagsTable td {
+  border-left: 1px solid transparent;
+  border-top: 1px solid black;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.hi-roundedDashboardTagsTable tr {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding-right: 0;
+}
+
+.hi-roundedDashboardTagsTable tr:nth-child(2n) {
+  background-color: $light-row-table;
+  border: 1px solid $light-row-table;
+}
+
+a:focus, a:hover {
+  text-decoration: none;
+}
+
+.hi-roundedDashboardTagsTable thead td {
+  border-top: 1px solid transparent;
+}
+
+.hi-roundedDashboardTagsTable thead td {
+  border-top: 1px solid transparent;
+}
+
+.hi-roundedDashboardTagsTable tbody tr:last-child td:last-child {
+  border-bottom-left-radius: 8px;
+  border-left: 1px solid transparent;
+}
+
+.hi-roundedDashboardTagsTable tbody tr:last-child td:first-child {
+  border-bottom-right-radius: 8px;
+  border-right: 1px solid transparent;
+  border-bottom-width: thin;
+}
+
+.hi-roundedDashboardTagsTable tbody:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.hi-roundedDashboardTagsTable tbody tr:last-child {
+  border-bottom: 1px solid transparent;
+  border-bottom-width: inherit;
+}
+
+/* ============[ edit & delete]=========== */
+
+.hi-roundedDashboardTagsTable_tbody_tr_td_edit a {
+  color: $edit-button;
+}
+
+.hi-roundedDashboardTagsTable_tbody_tr_td_delete a {
+  color: $delete;
+  margin-left: 10px;
+}
+
+/* ============[ check box ]=========== */
+
+.hi-roundedDashboardTagsTable_tbody_tr_td_li_square-checkbox {
+  cursor: pointer;
+}
+
+.hi-roundedDashboardTagsTable_tbody_tr_td_li_square-checkbox span {
+  line-height: 24px;
+}
+
+.hi-roundedDashboardTagsTable_tbody_tr_td_li_square-checkbox span::before {
+  margin-right: 4px;
+  padding-left: 1px;
+  width: 21px;
+  height: 21px;
+  border: 2px solid grey;
+  display: inline-block;
+  line-height: 14px;
+  content: '';
+  float: right;
+  border-radius: 5px;
+}
+
+.hi-roundedDashboardTagsTable_tbody_tr_td_li_square-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.hi-roundedDashboardTagsTable_tbody_tr_td_li_square-checkbox input[type="checkbox"]:checked + span::before {
+  font-family: FontAwesome;
+  content: "\f00c";
+  color: $navyBlue;
+}
+
+.hi-roundedDashboardTagsTable_tbody_tr_td_li {
+  list-style-type: none;
+}
+
+

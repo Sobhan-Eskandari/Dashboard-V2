@@ -1,0 +1,84 @@
+.ListCellWithIcon{
+  padding: 0 15px 5px 15px;
+}
+.ListCellWithIcon__Icon{
+  padding: 10px 15px 0 0;
+  text-align: center;
+}
+.ListCellWithIcon__Icon img{
+  width: 50px;
+  height: 50px;
+  transition: all 1s ease !important;
+}
+.ListCellWithIcon__Icon img:hover{
+  border: 1px solid #98a6ad;
+}
+.Card-Box{
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-clip: padding-box;
+}
+.Card-Box__text{
+  margin: 2px 0;
+}
+.Card-Box_dayMode{
+  background-color: #fff;
+}
+.Card-Box_dayMode_cardTitle{
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+}
+.Card-Box_dayMode_title{
+  color: whitesmoke;
+}
+.Card-Box_dayMode_text{
+  color: #a0a0a0;
+  font-size: 12px;
+  direction: rtl;
+}
+.nightMode_line{
+  background-color: #45525A;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.dayMode_line{
+  background-color: #f1f1f1;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.Card-Box_nightMode{
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background-color: #323b44;
+}
+.Card-Box_nightMode_cardTitle{
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+}
+.Card-Box_nightMode_title{
+  color: #f5f5f5;
+}
+.Card-Box_nightMode_text{
+  color: #98a6ad;
+  font-size: 12px;
+}
+.inbox_btn{
+  background-color: whitesmoke;
+  border: transparent;
+  color: #3D4E9F;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  position: absolute;
+  left: 20%;
+  top: 25%;
+}
+.Card_Header{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}

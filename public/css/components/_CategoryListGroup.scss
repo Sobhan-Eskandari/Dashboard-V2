@@ -1,0 +1,81 @@
+/* ============[ category box ]=========== */
+#hi-categoryListGroupFlip, #hi-CategoryListGroupPanel{
+  padding: 0;
+  text-align: center;
+}
+#categoriesList,#tagsList{
+  padding: 5px;
+  border-radius: 10px 10px 0 0;
+  color: $dark-text;
+  border: 1px solid $light-row-table;
+}
+#hi-CategoryListGroupPanel{
+  padding: 0px;
+  border: 1px solid $light-row-table;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.hi-categoryListGroup{
+  border-radius: 10px;
+  padding: 0;
+  width: 300px;
+  box-shadow: 0  0 5px $light-row-table;
+}
+.hi-categoryListGroup li:last-child {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.hi-categoryListGroup li{
+  border-color: transparent;
+  color : gray;
+}
+
+.hi-categoryListGroup li.categoryListGroupButton{
+  height: 50px;
+  border-top: 1px solid $light-row-table;
+}
+/* ============[ check box ]=========== */
+
+.hi-categoryListGroup_li_square-checkbox {
+  cursor: pointer;
+}
+
+.hi-categoryListGroup_li_square-checkbox span {
+  line-height: 24px;
+  color : gray;
+  font-weight: 400;
+}
+
+.hi-categoryListGroup_li_square-checkbox span::before {
+  padding-left: 1px;
+  width: 21px;
+  height: 21px;
+  border: 2px solid gray;
+  display: inline-block;
+  line-height: 14px;
+  content: '';
+  float: right;
+  border-radius: 5px;
+}
+
+.hi-categoryListGroup_li_square-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.hi-categoryListGroup_li_square-checkbox input[type="checkbox"]:checked + span::before {
+  font-family: FontAwesome;
+  content: "\f00c";
+  color: gray;
+}
+
+/* ============[ search form ]=========== */
+
+.searchFormListGroup , .searchFormListGroup:focus{
+  border-radius: 0;
+  border : 1px solid transparent;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+}
+.iconClose-2{
+  color: red;
+}

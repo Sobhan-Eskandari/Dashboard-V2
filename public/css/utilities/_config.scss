@@ -1,0 +1,82 @@
+// ==========================================================================
+// Global Config
+// ==========================================================================
+
+// Font Stacks
+@import url('../Resources/css/Font/fontiran.css'); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+
+body {
+  font-family: IRANSans !important;
+  font-weight: 300;
+  margin: 0;
+}
+h1, h2, h3, h4, h5, h6,input, textarea,button {
+  font-family: IRANSans !important;
+}
+$font-family--primary    : 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family--secondary  : 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// Font Weights
+
+$font-weight--thin       : 100;
+$font-weight--light      : 300;
+$font-weight--medium     : 400;
+$font-weight--bold       : 700;
+$font-weight--ultra-bold : 900;
+
+// Descriptive Base Colors
+
+$sormeieRoshan  : #3B4452;
+$sormeieTire    : #1F232C;
+$topBar_searchColor : #656c76;
+
+
+// Input Placeholder Colors
+::-webkit-input-placeholder { /* Chrome */
+  color: white;
+  opacity: 0.6;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+  opacity: 0.6;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  opacity: 0.6;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: white;
+  opacity: 0.6;
+}
+
+// Text
+
+$base__font-size : 16px;
+$base__line      : 24px;
+$letter-space    : 1px;
+
+// Border radius
+
+$br--default    : .4em;
+$br--round      : 50%;
+
+// Transitions
+
+$trns-duration  : .3s;
+
+// Path to Assets
+
+$path--rel      : "../img";
+
+// Grid
+
+$g-col-width    : 65px !default;
+$g-gutter-width : 20px !default;
+$g-col-count    : 12 !default;
+$g-cont-max-w   : 1050px !default;
+
+// Breakpoints
+
+$brkpoint--sm    : 1px;
+$brkpoint--md    : 768px;
+$brkpoint--lg    : 1100px;

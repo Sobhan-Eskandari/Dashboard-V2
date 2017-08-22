@@ -1,0 +1,27 @@
+/* ============[ create post textarea ]=========== */
+.writeCreatePostBox {
+  width: 100%;
+}
+/* ============[ create post label ]=========== */
+.createPostLabel {
+  font-weight: 600;
+}
+/* ============[ create post button ]=========== */
+.createPostAddFileButton, .createPostAddFileButton:focus, .createPostAddFileButton:hover {
+  background-color: white;
+  color: $confirm-button;
+  border: 1px solid $light-text;
+}
+
+.createPostAddFileButton:focus {
+  box-shadow: 0 0 0 2px rgba($light-text, .5);
+}
+
+.createPostPublicationButton, .createPostPublicationButton:focus, .createPostPublicationButton:hover {
+  background-color: $confirm-button;
+  border-radius: 8px;
+}
+
+.createPostPublicationButton:focus {
+  box-shadow: 0 0 0 2px rgba($confirm-button, .5);
+}

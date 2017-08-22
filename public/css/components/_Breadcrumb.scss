@@ -1,0 +1,152 @@
+// breakpoints
+
+$S:     480px;
+$M:     768px;
+$L:     1170px;
+
+// media queries
+
+@mixin MQ($canvas) {
+  @if $canvas == S {
+    @media only screen and (min-width: $S) { @content; }
+  }
+  @else if $canvas == M {
+    @media only screen and (min-width: $M) { @content; }
+  }
+  @else if $canvas == L {
+    @media only screen and (min-width: $L) { @content; }
+  }
+}
+
+// center vertically and/or horizontally an absolute positioned element
+
+@mixin center($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    @include transform(translateX(-50%) translateY(-50%));
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    @include transform(translateX(-50%));
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    @include transform(translateY(-50%));
+  }
+}
+
+
+// colors
+
+$color-1: #2c3f4c; // Pickled Bluewood
+$color-2: #96c03d; // Sushi
+$color-3: #ffffff; // White
+$color-4: #edeff0; // Porcelain
+
+.cd-breadcrumb, .cd-multi-steps {
+  width: 90%;
+  max-width: $M;
+  float: right;
+  padding: 0 20px 10px 20px;
+  margin: 10px auto;
+  border-radius: 10px;
+
+  li {
+    display: inline-block;
+    float: right;
+    margin: 0 0 0 0;
+    direction: rtl;
+
+    &::after {
+      /* this is the separator between items */
+      display: inline-block;
+      content: '\00bb';
+      margin: 0 20px;
+      color: tint($color-1, 50%);
+    }
+
+    &:last-of-type::after {
+      /* hide separator after the last item */
+      display: none;
+    }
+  }
+
+  li > * {
+    /* single step */
+    display: inline-block;
+    font-size: 15px;
+    color: $color-1;
+  }
+
+  li.current > * {
+    /* selected step */
+    color: $color-2;
+  }
+
+  .no-touch & a:hover {
+    /* steps already visited */
+    color: $color-2;
+  }
+
+  &.custom-separator li::after {
+    /* replace the default arrow separator with a custom icon */
+    content: '';
+    height: 16px;
+    width: 16px;
+    background: url(../images/cd-custom-separator.svg) no-repeat center center;
+    vertical-align: middle;
+    transform: rotate(180deg);
+  }
+
+  &.custom-icons li > *::before {
+    /* add a custom icon before each item */
+    content: '';
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin-right: 40px;
+    margin-top: -2px;
+    background: url(../images/cd-custom-icons-01.svg) no-repeat 0 0;
+    vertical-align: middle;
+  }
+
+  &.custom-icons li:not(.current):nth-of-type(2) > *::before {
+    /* change custom icon using image sprites */
+    background-position: -20px 0;
+  }
+
+  &.custom-icons li:not(.current):nth-of-type(3) > *::before {
+    background-position: -40px 0;
+  }
+
+  &.custom-icons li:not(.current):nth-of-type(4) > *::before {
+    background-position: -60px 0;
+  }
+
+  &.custom-icons li.current:first-of-type > *::before {
+    /* change custom icon for the current item */
+    background-position: 0 -20px;
+  }
+
+  &.custom-icons li.current:nth-of-type(2) > *::before {
+    background-position: -20px -20px;
+  }
+
+  &.custom-icons li.current:nth-of-type(3) > *::before {
+    background-position: -40px -20px;
+  }
+
+  &.custom-icons li.current:nth-of-type(4) > *::before {
+    background-position: -60px -20px;
+  }
+
+  .breadcrumb_currentPage{
+    color: #12a3d9;
+  }
+}
+

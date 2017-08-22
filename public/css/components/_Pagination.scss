@@ -1,0 +1,33 @@
+/* ============[ Pagination ]=========== */
+.pagination{
+  border-radius: 10px;
+}
+
+/* ============[ Each pagination number item ]=========== */
+.page-link{
+  color: $sormeieTire;
+  font-weight: $font-weight--medium;
+  border: 1px solid $sormeieRoshan;
+
+  &:focus{
+    background-color: $sormeieRoshan;
+    color: whitesmoke;
+    border: 1px solid $sormeieRoshan;
+  }
+  &:hover{
+    border: 1px solid $sormeieRoshan;
+  }
+}
+
+/* ============[ Next and Prev buttons of Pagination ]=========== */
+.nextBtn,.prevBtn{
+  background-color: #EAEBEC;
+}
+.nextBtn{
+  border-top-left-radius: 9px !important;
+  border-bottom-left-radius: 9px !important;
+}
+.prevBtn{
+  border-top-right-radius: 9px !important;
+  border-bottom-right-radius: 9px !important;
+}

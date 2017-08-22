@@ -1,0 +1,62 @@
+/* ============[ Top Bar ]=========== */
+.Topbar{
+  background-color: $sormeieRoshan;
+  position: fixed;
+  z-index: 1000;
+}
+.Topbar_paddings{
+  padding: 7px 25px;
+}
+.Topbar_rowOfItems{
+  direction: rtl !important;
+}
+.Topbar_button{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* ============[ Top Bar Avatar ]=========== */
+.Topbar_avatar_container{
+  margin-right: -20px;
+}
+.Topbar_avatar{
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  width: 45px;
+  height: 45px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+
+/* ============[ Top Bar Search ]=========== */
+.hi-search-1{
+  background-color: $topBar_searchColor;
+}
+
+/* ============[ Top Bar logout ]=========== */
+.Topbar_logoutBtn{
+  margin-top: 5px;
+}
+
+/* ============[ Top Bar Notifications ]=========== */
+.Topbar_notificationBtn{
+  .badge{
+    z-index: 100;
+    margin-left: -10px;
+    margin-top: -7px;
+    height: 20px;
+    position: relative;
+  }
+
+  /* ============[ Fixing Firefox ]=========== */
+  @-moz-document url-prefix() {
+    i{
+      margin-top: -10px;
+    }
+    .badge{
+      margin-left: 10px;
+    }
+  }
+
+}

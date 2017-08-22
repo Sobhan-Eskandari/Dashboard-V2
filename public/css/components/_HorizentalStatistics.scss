@@ -1,0 +1,40 @@
+.horizentalStat{
+  height: 100%;
+}
+/* ==========[ Stats Progress Part ]========= */
+.horizentalStat_circular{
+  background-color: #2F3031;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 10px;
+}
+/* ==========[ Circular Progress ]========= */
+#stat1,#stat2,#stat3,#stat4{
+  width: 70%;
+  height: 70%;
+  margin: auto auto;
+}
+/* ==========[ Stats Text Part ]========= */
+.horizentalStat_stat{
+  background-color: #757677;
+  text-align: center;
+  color: whitesmoke;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  h5{
+    margin: auto auto;
+    font-size: 17px;
+  }
+}
+/* ==========[ Statistic Number ]========= */
+.statNumber{
+  right: -210% !important;
+  color: whitesmoke !important;
+  top: 70% !important;
+  font-weight: $font-weight--bold;
+  font-size: 16px;
+}

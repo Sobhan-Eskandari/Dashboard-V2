@@ -1,0 +1,576 @@
+body {
+  font-family: IRANSans !important;
+}
+
+.l-rtl{
+  direction: rtl;
+}
+
+.l-ltr{
+  direction: ltr;
+}
+
+.l-flex{
+  display: flex;
+}
+
+.overflowBox{
+  height: 300px;
+  overflow: scroll;
+}
+
+.hi-subjectDashboardAdminProfile_h5 {
+  color: $light-text;
+  font-weight: $font-weight--medium;
+  font-size: 15px;
+}
+
+/* ============[ confirm button admin ]=========== */
+.hi-confirmButtonDashboard {
+  width: 100px;
+  font-weight: 500;
+  box-shadow: 0 0 5px $darkGray;
+  border-radius: 8px;
+  background-color: $darkGreen2;
+  color: white;
+  font-size: larger;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 4.5px;
+}
+
+.hi-confirmButtonDashboard:focus {
+  border: 1px solid $darkGreen2;
+}
+
+.hi-confirmButtonDashboard:active,
+.hi-confirmButtonDashboard:focus,
+.hi-confirmButtonDashboard.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* ============[ category ]=========== */
+
+.categoryRightDirection {
+  direction: rtl;
+}
+
+.hi-whiteCategoryDashboardBox {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 8px $darkGray;
+}
+
+.hi-roundedDashboardTagsTable_thead {
+  background-color: $navyBlue;
+}
+
+.hi-roundedDashboardTagsTable_thead_tr_td_r {
+  border-top-right-radius: 10px;
+  border: 0;
+  color: white;
+}
+
+.hi-roundedDashboardTagsTable_thead_tr_td_m {
+  border: 0 !important;
+}
+
+.hi-roundedDashboardTagsTable_thead_tr_td_l {
+  border-top-left-radius: 10px;
+  border: 0;
+}
+
+.hi-roundedDashboardTagsTable tbody {
+  padding: 0;
+}
+
+.hi-roundedDashboardTagsTable {
+  border-radius: 10px;
+  box-shadow: 0 0 5px $darkGray;
+  direction: rtl !important;
+}
+
+/* ============[ delete button ]=========== */
+
+.hi-roundedDashboardTagsTable_thead_tr_td_button {
+  border-color: $delete;
+  font-weight: 500;
+  font-family: IRANSans;
+  background-color: $delete;
+  color: white;
+}
+
+.hi-roundedDashboardTagsTable_thead_tr_td_button:focus {
+  box-shadow: 0 0 0 2px rgba($delete, .5);
+}
+
+/* ============[ input ]=========== */
+
+.hi-whiteCategoryDashboardBox_input {
+  border-radius: 8px;
+  border: 1px solid $light-text;
+  height: 50px;
+  width: 280px;
+}
+
+.hi-whiteCategoryDashboardBox_input:focus {
+  border: 1px solid $navyBlue;
+}
+
+/* ============[ confirm button ]=========== */
+.hi-whiteCategoryDashboardBox_button {
+  width: 90px;
+  font-weight: 400;
+  box-shadow: 0 0 5px $darkGray;
+  border-radius: 8px;
+  background-color: $darkBlue;
+  color: white;
+  font-size: larger;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.hi-whiteCategoryDashboardBox_button:active,
+.hi-whiteCategoryDashboardBox_button:focus,
+.hi-whiteCategoryDashboardBox_button.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* ============[ pagination]=========== */
+.dashboardPaginatinBs {
+  direction: rtl;
+  margin: 0 auto;
+}
+
+.dashboardPaginatinBs > ul.pagination > li:last-child > a {
+  border-radius: 5px 0 0 5px;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  background-color: $lightGray2;
+}
+
+.dashboardPaginatinBs > ul.pagination > li:first-child > a {
+  border-radius: 0 5px 5px 0;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  background-color: $lightGray2;
+}
+
+.dashboardPaginatinBs > ul.pagination > li.active > a {
+  border: 1px solid $navyBlue !important;
+  border-right: 1px solid transparent !important;
+  background-color: $navyBlue !important;
+
+}
+
+.dashboardPaginatinBs > ul.pagination > li > a {
+  color: $navyBlue;
+  font-weight: 500;
+}
+
+.dashboardPaginatinBs > ul.pagination > li > a, nav > ul.pagination > li > a:hover, nav > ul.pagination > li > a:focus {
+  border: 1px solid $navyBlue;
+  color: $navyBlue;
+}
+
+/* ============[ Settings Page]=========== */
+
+.contactUsInfo_line {
+  width: 104%;
+  margin-left: -2%;
+  border-top: 1px solid lightgray;
+}
+
+.contactUsInfo_textarea {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.rulesAndGuidesInfo_textarea {
+  width: 70%;
+  border-radius: 5px;
+}
+
+.rowOfInputs {
+  direction: rtl;
+}
+
+/* ============[ Home Page]=========== */
+.card_simple {
+  border-radius: 10px;
+}
+
+/* ==========[ Background card stle in pages ]========= */
+.bgCard {
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+
+/* ============[ Main pages Style ]=========== */
+#MainBody {
+  padding: 20px 30px;
+}
+
+.homeCard canvas{
+  width: 470px !important;
+  height: 80% !important;
+  padding: 0 20px 5px 20px;
+  margin: 5px;
+}
+.homeCard{
+  .flickity-page-dots{
+    margin-top: 0;
+    margin-bottom: 10px;
+    position: sticky !important;
+  }
+
+  .flickity-prev-next-button{
+    background-color: aliceblue;
+  }
+
+}
+
+/* ============[ create post]=========== */
+.hi-createPostBox {
+  direction: rtl;
+}
+
+.hi-infoPostListGroup {
+  border-radius: 10px;
+  padding: 0;
+  width: 300px;
+  box-shadow: 0 0 5px $light-row-table;
+}
+
+.hi-infoPostListGroup li:last-child {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.hi-infoPostListGroup li {
+  border-color: transparent;
+}
+
+/* ============[ for slideUp and slideDown Of list group and styling it ]=========== */
+
+#hi-infoPostListGroupPanel, #hi-infoPostListGroupFlip {
+  padding: 0px;
+  text-align: center;
+}
+
+#hi-infoPostListGroupFlip {
+  padding: 5px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  color: $dark-text;
+  border: 1px solid $light-row-table;
+}
+
+#hi-infoPostListGroupPanel {
+  padding: 0px;
+  border: 1px solid $light-row-table;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+/* ============[ button in list group for information post ]=========== */
+
+.btn-secondary-postInfo {
+  border-radius: 10px;
+  background-color: $light-text;
+}
+
+.btn-secondary-postInfo.active {
+  border-color: $pre;
+  background-color: $pre;
+}
+
+/* ============[ create post image ]=========== */
+.createPostImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  border: 1px solid $light-text;
+}
+
+/* ============[ create post form ]=========== */
+.makeCreatePostTitleBox {
+  width: 400px;
+}
+
+.makeCreatePostTitle {
+  font-size: 14px;
+}
+
+.makeCreatePostTitle:focus {
+  border: 1px solid $confirm-button;
+}
+
+/* ============[ create post label ]=========== */
+.createPostLabel {
+  font-weight: 600;
+}
+
+/* ============[ backup ]=========== */
+.backupBox_direction {
+  direction: rtl;
+}
+
+/* ============[ answer msg ]=========== */
+
+.answerPmBox {
+  direction: rtl;
+}
+
+.answerMsgFormCard {
+  width: 800px;
+  box-shadow: 0 0 3px $light-text;
+}
+
+.answerMsgFormCard_header {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: $add-tag;
+  color: white;
+}
+
+.answerMsgFormCard_text {
+  font-weight: 400;
+}
+
+.answerMsgFormCard_form {
+  border-radius: 10px;
+}
+
+.answerMsgFormCard_form:focus {
+  border: 1px solid transparent;
+}
+
+.answerMsgFormCard_textarea {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  resize: none;
+}
+
+.answerMsgFormCard_textarea:focus {
+  border: 1px solid transparent;
+}
+
+/* ============[ FAQ ]=========== */
+.FAQBox_direction {
+  direction: rtl;
+}
+
+.FAQ_hr {
+  width: 82%;
+}
+.FAQInput:focus{
+  border: 1px solid #3B4452;
+}
+
+/* ============[ check box ]=========== */
+
+.FAQ_card-block_tick_square-checkbox {
+  cursor: pointer;
+}
+
+.FAQ_card-block_tick_square-checkbox span {
+  line-height: 24px;
+}
+
+.FAQ_card-block_tick_square-checkbox span::before {
+  margin-right: 4px;
+  padding-left: 1px;
+  width: 21px;
+  height: 21px;
+  border: 1.5px solid white;
+  display: inline-block;
+  line-height: 14px;
+  content: '';
+  float: right;
+  border-radius: 5px;
+}
+
+.FAQ_card-block_tick_square-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+
+/* ============[ Custom Check boxes ]=========== */
+.pure-checkbox input[type="checkbox"] + label:before,
+.pure-radiobutton input[type="checkbox"] + label:before,
+.pure-checkbox input[type="radio"] + label:before,
+.pure-radiobutton input[type="radio"] + label:before  {
+  border-radius: 5px !important;
+  padding: 1px !important;
+}
+.pure-checkbox input[type="checkbox"] + label:after,
+.pure-radiobutton input[type="checkbox"] + label:after  {
+  top: 59%;
+  left: 5px;
+  width: 8px;
+  height: 3px;
+  margin-top: -3px !important;
+}
+
+/* ============[ Gallery ]=========== */
+.galleryModal{
+  @media (min-width: 992px) {
+    .modal-lg{
+      max-width: 1000px;
+    }
+  }
+
+  #gallery_row{
+    height: 160px;
+  }
+  .modal-content{
+    height: 720px;
+  }
+
+  .gallery_uploadedImage{
+    height:380px !important;
+    overflow-y: scroll;
+  }
+
+  .gallery_category{
+    list-style: none;
+
+    li{
+      padding: 0;
+      text-align: right;
+    }
+
+    .gallery_category_btn{
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      width: 100%;
+      text-align: right;
+      padding: 15px;
+    }
+  }
+
+  .gallery_files{
+    height: 100%;
+  }
+
+  .galleryFiles_info{
+    background-color: #F3F4F5;
+
+    .file_info{
+      margin-top: 10px;
+      list-style:none;
+      color: #959596;
+      font-size: 14px;
+      text-align: left;
+      padding-left: 5px;
+    }
+  }
+
+  .img-radioBtn{
+    padding-left: 0 !important;
+    &:after{
+      top: 21.0% !important;
+      left: 13.0% !important;
+    }
+    &:before{
+      top: 20.5% !important;
+      left: 10% !important;
+    }
+  }
+}
+
+#my-awesome-dropzone{
+  background-color: #EAEBEC;
+  border: 1px dashed;
+  border-radius: 5px;
+
+  &:before{
+    font-family: FontAwesome !important;
+    content: '\f093';
+    position: absolute;
+    left: 51%;
+    color: grey;
+    top: 40px;
+    margin-top: 8px;
+  }
+  .dz-message{
+    margin-top: 75px !important;
+  }
+}
+
+.FAQ_card-block_tick_square-checkbox input[type="checkbox"]:checked + span::before {
+  font-family: FontAwesome;
+  content: "\f00c";
+  color: white;
+}
+
+/* ============[ Tag ]=========== */
+.tag{
+  background-color: darkslateblue;
+  display: -webkit-inline-box;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 16px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+}
+
+.tag__text{
+  margin-right: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 32px;
+}
+.tag__close{
+  vertical-align: bottom;
+  cursor: pointer;
+}
+
+.tag_lightMode{
+  color: #5C5C5C;
+}
+.tag_darkMode{
+  color: white;
+}
+.direction_create_slider{
+  direction: rtl;
+}
+
+/* ============[ Sliders Page ]=========== */
+.multiselect-container{
+  min-width: 50px !important;
+  text-align: right;
+  label{
+    padding: 10px !important;
+  }
+}
+/* ============[ Settings page ]=========== */
+.upload-button input[type="file"] {
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+  margin-left: -75px; /* gets that button with no-pointer-cursor off to the left and out of the way */
+  width: 200%; /* over compensates for the above - I would use calc or sass math if not here*/
+  height: 100%;
+  opacity: 0; /* left this here so you could see. Make it 0 */
+  cursor: pointer;
+  border: 1px solid red;
+}
+
+.upload-button {
+  /* key */
+  position: relative;
+  overflow: hidden;
+
+  /* just positioning */
+  float: left;
+  clear: left;
+}

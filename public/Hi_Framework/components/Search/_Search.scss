@@ -1,0 +1,25 @@
+//<div class="hi-search-1">
+//<input placeholder="جست و جو کنید..." class="hi-search_field" type="text">
+//<button class="hi-button-btn1 pull-left py-1 px-2"><i class="fa fa-search white-text" aria-hidden="true"></i></button>
+//</div>
+.hi-search-1{
+  padding: 5px 20px;
+  border-radius: 20px;
+
+  .hi-search_field{
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    width: 85%;
+  }
+
+  .hi-button-btn1{
+    margin-top: 1px ;
+  }
+}
+
+/* ============[ Firefox Only Styles ]=========== */
+@-moz-document url-prefix() {
+
+}

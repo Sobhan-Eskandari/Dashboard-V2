@@ -1,0 +1,79 @@
+.FAQ_card-header {
+  background-color: #3B4452;
+  color: white;
+  font-weight: 400;
+  padding-right: 9.5px;
+}
+
+.FAQ_card_card-block_redBorder {
+  border: 1px solid $delete;
+  border-radius: 10px;
+  box-shadow: 0 0 4px $light-text;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.FAQ_card_card-block_lightText {
+  color: $light-text;
+  font-size: 13px;
+}
+
+.FAQ_card_card-block_blueBorder {
+  border: 1px solid $user;
+  border-radius: 10px;
+  box-shadow: 0 0 4px $light-text;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.FAQ_card-header_deleteButton {
+  background-color: $delete;
+  border-radius: 6px;
+  border: 1px solid $delete;
+}
+
+/* ============[ check box ]=========== */
+
+.FAQ_card-block_square-checkbox {
+  cursor: pointer;
+}
+
+.FAQ_card-block_square-checkbox span {
+  line-height: 24px;
+}
+
+.FAQ_card-block_square-checkbox span::before {
+  margin-right: 4px;
+  padding-left: 1px;
+  width: 21px;
+  height: 21px;
+  border: 2px solid grey;
+  display: inline-block;
+  line-height: 14px;
+  content: '';
+  float: right;
+  border-radius: 5px;
+}
+
+.FAQ_card-block_square-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.FAQ_card-block_square-checkbox input[type="checkbox"]:checked + span::before {
+  font-family: FontAwesome;
+  content: "\f00c";
+  color: gray;
+}
+
+.dropDownSettingFAQ,.dropDownSettingFAQ:hover,.dropDownSettingFAQ:focus,.dropDownSettingFAQ:active{
+  background-color: transparent;
+  color: black;
+  border: 1px solid transparent;
+  box-shadow: 0 0 2px #fff;
+}
+.dropSubDownSettingFAQ{
+  font-size: 12px;
+  width: 50px;
+  text-align: center;
+  margin-left: -75px;
+}

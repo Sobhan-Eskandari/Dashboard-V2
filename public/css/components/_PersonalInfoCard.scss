@@ -1,0 +1,29 @@
+
+.hi-aboutMePanelCard {
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px $darkGray;
+}
+
+.card-header.hi-aboutMePanelCard_card-header {
+  background-color: $admin-green;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.hi-aboutMePanelCard_textarea:focus, .hi-aboutMePanelCard_input:focus {
+  border: 1px solid #3B4452;
+}
+
+.hi-aboutMePanelCard_textarea {
+  height: 125.5px;
+  resize: none;
+}
+
+.hi-aboutMePanelCard_textarea, .hi-aboutMePanelCard_input {
+  border: 1px solid $light-text;
+  text-align: right;
+}
+
+.hi-aboutMePanelCard_label {
+  font-weight: 400;
+}
