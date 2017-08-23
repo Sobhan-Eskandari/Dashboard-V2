@@ -18,7 +18,7 @@
     <div class="hi-whiteCategoryDashboardBox">
         <div class="row p-5">
             <div class="col-5 offset-1" id="boxOfTags">
-                @include('Includes.AllTags')
+                @include('includes.tags.AllTags')
             </div>
 
             <div class="col-4 offset-1 categoryRightDirection">

@@ -20,14 +20,14 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.flash') @endcomponent
+        @component('components.errors.flash') @endcomponent
     </nav>
 
     <section class="usersSection">
         <div class="row">
             <div class="col-12 bgCard hi-shadow-2">
                 <div class="container-fluid" id="loadPosts">
-                    @include('Includes.AllPosts')
+                    @include('includes.posts.AllPosts')
                 </div>
             </div>
         </div>
