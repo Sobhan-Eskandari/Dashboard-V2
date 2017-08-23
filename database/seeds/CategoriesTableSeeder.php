@@ -18,13 +18,13 @@ class CategoriesTableSeeder extends Seeder
 
         $faker = Faker::create("fa_IR");
         $categories = [];
-        $time = jDate::forge('now')->format('datetime', true);
+//        $time = jDate::forge('now')->format('datetime', true);
 
         foreach (range(1, 50) as $index){
             $categories[] = [
                 'name' => $faker->unique()->firstName,
-                'created_at' => $time,
-                'updated_at' => $time,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
                 'created_by' => '1',
             ];
         }

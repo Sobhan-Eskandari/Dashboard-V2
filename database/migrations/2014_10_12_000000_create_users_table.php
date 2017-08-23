@@ -15,14 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_name')->unique();
+            $table->string('user_name')->nullable(true)->unique();
             $table->string('first_name')->nullable(true);
             $table->string('last_name')->nullable(true);
-            $table->string('email')->nullable()->unique();
+            $table->string('email')->nullable(true)->unique();
             $table->string('provider')->nullable(true);
             $table->string('provider_id')->nullable(true)->unique();
-            $table->integer('role_id')->default(0);
-            $table->string('password')->nullable();
+//            $table->integer('role_id')->default(0);
+            $table->string('password')->nullable(true);
             $table->char('land_line',11)->nullable(true);
             $table->char('mobile',11)->nullable(true)->unique();
             $table->text('address')->nullable(true);
@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('occupation')->nullable(true);
             $table->text('about')->nullable(true);
             $table->tinyInteger('verified')->default(0);
-            $table->unsignedBigInteger('created_by')->nullable(false);
+            $table->unsignedBigInteger('created_by')->nullable(true);
             $table->unsignedBigInteger('updated_by')->nullable(true);
             $table->string('email_token')->nullable(true);
             $table->rememberToken();

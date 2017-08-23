@@ -23,7 +23,7 @@
         <div class="row p-5">
 
             <div class="col-5 offset-1" id="loadCategories">
-                @include('Includes.AllCategories')
+                @include('includes.categories.AllCategories')
             </div>
 
             <div class="col-4 offset-1 categoryRightDirection" id="create-div">

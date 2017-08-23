@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
+//    use HasApiTokens;
     use Notifiable;
     use SoftDeletes;
     use Searchable;
@@ -59,7 +61,7 @@ class User extends Authenticatable
 
     public function categories()
     {
-        return $this->hasMany('App\Category', 'created_by');
+        return $this->hasMany(Category::class, 'created_by');
     }
 
     public function outboxes()

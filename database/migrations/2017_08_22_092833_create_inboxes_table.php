@@ -30,7 +30,7 @@ class CreateInboxesTable extends Migration
 //            $table->unsignedBigInteger('updated_by')->nullable(true);
 //            $table->dateTime('deleted_at')->nullable(true);
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable(true);
+            $table->softDeletes();
         });
     }
 

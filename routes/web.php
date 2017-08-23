@@ -208,3 +208,7 @@ Route::get('/test', function (\Illuminate\Http\Request $request){
 Route::post('/test', 'PhotoController@store');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

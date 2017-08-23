@@ -29,7 +29,7 @@ class CreatePostsTable extends Migration
 //            $table->dateTime('updated_at')->nullable(true);
 //            $table->dateTime('deleted_at')->nullable(true);
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable(true);
+            $table->softDeletes();
         });
     }
 
