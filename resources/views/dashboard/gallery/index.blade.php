@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="row px-4 mt-3" id="photos">
-                       @include('Includes.AllPhotosGallery')
+                       @include('includes.galleries.AllPhotosGallery')
                     </div>
                 </div>
             </div>

@@ -29,7 +29,7 @@ $('#multiDestroy').click(function (e) {
         data: {_token: CSRF_TOKEN,checkboxes:checkboxes}
     }).done(function (data) {
         $("#photos").html(data);
-        window.history.pushState("", "", "http://dash.dev/gallery/photos");
+        window.history.pushState("", "", "http://dash2.dev/gallery/photos");
         notify('عکس ها پاک شدند');
     }).fail(function () {
     });
