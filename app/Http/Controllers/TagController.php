@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\tagRequest;
 use App\Tag;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+//use Zend\Diactoros\Response;
 
 class TagController extends Controller
 {
@@ -12,9 +16,25 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $referer = $request->header('referer');
+        $tags = Tag::all();
+        if($request->has('query')) {
+            if(strpos($referer , 'create') || strpos($referer , 'edit')){
+                $tags = Tag::search($request->input('query'))->orderBy('created_at', 'desc')->get();
+            }else {
+                $tags = Tag::search($request->input('query'))->get();
+            }
+        }
+        if ($request->ajax()){
+            if(strpos($referer , 'create') || strpos($referer , 'edit')){
+                return view('Includes.PostTags', compact('tags'))->render();
+            }else {
+                return view('Includes.AllTags', compact('tags'));
+            }
+        }
+        return view('dashboard.tag.index',compact('tags'));
     }
 
     /**
@@ -31,31 +51,41 @@ class TagController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(tagRequest $request)
     {
-        //
+        $referer = $request->header('referer');
+        $input = $request->all();
+        $input['created_by']=1;
+        $tag = Tag::create($input);
+        $msg = "تگ ساخته شد.";
+        $token =csrf_token();
+        if(strpos($referer , 'create') || strpos($referer , 'edit')){
+            $tags = Tag::orderBy('created_at', 'desc')->get();
+            return view('Includes.PostTags', compact('tags'))->render();
+        }
+        $data=['tag'=>$tag,'message'=>$msg,'token'=>$token];
+        return $data;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show($id)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +94,10 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,11 +105,20 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response|string
      */
-    public function destroy(Tag $tag)
+    public function destroy(Request $request, $id)
     {
-        //
+        $referer = $request->header('referer');
+        $tag=Tag::find($id);
+        $tag->forceDelete();
+        if(strpos($referer , 'create') || strpos($referer , 'edit')){
+            $tags = Tag::orderBy('created_at', 'desc')->get();
+            return view('Includes.PostTags', compact('tags'))->render();
+        }
+        $msg="تگ پاک شد!";
+        return $msg;
+
     }
 }

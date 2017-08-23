@@ -7,25 +7,6 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,51 +16,52 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'task' => 'required|unique:todos',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Todo  $todo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Todo $todo)
-    {
-        //
-    }
+        auth()->user()->addTodo(new Todo([
+            'task' => $request->task,
+            'done' => false
+        ]));
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Todo  $todo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Todo $todo)
-    {
-        //
+        return back();
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Todo  $todo
+     * @param  \Illuminate\Http\Request $request
+     * @param Todo $todo
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Todo $todo)
     {
-        //
+        if ($request->ajax()) {
+            if ($todo->done) {
+                $todo->done = false;
+                $todo->update();
+                return response()->json(['response' => 'undone']);
+            } else {
+                $todo->done = true;
+                $todo->update();
+                return response()->json(['response' => 'done']);
+            }
+        }
+        return response()->json(['response' => 'failure']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Todo  $todo
+     * @param Todo $todo
      * @return \Illuminate\Http\Response
      */
     public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+
+        return back();
     }
 }
