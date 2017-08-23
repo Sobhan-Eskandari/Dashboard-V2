@@ -14,8 +14,14 @@ class CreateFaqsTable extends Migration
     public function up()
     {
         Schema::create('faqs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->text('question')->nullable(false);
+            $table->text('answer')->nullable(false);
+            $table->integer('revisions')->default(0);
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
