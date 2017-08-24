@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -115,7 +117,7 @@ class CategoryController extends Controller
             $category->updated_by = Auth::user()->id;
             $category->update($input);
 
-            auth()->user()->categories()->save(Category::create($request->all()));
+//            dd(auth()->user()->categories()->update($category));
 
             $categories = Category::pagination();
 
@@ -126,11 +128,72 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param Request $request
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request, Category $category)
     {
-        //
+        $category->delete();
+        Session::flash('danger', 'دسته بندی با موفقیت پاک شد');
+        return redirect(route('categories.index'));
+//        $referer = $request->header('referer');
+//        if($request->ajax()){
+//            try {
+//                $category->delete();
+//            }catch (\Exception $exception){
+//                dd($exception->getMessage());
+//            }
+//
+//            if(strpos($referer , 'create') || strpos($referer , 'edit')){
+//                $categories = Category::orderBy('created_at', 'desc')->get();
+//                return view('Includes.PostCategories', compact('categories'))->render();
+//            }else {
+//                $categories = Category::pagination();
+//                return view('includes.categories.AllCategories', compact('categories'))->render();
+//            }
+//        }
+    }
+
+    public function multiDestroy(Request $request)
+    {
+        $ids = explode(',', $request['ids']);
+        Category::destroy($ids);
+        Session::flash('danger', 'دسته بندی ها با موفقیت پاک شدند');
+        return redirect(route('categories.index'));
+//        if($request->ajax()){
+//            $input = $request->all();
+//            $ids = explode(',', $input['ids']);
+//            try {
+//                foreach ($ids as $id){
+//                    $deleteCategory = Category::findOrFail($id);
+//                    $deleteCategory->update(['updated_by' => Auth::user()->id]);
+//                    $deleteCategory->delete();
+//                }
+//            }catch (\Exception $exception){
+//                dd($exception->getMessage());
+//            }
+//
+//            $categories = Category::pagination();
+//
+//            return view('Includes.AllCategories', compact('categories'))->render();
+//        }
+    }
+
+    public function postCategoryStore(CategoryRequest $request)
+    {
+        if($request->ajax()){
+            $input = $request->all();
+            $user = Auth::user()->id;
+            $input['created_by'] = $user;
+            $input['updated_by'] = $user;
+            try {
+                Category::create($input);
+            }catch (\Exception $exception){
+                dd($exception->getMessage());
+            }
+            $categories = Category::orderByRaw('updated_at desc')->paginate(8);
+            return view('Includes.AllCategories', compact('categories'))->render();
+        }
     }
 }

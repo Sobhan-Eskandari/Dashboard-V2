@@ -18,6 +18,11 @@
 @endsection
 
 @section('content')
+
+    <nav dir="rtl">
+        @component('components.errors.flash') @endcomponent
+    </nav>
+
     <div class="hi-whiteCategoryDashboardBox">
 
         <div class="row p-5">

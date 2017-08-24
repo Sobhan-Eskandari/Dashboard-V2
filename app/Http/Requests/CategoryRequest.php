@@ -13,7 +13,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'وارد کردن دسته بندی الزامی است',
         ];
     }
 }
