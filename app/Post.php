@@ -56,12 +56,12 @@ class Post extends Model
 
     public function updater()
     {
-        return $this->belongsTo('App\Admin', 'updated_by');
+        return $this->belongsTo('App\User', 'updated_by');
     }
 
     public function creator()
     {
-        return $this->belongsTo('App\Admin', 'created_by');
+        return $this->belongsTo('App\User', 'created_by');
     }
 
     public function categories()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostRequest;
 use App\Photo;
 use App\Post;
 use App\Tag;
@@ -55,7 +56,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostCreateRequest $request)
+    public function store(PostRequest $request)
     {
         $input = $request->all();
         Auth::loginUsingId(1);
@@ -101,6 +102,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+
         $selectedTags = [];
         $selectedCategories = [];
         $indexPhoto = null;
@@ -109,8 +111,8 @@ class PostController extends Controller
 
         $categories = Category::orderBy('created_at', 'desc')->get();
         $tags = Tag::orderBy('created_at', 'desc')->get();
-        $post = Post::with(['tags', 'categories', 'creator', 'updater'])->findOrFail($id);
 
+        $post = Post::with(['tags', 'categories', 'creator', 'updater'])->findOrFail($id);
         foreach ($post->tags as $tag){
             $selectedTags[] = $tag->id;
         }
@@ -137,7 +139,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostCreateRequest $request, $id)
+    public function update(PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
         $post->revisions++;
@@ -147,8 +149,8 @@ class PostController extends Controller
 
         $input['updated_by'] = $user;
         $post->update($input);
-
         $tags = explode(',', $input['selectedTags']);
+
         $post->tags()->sync($tags);
 
         $categories = explode(',', $input['selectedCategories']);

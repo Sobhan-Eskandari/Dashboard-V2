@@ -15,10 +15,10 @@
 @endsection
 
 @section('galleries')
-    @component('components.galleryModal')
+    @component('components.galleries.galleryModal')
         @slot('gallery')
             <div class="row gallery_files l-rtl gallery_uploadedImage" id="loadPhotos">
-                @include('Includes.AllPhotos')
+                @include('includes.galleries.AllPhotos')
             </div>
         @endslot
     @endcomponent
@@ -27,7 +27,7 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.errors') @endcomponent
+        @component('components.errors.errors') @endcomponent
     </nav>
 
     <div class="row hi-createPostBox">
@@ -67,7 +67,7 @@
                         <br>
 
                         {!! Form::text('selectedCategories', $selectedCategories, ['style' => 'display: none;']) !!}
-                        {!! Form::text('selectedTags', $selectedTags, ['style' => 'display: none;']) !!}
+                        {!! Form::text('selectedTags', $selectedTags, []) !!}
                         {!! Form::text('draft', null, ['style' => 'display: none;']) !!}
                         @if(is_null($indexPhoto))
                             {!! Form::text('indexPhoto', null, ['style' => 'display: none;']) !!}
@@ -119,11 +119,11 @@
             <br>
 
             <div class="row">
-                @component('components.CreatePostLeftSidebar')
+                @component('components.posts.CreatePostLeftSidebar')
                     @slot('title') دسته بندی ها @endslot
                     @slot('list')
                         <div id="postCategories">
-                            @include('Includes.PostCategoriesEdit')
+                            @include('includes.posts.PostCategoriesEdit')
                         </div>
                     @endslot
                     @slot('search_form')
@@ -145,11 +145,11 @@
             <br>
 
             <div class="row">
-                @component('components.CreatePostLeftSidebar')
+                @component('components.posts.CreatePostLeftSidebar')
                     @slot('title') برچسب ها @endslot
                     @slot('list')
                         <div id="postTags">
-                            @include('Includes.PostTagsEdit')
+                            @include('includes.posts.PostTagsEdit')
                         </div>
                     @endslot
                     @slot('search_form')
