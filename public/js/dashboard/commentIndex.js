@@ -1,10 +1,9 @@
-/**
- * Created by Nima on 8/13/2017.
- */
 var collect = {};
-$('#searchCmt').keyup(function (e) {
+
+$('#searchCmt').keyup(function (event) {
+
     collect['query'] = $('#searchCmt').val();
-    if(collect['query'].length >=3 || e.keyCode===8){
+    if(collect['query'].length >=3 || event.keyCode===8){
         $.ajax({
             url: '/comments',
             dataType: 'text',
@@ -16,5 +15,4 @@ $('#searchCmt').keyup(function (e) {
             alert('Articles could not be loaded.');
         });
     }
-
 });

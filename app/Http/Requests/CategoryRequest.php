@@ -24,7 +24,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:categories,name,'.$this->category,
         ];
     }
 
@@ -32,6 +32,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name.required' => 'وارد کردن دسته بندی الزامی است',
+            'name.unique' => 'دسته بندی وارد شده تکراری می باشد',
         ];
     }
 }

@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
-use Morilog\Jalali\Facades\jDate;
 
 class CommentsTableSeeder extends Seeder
 {
@@ -18,7 +17,6 @@ class CommentsTableSeeder extends Seeder
 
         $faker = Faker::create("fa_IR");
         $comments = [];
-        $time = jDate::forge('now')->format('datetime', true);
 
         foreach (range(1, 100) as $index){
             $comments[] = [
@@ -29,8 +27,8 @@ class CommentsTableSeeder extends Seeder
                 'subject' => $faker->firstName,
                 'message' => $faker->realText(300),
                 'tracking_code' => \Faker\Provider\Uuid::uuid(),
-                'created_at' => $time,
-                'updated_at' => $time,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
             ];
         }
 

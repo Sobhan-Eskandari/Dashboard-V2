@@ -105,11 +105,13 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param CategoryRequest $request
-     * @param  \App\Category $category
+     * @param $id
      * @return \Illuminate\Http\Response
+     * @internal param Category $category
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryRequest $request, $id)
     {
+        $category = Category::findOrFail($id);
         if($request->ajax()){
 
             $input = $request->all();
