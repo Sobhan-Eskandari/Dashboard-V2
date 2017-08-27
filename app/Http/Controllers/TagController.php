@@ -29,9 +29,9 @@ class TagController extends Controller
         }
         if ($request->ajax()){
             if(strpos($referer , 'create') || strpos($referer , 'edit')){
-                return view('Includes.PostTags', compact('tags'))->render();
+                return view('includes.posts.PostTags', compact('tags'))->render();
             }else {
-                return view('Includes.AllTags', compact('tags'));
+                return view('includes.tags.AllTags', compact('tags'));
             }
         }
         return view('dashboard.tag.index',compact('tags'));
@@ -53,7 +53,7 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Http\Response
      */
-    public function store(tagRequest $request)
+    public function store(TagRequest $request)
     {
         $referer = $request->header('referer');
         $input = $request->all();
@@ -63,7 +63,7 @@ class TagController extends Controller
         $token =csrf_token();
         if(strpos($referer , 'create') || strpos($referer , 'edit')){
             $tags = Tag::orderBy('created_at', 'desc')->get();
-            return view('Includes.PostTags', compact('tags'))->render();
+            return view('Includes.posts.PostTags', compact('tags'))->render();
         }
         $data=['tag'=>$tag,'message'=>$msg,'token'=>$token];
         return $data;

@@ -15,10 +15,10 @@
 @endsection
 
 @section('gallery')
-    @component('components.galleryModal')
+    @component('components.galleries.galleryModal')
         @slot('gallery')
             <div class="row gallery_files l-rtl gallery_uploadedImage" id="loadPhotos">
-                @include('Includes.AllPhotos')
+                @include('includes.galleries.AllPhotos')
             </div>
         @endslot
     @endcomponent
@@ -27,7 +27,7 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.errors') @endcomponent
+        @component('components.errors.errors') @endcomponent
     </nav>
 
     <div class="row hi-createPostBox">
@@ -88,11 +88,11 @@
 
         <div class="col-4 mt-1">
             <div class="row">
-                @component('components.CreatePostLeftSidebar')
+                @component('components.posts.CreatePostLeftSidebar')
                     @slot('title') دسته بندی ها @endslot
                     @slot('list')
                         <div id="postCategories">
-                            @include('Includes.PostCategories')
+                            @include('includes.posts.PostCategories')
                         </div>
                     @endslot
                     @slot('search_form')
@@ -114,11 +114,11 @@
             <br>
 
             <div class="row">
-                @component('components.CreatePostLeftSidebar')
+                @component('components.posts.CreatePostLeftSidebar')
                     @slot('title') برچسب ها @endslot
                     @slot('list')
                         <div id="postTags">
-                            @include('Includes.PostTags')
+                            @include('includes.posts.PostTags')
                         </div>
                     @endslot
                     @slot('search_form')

@@ -13,7 +13,7 @@ class TagRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class TagRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'required'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required'=>'نام تگ نمی تواند خالی باشد'
         ];
     }
 }

@@ -14,11 +14,11 @@
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 @endsection
 
-@section('galleries')
-    @component('components.galleryModal')
+@section('gallery')
+    @component('components.galleries.galleryModal')
         @slot('gallery')
             <div class="row gallery_files l-rtl gallery_uploadedImage" id="loadPhotos">
-                @include('Includes.AllPhotos')
+                @include('includes.galleries.AllPhotos')
             </div>
         @endslot
     @endcomponent
@@ -27,7 +27,7 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.errors') @endcomponent
+        @component('components.errors.errors') @endcomponent
     </nav>
 
     <div class="row hi-createPostBox">
@@ -87,7 +87,7 @@
                         @if(is_null($indexPhoto))
                             <img src="{{asset('images/nobody_m.original.jpg')}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
                         @else
-                            <img src="{{asset('galleries' . '/' . $indexPhoto[0]->name)}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
+                            <img src="{{asset('photoGallery' . '/' . $indexPhoto[0]->name)}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
                         @endif
                     </div>
                 </div>
@@ -119,11 +119,11 @@
             <br>
 
             <div class="row">
-                @component('components.CreatePostLeftSidebar')
+                @component('components.posts.CreatePostLeftSidebar')
                     @slot('title') دسته بندی ها @endslot
                     @slot('list')
                         <div id="postCategories">
-                            @include('Includes.PostCategoriesEdit')
+                            @include('includes.posts.PostCategoriesEdit')
                         </div>
                     @endslot
                     @slot('search_form')
@@ -145,11 +145,11 @@
             <br>
 
             <div class="row">
-                @component('components.CreatePostLeftSidebar')
+                @component('components.posts.CreatePostLeftSidebar')
                     @slot('title') برچسب ها @endslot
                     @slot('list')
                         <div id="postTags">
-                            @include('Includes.PostTagsEdit')
+                            @include('includes.posts.PostTagsEdit')
                         </div>
                     @endslot
                     @slot('search_form')

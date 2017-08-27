@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostRequest;
 use App\Photo;
 use App\Post;
 use App\Tag;
@@ -30,7 +31,7 @@ class PostController extends Controller
         }
 
         if($request->ajax()){
-            return view('Includes.AllPosts', compact('posts'))->render();
+            return view('includes.posts.AllPosts', compact('posts'))->render();
         }
 
         return view('dashboard.posts.index', compact('posts'));
@@ -55,7 +56,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostCreateRequest $request)
+    public function store(PostRequest $request)
     {
         $input = $request->all();
         Auth::loginUsingId(1);
@@ -101,6 +102,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+
         $selectedTags = [];
         $selectedCategories = [];
         $indexPhoto = null;
@@ -109,8 +111,8 @@ class PostController extends Controller
 
         $categories = Category::orderBy('created_at', 'desc')->get();
         $tags = Tag::orderBy('created_at', 'desc')->get();
-        $post = Post::with(['tags', 'categories', 'creator', 'updater'])->findOrFail($id);
 
+        $post = Post::with(['tags', 'categories', 'creator', 'updater'])->findOrFail($id);
         foreach ($post->tags as $tag){
             $selectedTags[] = $tag->id;
         }
@@ -137,7 +139,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostCreateRequest $request, $id)
+    public function update(PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
         $post->revisions++;
@@ -147,8 +149,8 @@ class PostController extends Controller
 
         $input['updated_by'] = $user;
         $post->update($input);
-
         $tags = explode(',', $input['selectedTags']);
+
         $post->tags()->sync($tags);
 
         $categories = explode(',', $input['selectedCategories']);
@@ -174,6 +176,7 @@ class PostController extends Controller
      */
     public function destroy(Request $request, Post $post)
     {
+
         if($request->ajax()){
             try {
                 $post->update(['updated_by' => Auth::user()->id]);
@@ -184,12 +187,16 @@ class PostController extends Controller
 
             if(strpos($request->header('referer'), 'posts-drafts')) {
                 $posts = Post::pagination('http://dashboard.dev/posts-drafts', '1');
-                return view('Includes.AllPostsDraft', compact('posts'))->render();
-            }else{
-                $posts = Post::pagination();
-                return view('Includes.AllPosts', compact('posts'))->render();
+                return view('includes.posts.AllPostsDraft', compact('posts'))->render();
             }
+//            else{
+//                $posts = Post::pagination();
+//                return view('includes.posts.AllPosts', compact('posts'))->render();
+//            }
         }
+        $post->update(['updated_by' => Auth::user()->id]);
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 
     public function multiDestroy(Request $request)
@@ -209,10 +216,10 @@ class PostController extends Controller
 
             if(strpos($request->header('referer'), 'posts-drafts')) {
                 $posts = Post::pagination('http://dashboard.dev/posts-drafts', '1');
-                return view('Includes.AllPostsDraft', compact('posts'))->render();
+                return view('includes.posts.AllPostsDraft', compact('posts'))->render();
             }else{
                 $posts = Post::pagination();
-                return view('Includes.AllPosts', compact('posts'))->render();
+                return view('includes.posts.AllPosts', compact('posts'))->render();
             }
         }
     }
@@ -222,7 +229,7 @@ class PostController extends Controller
         $posts = Post::with(['updater', 'creator', 'categories', 'tags'])->onlyTrashed()->orderBy('updated_at', 'desc')->paginate(8);
 
         if ($request->ajax()) {
-            return view('Includes.AllPostsTrash', compact('posts'))->render();
+            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
         }
 
         return view('dashboard.posts.trash', compact('posts'));
@@ -238,8 +245,10 @@ class PostController extends Controller
             }
 
             $posts = Post::pagination("http://dashboard.dev/posts-trash");
-            return view('Includes.AllPostsTrash', compact('posts'))->render();
+            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
         }
+        Post::onlyTrashed()->findOrFail($id)->forceDelete();
+        return redirect()->route('posts.trash');
     }
 
     public function forceMultiDestroy(Request $request)
@@ -256,7 +265,7 @@ class PostController extends Controller
             }
 
             $posts = Post::pagination("http://dashboard.dev/posts-trash");
-            return view('Includes.AllPostsTrash', compact('posts'))->render();
+            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
         }
     }
 
@@ -270,8 +279,10 @@ class PostController extends Controller
             }
 
             $posts = Post::pagination("http://dashboard.dev/posts-trash");
-            return view('Includes.AllPostsTrash', compact('posts'))->render();
+            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
         }
+        Post::onlyTrashed()->findOrFail($id)->restore();
+        return redirect()->route('posts.trash');
     }
 
     public function imageUpload(Request $request)
@@ -302,7 +313,7 @@ class PostController extends Controller
         }
 
         if($request->ajax()){
-            return view('Includes.AllPostsDraft', compact('posts'))->render();
+            return view('includes.posts.AllPostsDraft', compact('posts'))->render();
         }
 
         return view('dashboard.posts.draft', compact('posts'));

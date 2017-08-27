@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-12 bgCard hi-shadow-2">
                 <div class="container-fluid" id="loadPosts">
-                    @include('Includes.AllPostsTrash')
+                    @include('includes.posts.AllPostsTrash')
                 </div>
             </div>
         </div>

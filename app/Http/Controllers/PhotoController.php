@@ -32,13 +32,13 @@ class PhotoController extends Controller
     public function store(Request $request){
         $image = $request->file('file');
         $imageName = time().$image->getClientOriginalName();
-        $image->move(public_path('photos'),$imageName);
+        $image->move(public_path('photoGallery'),$imageName);
         Photo::create([
             'name'=>$imageName,
             'created_by'=>1
         ]);
         $photos = Photo::all();
-        return view('Includes.AllPhotosGallery',compact('photos'));
+        return view('includes.galleries.AllPhotosGallery',compact('photos'));
     }
 
     public function multiDestroy(Request $request)
@@ -50,6 +50,6 @@ class PhotoController extends Controller
         }
 
         $photos = Photo::all();
-        return view('Includes.AllPhotosGallery', compact('photos'));
+        return view('includes.galleries.AllPhotosGallery', compact('photos'));
     }
 }

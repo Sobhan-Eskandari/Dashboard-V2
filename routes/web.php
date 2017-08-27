@@ -16,19 +16,19 @@ Route::get('/home', 'HomeController@index')->name('home');
  * users
  */
 Route::prefix('users')->group(function(){
-    Route::get('users','API\UserController@index')->name('all.users');
-    Route::Delete('/delete/{user}','API\UserController@destroy')->name('users.destroy');
-    Route::post('/MultiDelete','API\UserController@multiDestroy')->name('user.multi.destroy');
-    Route::get('/trash','API\UserController@trash')->name('user.trash');
-    Route::get('/create','API\UserController@create')->name('user.create');
-    Route::post('/','API\UserController@store')->name('user.store');
-//    Route::post('photo','API\UserController@photo')->name('user.photo');
-    Route::get('/show/{user}','API\UserController@show')->name('user.show');
-    Route::get('/edit/{user}','API\UserController@edit')->name('user.edit');
-    Route::post('/update/{user}','API\UserController@update')->name('user.update');
-    Route::delete('/forceDelete/{user}','API\UserController@forceDelete')->name('user.force.delete');
-    Route::post('/forceMultiDelete','API\UserController@forceMultiDelete')->name('user.force.multiDelete');
-    $this->post('/restore/{user}','API\UserController@restore')->name('user.restore');
+    Route::get('users','UserController@index')->name('all.users');
+    Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
+    Route::post('/MultiDelete','UserController@multiDestroy')->name('user.multi.destroy');
+    Route::get('/trash','UserController@trash')->name('user.trash');
+    Route::get('/create','UserController@create')->name('user.create');
+    Route::post('/','UserController@store')->name('user.store');
+//    Route::post('photo','UserController@photo')->name('user.photo');
+    Route::get('/show/{user}','UserController@show')->name('user.show');
+    Route::get('/edit/{user}','UserController@edit')->name('user.edit');
+    Route::post('/update/{user}','UserController@update')->name('user.update');
+    Route::delete('/forceDelete/{user}','UserController@forceDelete')->name('user.force.delete');
+    Route::post('/forceMultiDelete','UserController@forceMultiDelete')->name('user.force.multiDelete');
+    $this->post('/restore/{user}','UserController@restore')->name('user.restore');
 });
 
 /*
