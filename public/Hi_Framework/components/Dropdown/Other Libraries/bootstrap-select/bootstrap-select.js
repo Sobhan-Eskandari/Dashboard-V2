@@ -13,7 +13,7 @@
     });
   } else if (typeof module === 'object' && module.exports) {
     // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
+    // only CommonJS-like environments that support module.backups,
     // like Node.
     module.exports = factory(require("jquery"));
   } else {
