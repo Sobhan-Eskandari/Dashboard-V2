@@ -14,7 +14,7 @@
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 @endsection
 
-@section('galleries')
+@section('gallery')
     @component('components.galleries.galleryModal')
         @slot('gallery')
             <div class="row gallery_files l-rtl gallery_uploadedImage" id="loadPhotos">
@@ -67,7 +67,7 @@
                         <br>
 
                         {!! Form::text('selectedCategories', $selectedCategories, ['style' => 'display: none;']) !!}
-                        {!! Form::text('selectedTags', $selectedTags, []) !!}
+                        {!! Form::text('selectedTags', $selectedTags, ['style' => 'display: none;']) !!}
                         {!! Form::text('draft', null, ['style' => 'display: none;']) !!}
                         @if(is_null($indexPhoto))
                             {!! Form::text('indexPhoto', null, ['style' => 'display: none;']) !!}
@@ -87,7 +87,7 @@
                         @if(is_null($indexPhoto))
                             <img src="{{asset('images/nobody_m.original.jpg')}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
                         @else
-                            <img src="{{asset('galleries' . '/' . $indexPhoto[0]->name)}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
+                            <img src="{{asset('photoGallery' . '/' . $indexPhoto[0]->name)}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
                         @endif
                     </div>
                 </div>
