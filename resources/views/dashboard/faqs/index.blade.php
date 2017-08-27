@@ -24,8 +24,8 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.errors') @endcomponent
-        @component('components.flash') @endcomponent
+        @component('components.errors.errors') @endcomponent
+        @component('components.errors.flash') @endcomponent
     </nav>
 
     <div class="row FAQBox_direction">
@@ -75,7 +75,7 @@
 
         <div class="col-6">
             <div class="card" id="loadFaqs">
-                @include('includes.AllFaqs')
+                @include('includes.faqs.AllFaqs')
             </div>
         </div>
     </div>

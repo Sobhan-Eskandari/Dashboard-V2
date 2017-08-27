@@ -13,7 +13,7 @@ class FaqRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class FaqRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'question' => 'required',
+            'answer' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'question.required' => 'وارد کردن سوال الزامی است',
+            'answer.required' => 'وارد کردن جواب الزامی است',
         ];
     }
 }

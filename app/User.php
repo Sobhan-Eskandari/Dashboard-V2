@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function faqs()
     {
-        return $this->hasMany('App\FAQ', 'created_by');
+        return $this->hasMany(Faq::class, 'created_by');
     }
 
     public function categories()
