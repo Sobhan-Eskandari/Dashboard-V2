@@ -12,7 +12,9 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.errors') @endcomponent
+        @if(count($errors) > 0)
+            @component('components.errors.errors') @endcomponent
+        @endif
     </nav>
 
     <div class="row answerPmBox">

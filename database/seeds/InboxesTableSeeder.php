@@ -18,7 +18,6 @@ class InboxesTableSeeder extends Seeder
 
         $faker = Faker::create("fa_IR");
         $inboxes = [];
-        $time = jDate::forge('now')->format('datetime', true);
 
         foreach (range(1, 100) as $index){
             $inboxes[] = [
@@ -27,8 +26,8 @@ class InboxesTableSeeder extends Seeder
                 'subject' => $faker->firstName,
                 'message' => $faker->realText(300),
                 'tracking_code' => \Faker\Provider\Uuid::uuid(),
-                'created_at' => $time,
-                'updated_at' => $time,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
             ];
         }
 

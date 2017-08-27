@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-12 bgCard hi-shadow-2">
                 <div class="container-fluid" id="loadInboxes">
-                    @include('Includes.AllInboxesTrash')
+                    @include('includes.inboxes.AllInboxesTrash')
                 </div>
             </div>
         </div>
