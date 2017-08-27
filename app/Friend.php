@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\URL;
+use Laravel\Scout\Searchable;
 
 class Friend extends Model
 {

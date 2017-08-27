@@ -13,7 +13,7 @@ class FriendRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class FriendRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'site_name' => 'required',
+            'address' => 'required|unique:friends,address,'.$this->friend,
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'site_name.required' => 'وارد کردن نام سایت الزامی است',
+            'address.required' => 'وارد کردن آدرس سایت الزامی است',
+            'address.unique' => 'سایت وارد شده تکراری می باشد',
         ];
     }
 }

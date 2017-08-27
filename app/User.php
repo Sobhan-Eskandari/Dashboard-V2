@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(Category::class, 'created_by');
     }
 
+    public function friends()
+    {
+        return $this->hasMany(Friend::class, 'created_by');
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);

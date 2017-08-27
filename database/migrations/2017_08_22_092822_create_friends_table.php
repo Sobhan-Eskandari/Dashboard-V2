@@ -17,11 +17,10 @@ class CreateFriendsTable extends Migration
             $table->bigIncrements('id');
             $table->string('site_name')->nullable(false);
             $table->string('address')->nullable(false);
-            $table->unsignedBigInteger('created_by')->nullable(false);
+            $table->unsignedBigInteger('created_by')->nullable(true);
             $table->unsignedBigInteger('updated_by')->nullable(true);
             $table->integer('revisions')->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

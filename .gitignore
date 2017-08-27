@@ -6,6 +6,7 @@
 /.idea
 /storage/*.index
 /public/photos
+/public/photoGallery
 /.vagrant
 Homestead.json
 Homestead.yaml

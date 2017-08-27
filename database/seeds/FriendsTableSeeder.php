@@ -18,14 +18,13 @@ class FriendsTableSeeder extends Seeder
 
         $faker = Faker::create("fa_IR");
         $friends = [];
-        $time = jDate::forge('now')->format('datetime', true);
 
         foreach (range(1, 20) as $index){
             $friends[] = [
                 'site_name' => $faker->domainName,
                 'address' => $faker->url,
-                'created_at' => $time,
-                'updated_at' => $time,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
                 'created_by' => '1',
             ];
         }
