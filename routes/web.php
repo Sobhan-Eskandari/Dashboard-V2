@@ -16,7 +16,7 @@ Route::get('/home', 'HomeController@index')->name('home');
  * users
  */
 Route::prefix('users')->group(function(){
-    Route::get('users','UserController@index')->name('all.users');
+    Route::get('/','UserController@index')->name('all.users');
     Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
     Route::post('/MultiDelete','UserController@multiDestroy')->name('user.multi.destroy');
     Route::get('/trash','UserController@trash')->name('user.trash');

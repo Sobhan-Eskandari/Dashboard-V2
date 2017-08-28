@@ -25,25 +25,23 @@ class UserController extends Controller
 //            return $currentPage;
 //        });
 
-        $users = User::pagination(8);
+        $users = User::latest()->paginate(8);
         if ($request->has('query')) {
             $users = User::search($request->input('query'))->paginate(8);
 //            dd($users);
         }
         if ($request->ajax()) {
-            return view('Includes.AllUsers', compact('users'));
+            return view('includes.users.AllUsers', compact('users'));
         }
         return view('dashboard.users.index',compact('users'));
     }
     public function destroy(Request $request,User $user){
-//        dd($request->all());
         $user->delete();
-        if ($request->has('query')) {
-            $users = User::search($request->input('query'))->paginate(8);
-        } else {
-            $users = User::pagination();
-        }
-        return view('Includes.AllUsers', compact('users'))->render();
+        return redirect()->back();
+//        if ($request->has('query')) {
+//            $users = User::search($request->input('query'))->paginate(8);
+////        }
+//        return view('Includes.AllUsers', compact('users'))->render();
     }
     public function multiDestroy(Request $request){
         foreach ($request->input('checkboxes') as $checkbox) {

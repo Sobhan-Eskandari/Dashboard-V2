@@ -18,14 +18,14 @@
     @component('components.galleryModal')
         @slot('gallery')
             <div class="row gallery_files l-rtl gallery_uploadedImage" id="photos">
-                @include('Includes.AllPhotosGallery')
+                @include('includes.galleries.AllPhotosGallery')
             </div>
         @endslot
     @endcomponent
 @endsection
 
 @section('content')
-    {!! Form::open(['method'=>'POST','action'=>'API\UserController@store']) !!}
+    {!! Form::open(['method'=>'POST','action'=>'UserController@store']) !!}
         <div class="row">
             <!-- about me -->
             <div class="col-8 mt-3">
@@ -44,7 +44,7 @@
 
             <div class="col-4 mt-3">
 
-                @component('components.UsersInfoCard')
+                @component('components.users.UsersInfoCard')
                     @slot('header_color')
                         blue-grey darken-1
                     @endslot
