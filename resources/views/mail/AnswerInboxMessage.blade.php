@@ -1,12 +1,13 @@
 @component('mail::message')
-# Introduction
+# پاسخ به پیام: {{ $message['email'] }}
+<h3>موضوع پیام: {{ $message['subject'] }}</h3>
 
-The body of your message.
+{{ $message['message'] }}
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => \Illuminate\Support\Facades\URL::to('/')])
+بازگشت به وبسایت
 @endcomponent
 
-Thanks,<br>
+با تشکر<br>
 {{ config('app.name') }}
 @endcomponent

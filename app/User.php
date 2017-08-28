@@ -76,18 +76,21 @@ class User extends Authenticatable
 
     public function outboxes()
     {
-        return $this->hasMany('App\Outbox', 'created_by');
+        return $this->hasMany(Outbox::class, 'created_by');
     }
 
-    public function setting() {
+    public function setting()
+    {
         return $this->hasOne(Setting::class, 'created_by');
     }
 
-    public function sliders() {
+    public function sliders()
+    {
         return $this->hasMany(Slider::class, 'created_by');
     }
 
-    public function todos() {
+    public function todos()
+    {
         return $this->hasMany(Todo::class);
     }
 
@@ -95,18 +98,22 @@ class User extends Authenticatable
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
 //    Todo Methods Begin
-    public function addTodo(Todo $todo) {
+    public function addTodo(Todo $todo)
+    {
         $this->todos()->save($todo);
     }
 //    Todo Methods End
 
 //    Setting Methods Begin
-    public function saveSetting(Setting $setting) {
+    public function saveSetting(Setting $setting)
+    {
         $this->setting()->save($setting);
     }
 
-    public function updateSetting(Setting $setting) {
+    public function updateSetting(Setting $setting)
+    {
         $setting->update();
     }
 //    Setting Methods End
@@ -116,9 +123,9 @@ class User extends Authenticatable
         return [
             'id' => $this->id,
             'user_name' => $this->user_name,
-            'email'=>$this->email,
-            'first_name'=>$this->first_name,
-            'last_name'=>$this->last_name,
+            'email' => $this->email,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
         ];
     }
     public static function pagination()
@@ -143,7 +150,9 @@ class User extends Authenticatable
 
         return $users;
     }
-    public function photo(){
+
+    public function photo()
+    {
         return $this->belongsTo('App\Photo','avatar');
     }
 }

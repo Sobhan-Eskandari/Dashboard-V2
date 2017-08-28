@@ -186,7 +186,7 @@
                     {{--============[ Messages Menu of dashboard ]===========--}}
                     <h5 role="tab" class="pt-3" id="messages" data-toggle="collapse" data-parent="#accordion" href="#messagesMenu" aria-expanded="false" aria-controls="messagesMenu">
                         <a class="Sidebar_menu_link">
-                            {{--<i class="fa fa-chevron-left hi-fontSize-14" aria-hidden="true"></i><span class="badge badge-pill badge-default mr-2 countBadge">{{ \App\Inbox::whereSeen(0)->count() }}</span>پیام ها<i class="fa fa-envelope-o ml-4" aria-hidden="true"></i>--}}
+                            <i class="fa fa-chevron-left hi-fontSize-14" aria-hidden="true"></i><span class="badge badge-pill badge-default mr-2 countBadge">{{ \App\Inbox::whereSeenBy(null)->count() }}</span>پیام ها<i class="fa fa-envelope-o ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>
 

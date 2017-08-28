@@ -13,7 +13,7 @@ class OutboxRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class OutboxRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.email' => 'ایمیل وارد شده معتبر نمی باشد',
+            'email.required' => 'وارد کردن ایمیل الزامی می باشد',
+            'subject.required' => 'وارد کردن موضوع الزامی می باشد',
+            'message.required' => 'وارد کردن متن پیام الزامی می باشد',
         ];
     }
 }

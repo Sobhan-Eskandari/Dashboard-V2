@@ -109,14 +109,17 @@ class InboxController extends Controller
             dd($exception->getMessage());
         }
 
-        $inboxes = Inbox::pagination(URL::to('/inbox'));
+        Session::flash('danger', 'پیام مورد نظر با موفقیت پاک شد');
+        return redirect(route('inbox.index'));
 
-        if($request->ajax()){
-            return view('includes.inboxes.AllInboxes', compact('inboxes'))->render();
-        }else{
-            Session::flash('danger', 'پیام مورد نظر با موفقیت پاک شد');
-            return redirect(route('inbox.index'));
-        }
+//        $inboxes = Inbox::pagination(URL::to('/inbox'));
+//
+//        if($request->ajax()){
+//            return view('includes.inboxes.AllInboxes', compact('inboxes'))->render();
+//        }else{
+//            Session::flash('danger', 'پیام مورد نظر با موفقیت پاک شد');
+//            return redirect(route('inbox.index'));
+//        }
     }
 
     public function multiDestroy(Request $request)
@@ -136,13 +139,16 @@ class InboxController extends Controller
             dd($exception->getMessage());
         }
 
-        $inboxes = Inbox::pagination(URL::to('/inbox'));
-        if($request->ajax()){
-           return view('includes.inboxes.AllInboxes', compact('inboxes'))->render();
-        }else{
-            Session::flash('danger', 'پیام های مورد نظر با موفقیت پاک شد');
-            return redirect(route('inbox.index'));
-        }
+        Session::flash('danger', 'پیام های مورد نظر با موفقیت پاک شد');
+        return redirect(route('inbox.index'));
+//
+//        $inboxes = Inbox::pagination(URL::to('/inbox'));
+//        if($request->ajax()){
+//           return view('includes.inboxes.AllInboxes', compact('inboxes'))->render();
+//        }else{
+//            Session::flash('danger', 'پیام های مورد نظر با موفقیت پاک شد');
+//            return redirect(route('inbox.index'));
+//        }
     }
 
     public function trash(Request $request)
@@ -169,13 +175,15 @@ class InboxController extends Controller
             dd($exception->getMessage());
         }
 
-        $inboxes = Inbox::pagination(URL::to('/inbox/trash'));
-
-        if($request->ajax()){
-            return view('includes.inboxes.AllInboxesTrash', compact('inboxes'))->render();
-        }else{
-            return redirect(route('inbox.trash'));
-        }
+        Session::flash('danger', 'پیام مورد نظر به صورت دائمی پاک شد');
+        return redirect(route('inbox.trash'));
+//        $inboxes = Inbox::pagination(URL::to('/inbox/trash'));
+//
+//        if($request->ajax()){
+//            return view('includes.inboxes.AllInboxesTrash', compact('inboxes'))->render();
+//        }else{
+//            return redirect(route('inbox.trash'));
+//        }
     }
 
     public function forceMultiDestroy(Request $request)
@@ -193,13 +201,15 @@ class InboxController extends Controller
             dd($exception->getMessage());
         }
 
-        $inboxes = Inbox::pagination(URL::to('/inbox/trash'));
-
-        if($request->ajax()){
-            return view('includes.inboxes.AllInboxesTrash', compact('inboxes'))->render();
-        }else{
-            return redirect(route('inbox.trash'));
-        }
+        Session::flash('danger', 'پیام های مورد نظر به صورت دائمی پاک شدند');
+        return redirect(route('inbox.trash'));
+//        $inboxes = Inbox::pagination(URL::to('/inbox/trash'));
+//
+//        if($request->ajax()){
+//            return view('includes.inboxes.AllInboxesTrash', compact('inboxes'))->render();
+//        }else{
+//            return redirect(route('inbox.trash'));
+//        }
     }
 
     public function restore(Request $request, $id)
@@ -216,12 +226,14 @@ class InboxController extends Controller
             dd($exception->getMessage());
         }
 
-        $inboxes = Inbox::pagination(URL::to('/inbox/trash'));
-
-        if($request->ajax()){
-            return view('includes.inboxes.AllInboxesTrash', compact('inboxes'))->render();
-        }else{
-            return redirect(route('inbox.trash'));
-        }
+        Session::flash('success', 'پیام مورد نظر با موفقیت بازگردانی شد');
+        return redirect(route('inbox.trash'));
+//        $inboxes = Inbox::pagination(URL::to('/inbox/trash'));
+//
+//        if($request->ajax()){
+//            return view('includes.inboxes.AllInboxesTrash', compact('inboxes'))->render();
+//        }else{
+//            return redirect(route('inbox.trash'));
+//        }
     }
 }

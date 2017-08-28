@@ -11,14 +11,16 @@ class AnswerInboxMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $message;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $message
      */
-    public function __construct()
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -28,6 +30,7 @@ class AnswerInboxMessage extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail\AnswerInboxMessage');
+        return $this->markdown('mail\AnswerInboxMessage')
+            ->subject($this->message['subject']);
     }
 }

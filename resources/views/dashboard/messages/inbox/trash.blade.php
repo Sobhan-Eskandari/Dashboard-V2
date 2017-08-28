@@ -11,6 +11,16 @@
 
 @section('content')
 
+    <nav dir="rtl">
+        @if(count($errors) > 0)
+            @component('components.errors.errors') @endcomponent
+        @endif
+
+        @if(Session::has('success') || Session::has('warning') || Session::has('danger'))
+            @component('components.errors.flash') @endcomponent
+        @endif
+    </nav>
+
     <section class="usersSection">
         <div class="row">
             <div class="col-12 bgCard hi-shadow-2">
