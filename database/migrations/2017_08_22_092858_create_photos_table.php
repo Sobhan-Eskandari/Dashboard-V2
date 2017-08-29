@@ -18,9 +18,7 @@ class CreatePhotosTable extends Migration
             $table->string('name')->nullable(false);
             $table->tinyInteger('order')->nullable(true);
             $table->string('position')->nullable(true);
-            $table->unsignedBigInteger('created_by')->nullable(false);
-//            $table->dateTime('created_at')->nullable(true);
-//            $table->dateTime('updated_at')->nullable(true);
+            $table->unsignedBigInteger('created_by')->nullable(true);
             $table->timestamps();
         });
     }

@@ -5,8 +5,7 @@
 /vendor
 /.idea
 /storage/*.index
-/public/photos
-/public/photoGallery
+/public/gallery
 /.vagrant
 Homestead.json
 Homestead.yaml

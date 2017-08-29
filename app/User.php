@@ -59,6 +59,21 @@ class User extends Authenticatable
         return $this->hasMany(Faq::class, 'created_by');
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(User::class, 'created_by')->withTrashed();
+    }
+
+    public function children()
+    {
+        return $this->hasMany(User::class, 'created_by')->withTrashed();
+    }
+
+    public function tags()
+    {
+        return $this->hasMany('App\Tag', 'created_by');
+    }
+
     public function categories()
     {
         return $this->hasMany(Category::class, 'created_by');
@@ -67,6 +82,16 @@ class User extends Authenticatable
     public function friends()
     {
         return $this->hasMany(Friend::class, 'created_by');
+    }
+
+    public function createPhotos()
+    {
+        return $this->hasMany(Photo::class, 'created_by');
+    }
+
+    public function photos()
+    {
+        return $this->morphToMany(Photo::class, 'photoable');
     }
 
     public function comments()

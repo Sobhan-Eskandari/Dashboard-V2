@@ -16,7 +16,6 @@
 <td>{{ $full_name }}</td>
 <td>{{ $email }}</td>
 <td>{{ $mobile }}</td>
-<td>{{ $role }}</td>
 
 {{--==========[ More Button Dropdown ]========= --}}
 <td>
@@ -26,13 +25,13 @@
         </button>
         {{--==========[ Dropdown Menu ]========= --}}
         <div data-dropdown-in="bounceIn" data-dropdown-out="bounceOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
-            {!! Form::open(['method'=>'POST', 'action'=>['AdminController@restore', $id], 'class'=>'restore']) !!}
+            {!! Form::open(['method'=>'POST', 'action'=>['UserController@adminRestore', $id], 'class'=>'restore']) !!}
             <button class="dropdown-item text-right py-0">
                 <i class="fa fa-undo ml-2" aria-hidden="true"></i>بازگردانی
             </button>
             {!! Form::close() !!}
             <div class="dropdown-divider my-1"></div>
-            {!! Form::open(['method'=>'DELETE', 'action'=>['AdminController@forceDestroy', $id], 'class'=>'singleDestroy']) !!}
+            {!! Form::open(['method'=>'DELETE', 'action'=>['UserController@adminForceDestroy', $id], 'class'=>'singleDestroy']) !!}
                 <button class="dropdown-item text-right py-0 mt-1">
                     <i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف
                 </button>

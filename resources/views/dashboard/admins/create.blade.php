@@ -14,10 +14,10 @@
 @endsection
 
 @section('gallery')
-    @component('components.galleryModal')
+    @component('components.galleries.galleryModal')
         @slot('gallery')
             <div class="row gallery_files l-rtl gallery_uploadedImage" id="loadPhotos">
-                @include('Includes.AllPhotos')
+                @include('includes.galleries.AllPhotos')
             </div>
         @endslot
     @endcomponent
@@ -26,7 +26,13 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.errors') @endcomponent
+        @if(count($errors) > 0)
+            @component('components.errors.errors') @endcomponent
+        @endif
+
+        @if(Session::has('success') || Session::has('warning') || Session::has('danger'))
+            @component('components.errors.flash') @endcomponent
+        @endif
     </nav>
 
     <div class="row">
@@ -35,7 +41,7 @@
                 {{--اطلاعات : {{ $admins->updated_at->format('y/m/d') }}</h5>--}}
         {{--</div>--}}
     </div>
-    {!! Form::open(['method'=>'POST', 'action'=>'AdminController@store', 'files' => true]) !!}
+    {!! Form::open(['method'=>'POST', 'action'=>'UserController@adminStore', 'files' => true]) !!}
     <div class="row">
         <div class="col-8 mt-3">
             <div class="card hi-aboutMePanelCard">
@@ -137,7 +143,7 @@
                         </div>
                         <div class="col-4 pt-5">
                             <div class="hi-profileCard_PictureSelectorBox_selector hi-profileCard_PictureSelectorBox_selector_first mt-4">
-                                {!! Form::select('role_id',$roles, null, ['class'=>'dropdown', 'data-settings'=>'{"wrapperClass":"metro"}']) !!}
+{{--                                {!! Form::select('role_id',$roles, null, ['class'=>'dropdown', 'data-settings'=>'{"wrapperClass":"metro"}']) !!}--}}
                             </div>
                         </div>
                     </div>

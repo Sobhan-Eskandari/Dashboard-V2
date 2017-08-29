@@ -2,7 +2,7 @@
     {{--============[ Row of Dissmis Btn ]===========--}}
     <div class="row">
         <div class="col-12 mb-2 pr-4">
-            {!! Form::open(['method'=>'DELETE', 'action'=>['AdminController@destroy', $id], 'class'=>'singleDestroy']) !!}
+            {!! Form::open(['method'=>'DELETE', 'action'=>['UserController@adminDestroy', $id], 'class'=>'singleDestroy']) !!}
                 <button class="hi-button-btn1 pull-right">
                     <i class="fa fa-times hi-fontSize-21" aria-hidden="true"></i>
                 </button>

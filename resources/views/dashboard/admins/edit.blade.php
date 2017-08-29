@@ -14,10 +14,10 @@
 @endsection
 
 @section('gallery')
-    @component('components.galleryModal')
+    @component('components.galleries.galleryModal')
         @slot('gallery')
             <div class="row gallery_files l-rtl gallery_uploadedImage" id="loadPhotos">
-                @include('Includes.AllPhotos')
+                @include('includes.galleries.AllPhotos')
             </div>
         @endslot
     @endcomponent
@@ -25,16 +25,16 @@
 
 @section('content')
 
-    {{--{!! Form::open(['method'=>'POST', 'action'=>['AdminController@edit_profile_pic', $admins->id], 'files' => true, 'id'=>'uploadForm']) !!}--}}
-        {{--{!! Form::file('avatar') !!}--}}
-        {{--{!! Form::submit('آپلود', ['class'=>'btnSubmit', 'id'=>'uploadSubmit']) !!}--}}
-    {{--{!! Form::close() !!}--}}
-
-    {{--<div id="target"></div>--}}
-
     <nav dir="rtl">
-        @component('components.errors') @endcomponent
+        @if(count($errors) > 0)
+            @component('components.errors.errors') @endcomponent
+        @endif
+
+        @if(Session::has('success') || Session::has('warning') || Session::has('danger'))
+            @component('components.errors.flash') @endcomponent
+        @endif
     </nav>
+
 
     <div class="row">
         <div class="col hi-subjectDashboardAdminProfile text-right">
@@ -42,7 +42,7 @@
                 اطلاعات : {{ $admin->updated_at->format('y/m/d') }}</h5>
         </div>
     </div>
-    {!! Form::model($admin , ['method'=>'PUT', 'action'=>['AdminController@update', $admin->id], 'files' => true, 'id'=>'form']) !!}
+    {!! Form::model($admin , ['method'=>'PUT', 'action'=>['UserController@adminUpdate', $admin->id], 'files' => true, 'id'=>'form']) !!}
         <div class="row">
             <div class="col-8 mt-3">
                 <div class="card hi-aboutMePanelCard">
@@ -160,7 +160,7 @@
                             {{-- profile pic upload - end --}}
                             <div class="col-4 pt-5">
                                 <div class="hi-profileCard_PictureSelectorBox_selector hi-profileCard_PictureSelectorBox_selector_first mt-4">
-                                    {!! Form::select('role_id',$roles, null, ['class'=>'dropdown', 'data-settings'=>'{"wrapperClass":"metro"}']) !!}
+{{--                                    {!! Form::select('role_id',$roles, null, ['class'=>'dropdown', 'data-settings'=>'{"wrapperClass":"metro"}']) !!}--}}
                                 </div>
                             </div>
                         </div>

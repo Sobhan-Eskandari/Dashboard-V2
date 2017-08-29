@@ -10,7 +10,7 @@
 
 @section('search')
     <div class="hi-search-1">
-        {!! Form::open(['method'=>'GET', 'action'=>'AdminController@index']) !!}
+        {!! Form::open(['method'=>'GET', 'action'=>'UserController@adminIndex']) !!}
             {!! Form::text('query', isset($_GET['query'])? $_GET['query'] : '', ['class' => 'hi-search_field', 'placeholder'=>'جست و جو کنید...', 'id'=>'search']) !!}
             <button class="hi-button-btn1 pull-left" id="loading"><i class="fa fa-search white-text hi-fontSize-19" aria-hidden="true"></i></button>
         {!! Form::close() !!}
@@ -20,7 +20,13 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.flash') @endcomponent
+        @if(count($errors) > 0)
+            @component('components.errors.errors') @endcomponent
+        @endif
+
+        @if(Session::has('success') || Session::has('warning') || Session::has('danger'))
+            @component('components.errors.flash') @endcomponent
+        @endif
     </nav>
 
     <section class="adminsSection">
@@ -40,7 +46,7 @@
             </div>
 
             <div id="loadAdmins">
-                @include('Includes.AllAdmins')
+                @include('includes.admins.AllAdmins')
             </div>
         </div>
 

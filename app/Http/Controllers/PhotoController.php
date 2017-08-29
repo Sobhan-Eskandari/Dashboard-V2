@@ -10,33 +10,19 @@ use Illuminate\Support\Facades\File;
 
 class PhotoController extends Controller
 {
-    //    public function store(Request $request)
-//    {
-//        $file = $request->file('file');
-//
-//        $name = time() . $file->getClientOriginalName();
-//
-//        $file->move('gallery', $name);
-//
-//        Photo::create([
-//            'name' => $name,
-//            'created_by' => Auth::user()->id
-//        ]);
-//    }
-
     public function index(){
         $photos = Photo::all();
         return view('dashboard.gallery.index',compact('photos'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $image = $request->file('file');
-        $imageName = time().$image->getClientOriginalName();
-        $image->move(public_path('photoGallery'),$imageName);
-        Photo::create([
-            'name'=>$imageName,
-            'created_by'=>1
-        ]);
+        $imageName = time() . $image->getClientOriginalName();
+        $image->move(public_path('gallery'), $imageName);
+
+        auth()->user()->createPhotos()->save(Photo::create(['name' => $imageName]));
+
         $photos = Photo::all();
         return view('includes.galleries.AllPhotosGallery',compact('photos'));
     }
