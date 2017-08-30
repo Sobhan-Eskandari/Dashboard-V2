@@ -93,11 +93,19 @@
 
                         {{--============[ image box ]===========--}}
                         <div class="col-2 pr-0">
-                            <img src="{{asset('images/nobody_m.original.jpg')}}"
-                                 alt="در حال بارگذاری عکس"
-                                 class="createPostImage mr-2"
-                                 id="header_img">
-                            {!! Form::text('header_img', null, ['style' => 'display: none']) !!}
+                            @if(!is_null($header_img))
+                                <img src="{{ asset('gallery' . '/' . $header_img->name) }}"
+                                     alt="در حال بارگذاری عکس"
+                                     class="createPostImage mr-2"
+                                     id="header_img">
+                                {!! Form::text('header_img', null, ['style' => 'display: none']) !!}
+                            @else
+                                <img src="{{asset('images/nobody_m.original.jpg')}}"
+                                     alt="در حال بارگذاری عکس"
+                                     class="createPostImage mr-2"
+                                     id="header_img">
+                                {!! Form::text('header_img', null, ['style' => 'display: none']) !!}
+                            @endif
                         </div>
                     </div>
 
@@ -132,11 +140,19 @@
 
                         {{--============[ image box ]===========--}}
                         <div class="col-2 pr-0">
-                            <img src="{{asset('images/nobody_m.original.jpg')}}"
-                                 alt="در حال بارگذاری عکس"
-                                 class="createPostImage mr-2"
-                                 id="about_us_img">
-                            {!! Form::text('about_us_img', null, ['style' => 'display: none']) !!}
+                            @if(!is_null($about_us_img))
+                                <img src="{{ asset('gallery' . '/' . $about_us_img->name) }}"
+                                     alt="در حال بارگذاری عکس"
+                                     class="createPostImage mr-2"
+                                     id="about_us_img">
+                                {!! Form::text('about_us_img', null, ['style' => 'display: none']) !!}
+                            @else
+                                <img src="{{asset('images/nobody_m.original.jpg')}}"
+                                     alt="در حال بارگذاری عکس"
+                                     class="createPostImage mr-2"
+                                     id="about_us_img">
+                                {!! Form::text('about_us_img', null, ['style' => 'display: none']) !!}
+                            @endif
                         </div>
                     </div>
 

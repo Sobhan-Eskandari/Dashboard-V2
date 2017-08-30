@@ -46,7 +46,7 @@ class SettingController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param $
      */
-    public function store(Request $request)
+    public function store(SettingRequest $request)
     {
         $logo = $request->file('logoFile');
 
@@ -79,7 +79,22 @@ class SettingController extends Controller
     public function edit(Setting $setting)
     {
         $photos = Photo::orderBy('created_at', 'desc')->get();
-        return view('dashboard.settings.edit', compact('setting', 'photos'));
+        $header_img = '';
+        $about_us_img = '';
+
+        foreach ($setting->photos as $photo)
+        {
+            if($photo->position == 'header')
+            {
+                $header_img = $photo;
+            }
+
+            if($photo->position == 'about_us'){
+                $about_us_img = $photo;
+            }
+        }
+
+        return view('dashboard.settings.edit', compact('setting', 'photos', 'header_img', 'about_us_img'));
     }
 
     /**
@@ -95,6 +110,27 @@ class SettingController extends Controller
 
         $setting->revisions++;
         $setting->updated_by = Auth::user()->id;
+
+        if (!is_null($request['header_img'])){
+            $photo = Photo::wherePosition('header')->first();
+            $setting->photos()->detach($photo);
+            $photo->position = null;
+            $photo->update();
+
+            $setting->photos()->attach($request['header_img']);
+            Photo::findOrFail($request['header_img'])->update(['position' => 'header']);
+        }
+
+        if (!is_null($request['about_us_img'])){
+            $photo = Photo::wherePosition('about_us')->first();
+            $setting->photos()->detach($photo);
+            $photo->position = null;
+            $photo->update();
+
+            $setting->photos()->attach($request['about_us_img']);
+            Photo::findOrFail($request['about_us_img'])->update(['position' => 'about_us']);
+        }
+
         $setting->update($request->all());
 
         Session::flash('success', 'تنظیمات با موفقیت ویررایش شد');
