@@ -26,7 +26,7 @@ class CreateSettingsTable extends Migration
             $table->char('mobile_number2', 11)->nullable(false);
             $table->char('zip', 10)->nullable(false);
             $table->text('address')->nullable(false);
-            $table->string('logo')->nullable(true)->default('/photos/logo.png');
+            $table->string('logo')->nullable(true);
             $table->string('instagram')->nullable(true)->default('https://www.instagram.com/');
             $table->string('telegram')->nullable(true)->default('https://telegram.org/');
             $table->string('facebook')->nullable(true)->default('https://www.facebook.com/');
@@ -38,11 +38,8 @@ class CreateSettingsTable extends Migration
             $table->text('about_site')->nullable(true);
             $table->text('guide')->nullable(true);
             $table->text('header')->nullable(true);
-            $table->text('slider')->nullable(true);
             $table->string('favicon')->nullable(true);
-//            $table->dateTime('created_at');
-//            $table->dateTime('updated_at');
-            $table->unsignedBigInteger('created_by')->nullable(false);
+            $table->unsignedBigInteger('created_by')->nullable(true);
             $table->unsignedBigInteger('updated_by')->nullable(true);
             $table->integer('revisions')->default(0);
             $table->timestamps();

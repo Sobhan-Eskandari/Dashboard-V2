@@ -18,6 +18,7 @@ class Setting extends Model
         'mobile_number2',
         'address',
         'zip',
+        'logo',
         'instagram',
         'telegram',
         'facebook',
@@ -29,7 +30,6 @@ class Setting extends Model
         'about_site',
         'guide',
         'header',
-        'slider',
         'favicon',
         'created_by',
         'updated_by',
@@ -41,7 +41,8 @@ class Setting extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function photos() {
-        return $this->morphOne(Photo::class, 'photoable');
+    public function photos()
+    {
+        return $this->morphToMany(Photo::class, 'photoable');
     }
 }

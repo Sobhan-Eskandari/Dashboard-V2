@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SettingRequest;
 use App\Setting;
 use App\Photo;
 use App\Http\Requests\SettingStoreRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
 class SettingController extends Controller
 {
-    //    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +26,6 @@ class SettingController extends Controller
         }else{
             return $this->create();
         }
-
     }
 
     /**
@@ -39,26 +35,39 @@ class SettingController extends Controller
      */
     public function create()
     {
-        return view('dashboard.settings.create');
+        $photos = Photo::all();
+        return view('dashboard.settings.create', compact('photos'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param SettingStoreRequest $request
+     * @param SettingRequest $request
      * @return \Illuminate\Http\Response
      * @internal param $
      */
-    public function store(SettingStoreRequest $request)
+    public function store(Request $request)
     {
-        $logo = $request->file('logo');
-        $logo->move(public_path('photos'), 'logo' . $request->file('logo')->getClientOriginalExtension());
-        $request['created_by'] = auth()->user()->getAuthIdentifier();
-        $request['logo'] = '/photos/logo'.$request->file('logo')->getClientOriginalExtension();
-        $setting = Setting::create($request->all());
-        auth()->user()->saveSetting($setting);
-        Session::flash('success', 'تنظیمات با موفقیت ثبت شد.');
-        return back();
+        $logo = $request->file('logoFile');
+
+        $request['logo'] = time() . $logo->getClientOriginalName();
+
+        $logo->move(public_path('images'), $request['logo']);
+
+        auth()->user()->setting()->save($setting = Setting::create($request->all()));
+
+        $setting->photos()->attach([
+            $request['header_img'],
+            $request['about_us_img']
+        ]);
+
+        Photo::findOrFail($request['header_img'])->update(['position' => 'header']);
+        Photo::findOrFail($request['about_us_img'])->update(['position' => 'about_us']);
+
+        Session::flash('success', 'تنظیمات با موفقیت ثبت شد');
+
+        return redirect(route('settings.index'));
+
     }
 
     /**
@@ -76,18 +85,19 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param SettingStoreRequest|Request $request
+     * @param SettingRequest $request
      * @return \Illuminate\Http\Response
      * @internal param Setting $setting
      */
-    public function update(SettingStoreRequest $request)
+    public function update(SettingRequest $request)
     {
         $setting = Setting::first();
-        $request['updated_by'] = auth()->user()->getAuthIdentifier();
-        $request['updated_at'] = jdate(Carbon::now());
-        $request['revisions'] = $setting->revisions + 1;
-        auth()->user()->updateSetting($setting->fill($request->all()));
-        Session::flash('success', 'تنظیمات با موفقیت ذخیره شد.');
-        return back();
+
+        $setting->revisions++;
+        $setting->updated_by = Auth::user()->id;
+        $setting->update($request->all());
+
+        Session::flash('success', 'تنظیمات با موفقیت ویررایش شد');
+        return redirect(route('settings.index'));
     }
 }
