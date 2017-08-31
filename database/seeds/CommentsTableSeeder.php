@@ -21,9 +21,9 @@ class CommentsTableSeeder extends Seeder
         foreach (range(1, 100) as $index){
             $comments[] = [
                 'full_name' => $faker->name,
-                'user_id'=>rand(1,10),
-                'post_id'=>rand(1,3),
-                'parent_id'=>rand(1,5),
+                'user_id' => rand(1, 10),
+                'post_id' => rand(1, 50),
+                'parent_id' => rand(1, 5),
                 'subject' => $faker->firstName,
                 'message' => $faker->realText(300),
                 'tracking_code' => \Faker\Provider\Uuid::uuid(),

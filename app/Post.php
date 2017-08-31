@@ -5,7 +5,9 @@ namespace App;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Laravel\Scout\Searchable;
+use Morilog\Jalali\Facades\jDate;
 
 class Post extends Model
 {
@@ -28,24 +30,21 @@ class Post extends Model
         'locked_by',
         'revisions',
     ];
-    public static function pagination($path = "http://dashboard.dev/posts", $draft = 0)
+
+    public static function pagination($path, $draft = 0)
     {
-        if ($path == "http://dashboard.dev/posts/trash"){
-            $allPosts = Post::with(['updater', 'creator', 'categories', 'tags'])->onlyTrashed()->orderBy('updated_at', 'desc')->get();
+        if ($path == URL::to('/posts/trash')){
+            $allPosts = Post::with(['updater', 'creator', 'categories', 'tags'])->onlyTrashed()->orderBy('updated_at', 'desc')->get()->toArray();
         }else{
-            $allPosts = Post::with(['updater', 'creator', 'categories', 'tags'])->where('draft', $draft)->orderBy('updated_at', 'desc')->get();
-        }
-        $postArray = [];
-        foreach ($allPosts as $post){
-            $postArray[] = $post;
+            $allPosts = Post::with(['updater', 'creator', 'categories', 'tags'])->where('draft', $draft)->orderBy('updated_at', 'desc')->get()->toArray();
         }
 
         $page = Input::get('page', 1); // Get the current page or default to 1
         $perPage = 8;
         $offset = ($page * $perPage) - $perPage;
 
-        $posts = new LengthAwarePaginator(array_slice($postArray, $offset, $perPage, true),
-            count($postArray),
+        $posts = new LengthAwarePaginator(array_slice($allPosts, $offset, $perPage, true),
+            count($allPosts),
             $perPage,
             $page,
             ['path' => $path]
@@ -56,32 +55,42 @@ class Post extends Model
 
     public function updater()
     {
-        return $this->belongsTo('App\User', 'updated_by');
+        return $this->belongsTo(User::class, 'updated_by');
     }
 
     public function creator()
     {
-        return $this->belongsTo('App\User', 'created_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function categories()
     {
-        return $this->morphToMany('App\Category', 'categorable');
+        return $this->morphToMany(Category::class, 'categorable');
     }
 
     public function tags()
     {
-        return $this->morphToMany('App\Tag', 'taggable');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function photos()
     {
-        return $this->morphToMany('App\Photo', 'photoable');
+        return $this->morphToMany(Photo::class, 'photoable');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class);
+    }
+
+    public function create_date()
+    {
+        return jDate::forge($this->created_at)->format('%d %B، %Y');
+    }
+
+    public function update_date()
+    {
+        return jDate::forge($this->updated_at)->format('%d %B، %Y');
     }
 
     public function toSearchableArray()

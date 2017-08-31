@@ -18,21 +18,23 @@ class PostsTableSeeder extends Seeder
         DB::table('posts')->truncate();
 
         $faker = Faker::create("fa_IR");
-        $posts = [];
-        $time = jDate::forge('now')->format('datetime', true);
 
         foreach (range(1, 50) as $index){
             $post = new Post([
                 'title' => $faker->firstName,
                 'body' => $faker->realText(500),
-                'created_at' => $time,
-                'updated_at' => $time,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+                'views' => rand(10, 100),
                 'created_by' => '1',
-                'updated_by' => '2',
+                'updated_by' => '1',
             ]);
+
             $post->save();
+
+            $post->categories()->attach([rand(1, 20), rand(21, 40), rand(41, 50)]);
+            $post->tags()->attach([rand(1, 20), rand(21, 40), rand(41, 50)]);
         }
 
-//        DB::table('posts')->insert($posts);
     }
 }

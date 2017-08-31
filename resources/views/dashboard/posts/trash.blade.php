@@ -1,4 +1,5 @@
 @extends('layouts.main')
+
 @section('breadcrumb')
     @component('components.Breadcrumb')
         <li><a href="{{ route('home') }}">داشبورد</a></li>
@@ -8,6 +9,16 @@
 @endsection
 
 @section('content')
+
+    <nav dir="rtl">
+        @if(count($errors) > 0)
+            @component('components.errors.errors') @endcomponent
+        @endif
+
+        @if(Session::has('success') || Session::has('warning') || Session::has('danger'))
+            @component('components.errors.flash') @endcomponent
+        @endif
+    </nav>
 
     <section class="usersSection">
         <div class="row">

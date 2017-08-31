@@ -27,7 +27,13 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.errors.errors') @endcomponent
+        @if(count($errors) > 0)
+            @component('components.errors.errors') @endcomponent
+        @endif
+
+        @if(Session::has('success') || Session::has('warning') || Session::has('danger'))
+            @component('components.errors.flash') @endcomponent
+        @endif
     </nav>
 
     <div class="row hi-createPostBox">
@@ -87,7 +93,7 @@
                         @if(is_null($indexPhoto))
                             <img src="{{asset('images/nobody_m.original.jpg')}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
                         @else
-                            <img src="{{asset('photoGallery' . '/' . $indexPhoto[0]->name)}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
+                            <img src="{{asset('gallery' . '/' . $indexPhoto[0]->name)}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
                         @endif
                     </div>
                 </div>
@@ -109,10 +115,10 @@
                         </li>
                         <li class="list-group-item"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; {{ $post->views }} بازدید</li>
                         <li class="list-group-item"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;{{ count($post->comments) }} نظر</li>
-                        <li class="list-group-item"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ $post->created_at->format('y/m/d') }}</li>
+                        <li class="list-group-item"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ $post->create_date() }}</li>
                         <li class="list-group-item">ایجاد شده توسط : {{ $post->creator->full_name }}</li>
                         <li class="list-group-item">تعداد ویرایش&nbsp;<span class="badge badge-pill badge-default">{{ $post->revisions }}</span></li>
-                        <li class="list-group-item">آخرین ویرایش : {{ $post->updated_at->format('y/m/d') }} - {{ $post->updater->full_name }}</li>
+                        <li class="list-group-item">آخرین ویرایش : {{ $post->update_date() }} - {{ $post->updater->full_name }}</li>
                     </div>
                 </ul>
             </div>

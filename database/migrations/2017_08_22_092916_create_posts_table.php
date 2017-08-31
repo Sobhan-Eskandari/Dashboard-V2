@@ -21,13 +21,10 @@ class CreatePostsTable extends Migration
             $table->integer('views')->default(0);
             $table->boolean('lock')->default(false);
             $table->boolean('draft')->default(false);
-            $table->unsignedBigInteger('created_by')->nullable(false);
+            $table->unsignedBigInteger('created_by')->nullable(true);
             $table->unsignedBigInteger('updated_by')->nullable(true);
             $table->unsignedBigInteger('locked_by')->nullable(true);
             $table->integer('revisions')->default(0);
-//            $table->dateTime('created_at')->nullable(true);
-//            $table->dateTime('updated_at')->nullable(true);
-//            $table->dateTime('deleted_at')->nullable(true);
             $table->timestamps();
             $table->softDeletes();
         });

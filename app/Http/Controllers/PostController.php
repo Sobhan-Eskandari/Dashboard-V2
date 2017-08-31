@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Morilog\Jalali\Facades\jDate;
 
 class PostController extends Controller
@@ -19,6 +20,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -53,27 +55,23 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PostRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(PostRequest $request)
     {
-        $input = $request->all();
-        Auth::loginUsingId(1);
-        $user = Auth::user()->id;
-        $input['created_by'] = $user;
-        $input['updated_by'] = $user;
-        $post = Post::create($input);
+        $request['updated_by'] = Auth::user()->id;
+        auth()->user()->posts()->save($post = Post::create($request->all()));
 
-        $tags = explode(',', $input['selectedTags']);
+        $tags = explode(',', $request['selectedTags']);
         $post->tags()->attach($tags);
 
-        $categories = explode(',', $input['selectedCategories']);
+        $categories = explode(',', $request['selectedCategories']);
         $post->categories()->attach($categories);
 
-        $post->photos()->attach($input['indexPhoto']);
+        $post->photos()->attach($request['indexPhoto']);
 
-        if($input['draft'] === '1'){
+        if($request['draft'] === '1'){
             Session::flash('success', 'پست با موفقیت ساخته و پیش نویس شد');
             return redirect(route('posts.draft'));
         }else {
@@ -85,8 +83,9 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $slug
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function show($slug)
     {
@@ -102,17 +101,16 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-
         $selectedTags = [];
         $selectedCategories = [];
         $indexPhoto = null;
 
         $photos = Photo::orderBy('created_at', 'desc')->get();
-
         $categories = Category::orderBy('created_at', 'desc')->get();
         $tags = Tag::orderBy('created_at', 'desc')->get();
 
         $post = Post::with(['tags', 'categories', 'creator', 'updater'])->findOrFail($id);
+
         foreach ($post->tags as $tag){
             $selectedTags[] = $tag->id;
         }
@@ -135,31 +133,29 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param PostRequest $request
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, $id)
+    public function update(PostRequest $request, Post $post)
     {
-        $post = Post::findOrFail($id);
         $post->revisions++;
-
-        $input = $request->all();
         $user = Auth::user()->id;
 
-        $input['updated_by'] = $user;
-        $post->update($input);
-        $tags = explode(',', $input['selectedTags']);
+        $request['updated_by'] = $user;
+        $post->update($request->all());
+
+        $tags = explode(',', $request['selectedTags']);
 
         $post->tags()->sync($tags);
 
-        $categories = explode(',', $input['selectedCategories']);
+        $categories = explode(',', $request['selectedCategories']);
         $post->categories()->sync($categories);
 
         $post->photos()->detach();
-        $post->photos()->attach($input['indexPhoto']);
+        $post->photos()->attach($request['indexPhoto']);
 
-        if($input['draft'] === '0'){
+        if($request['draft'] === '0'){
             Session::flash('warning', 'پست با موفقیت ویرایش و منتشر شد');
             return redirect(route('posts.index'));
         }else{
@@ -171,62 +167,54 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param Post $post
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function destroy(Request $request, Post $post)
     {
-
-        if($request->ajax()){
-            try {
-                $post->update(['updated_by' => Auth::user()->id]);
-                $post->delete();
-            }catch (\Exception $exception){
-                dd($exception->getMessage());
-            }
-
-            if(strpos($request->header('referer'), 'posts-drafts')) {
-                $posts = Post::pagination('http://dashboard.dev/posts-drafts', '1');
-                return view('includes.posts.AllPostsDraft', compact('posts'))->render();
-            }
-//            else{
-//                $posts = Post::pagination();
-//                return view('includes.posts.AllPosts', compact('posts'))->render();
-//            }
+        try {
+            $post->update(['updated_by' => Auth::user()->id]);
+            $post->delete();
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
         }
-        $post->update(['updated_by' => Auth::user()->id]);
-        $post->delete();
-        return redirect()->route('posts.index');
+
+        Session::flash('danger', 'پست مورد نظر با موفقیت پاک شد');
+
+        if($request->header('referer') == URL::to('/posts/drafts')) {
+            return redirect(route('posts.draft'));
+        }
+
+        return redirect(route('posts.index'));
     }
 
     public function multiDestroy(Request $request)
     {
-        if($request->ajax()){
-            $input = $request->all();
-            $ids = explode(',', $input['ids']);
-            try {
-                foreach ($ids as $id){
-                    $post = Post::findOrFail($id);
-                    $post->update(['updated_by' => Auth::user()->id]);
-                    $post->delete();
-                }
-            }catch (\Exception $exception){
-                dd($exception->getMessage());
+        $ids = explode(',', $request['ids']);
+        try {
+            foreach ($ids as $id){
+                $post = Post::findOrFail($id);
+                $post->update(['updated_by' => Auth::user()->id]);
+                $post->delete();
             }
-
-            if(strpos($request->header('referer'), 'posts-drafts')) {
-                $posts = Post::pagination('http://dashboard.dev/posts-drafts', '1');
-                return view('includes.posts.AllPostsDraft', compact('posts'))->render();
-            }else{
-                $posts = Post::pagination();
-                return view('includes.posts.AllPosts', compact('posts'))->render();
-            }
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
         }
+
+        Session::flash('danger', 'پست های مورد نظر با موفقیت پاک شدند');
+
+        if($request->header('referer') == URL::to('/posts/drafts')) {
+            return redirect(route('posts.draft'));
+        }
+
+        return redirect(route('posts.index'));
     }
 
     public function trash(Request $request)
     {
-        $posts = Post::with(['updater', 'creator', 'categories', 'tags'])->onlyTrashed()->orderBy('updated_at', 'desc')->paginate(8);
+        $posts = Post::with(['updater', 'creator', 'categories', 'tags', 'comments'])->onlyTrashed()->orderBy('updated_at', 'desc')->paginate(8);
 
         if ($request->ajax()) {
             return view('includes.posts.AllPostsTrash', compact('posts'))->render();
@@ -237,50 +225,59 @@ class PostController extends Controller
 
     public function forceDestroy(Request $request, $id)
     {
-        if($request->ajax()){
-            try {
-                Post::onlyTrashed()->findOrFail($id)->forceDelete();
-            }catch (\Exception $exception){
-                dd($exception->getMessage());
-            }
-
-            $posts = Post::pagination("http://dashboard.dev/posts-trash");
-            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
-        }
+//        if($request->ajax()){
+//            try {
+//                Post::onlyTrashed()->findOrFail($id)->forceDelete();
+//            }catch (\Exception $exception){
+//                dd($exception->getMessage());
+//            }
+//
+//            $posts = Post::pagination(URL::to('/posts/trash'));
+//            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
+//        }
+        Session::flash('danger', 'پست مورد نظر به صورت دائمی حذف شد');
         Post::onlyTrashed()->findOrFail($id)->forceDelete();
         return redirect()->route('posts.trash');
     }
 
     public function forceMultiDestroy(Request $request)
     {
-        if($request->ajax()){
-            $input = $request->all();
-            $ids = explode(',', $input['ids']);
-            try {
-                foreach ($ids as $id){
-                    Post::onlyTrashed()->findOrFail($id)->forceDelete();
-                }
-            }catch (\Exception $exception){
-                dd($exception->getMessage());
-            }
-
-            $posts = Post::pagination("http://dashboard.dev/posts-trash");
-            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
+        $ids = explode(',', $request['ids']);
+        foreach ($ids as $id){
+            Post::onlyTrashed()->findOrFail($id)->forceDelete();
         }
+
+        Session::flash('danger', 'پست های مورد نظر به صورت دائمی حذف شدند');
+        return redirect()->route('posts.trash');
+//        if($request->ajax()){
+//            $ids = explode(',', $request['ids']);
+//            try {
+//                foreach ($ids as $id){
+//                    Post::onlyTrashed()->findOrFail($id)->forceDelete();
+//                }
+//            }catch (\Exception $exception){
+//                dd($exception->getMessage());
+//            }
+//
+//            $posts = Post::pagination(URL::to('/posts/trash'));
+//            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
+//        }
     }
 
     public function restore(Request $request, $id)
     {
-        if($request->ajax()){
-            try {
-                Post::onlyTrashed()->findOrFail($id)->restore();
-            }catch (\Exception $exception){
-                dd($exception->getMessage());
-            }
+//        if($request->ajax()){
+//            try {
+//                Post::onlyTrashed()->findOrFail($id)->restore();
+//            }catch (\Exception $exception){
+//                dd($exception->getMessage());
+//            }
+//
+//            $posts = Post::pagination(URL::to('/posts/trash'));
+//            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
+//        }
 
-            $posts = Post::pagination("http://dashboard.dev/posts-trash");
-            return view('includes.posts.AllPostsTrash', compact('posts'))->render();
-        }
+        Session::flash('success', 'پست مورد نظر بازگردانی شد');
         Post::onlyTrashed()->findOrFail($id)->restore();
         return redirect()->route('posts.trash');
     }
@@ -307,9 +304,9 @@ class PostController extends Controller
     {
         if($request->has('query')){
             $posts = Post::search($request->input('query'))->where('draft', 1)->orderBy('updated_at', 'desc')->paginate(8);
-            $posts->load(['updater', 'creator', 'categories', 'tags']);
+            $posts->load(['updater', 'creator', 'categories', 'tags', 'comments']);
         }else{
-            $posts = Post::with(['updater', 'creator', 'categories', 'tags'])->where('draft', 1)->orderBy('updated_at', 'desc')->paginate(8);
+            $posts = Post::with(['updater', 'creator', 'categories', 'tags', 'comments'])->where('draft', 1)->orderBy('updated_at', 'desc')->paginate(8);
         }
 
         if($request->ajax()){

@@ -71,7 +71,12 @@ class User extends Authenticatable
 
     public function tags()
     {
-        return $this->hasMany('App\Tag', 'created_by');
+        return $this->hasMany(Tag::class, 'created_by');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'created_by');
     }
 
     public function categories()

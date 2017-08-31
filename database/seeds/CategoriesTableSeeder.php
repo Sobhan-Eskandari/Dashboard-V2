@@ -18,7 +18,6 @@ class CategoriesTableSeeder extends Seeder
 
         $faker = Faker::create("fa_IR");
         $categories = [];
-//        $time = jDate::forge('now')->format('datetime', true);
 
         foreach (range(1, 50) as $index){
             $categories[] = [

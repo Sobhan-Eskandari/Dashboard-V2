@@ -115,7 +115,7 @@ class TagController extends Controller
         $tag->forceDelete();
         if(strpos($referer , 'create') || strpos($referer , 'edit')){
             $tags = Tag::orderBy('created_at', 'desc')->get();
-            return view('Includes.PostTags', compact('tags'))->render();
+            return view('includes.posts.PostTags', compact('tags'))->render();
         }
         $msg="تگ پاک شد!";
         return $msg;

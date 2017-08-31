@@ -7,6 +7,7 @@ use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 class CategoryController extends Controller
 {
@@ -31,7 +32,7 @@ class CategoryController extends Controller
 
         if ($request->ajax()) {
             if(strpos($referer , 'create') || strpos($referer , 'edit')){
-                return view('Includes.PostCategories', compact('categories'))->render();
+                return view('includes.posts.PostCategories', compact('categories'))->render();
             }else{
                 return view('includes.categories.AllCategories', compact('categories'))->render();
             }
@@ -68,7 +69,7 @@ class CategoryController extends Controller
 
             if(strpos($referer , 'create') || strpos($referer , 'edit')){
                 $categories = Category::orderBy('created_at', 'desc')->get();
-                return view('Includes.PostCategories', compact('categories'))->render();
+                return view('includes.posts.PostCategories', compact('categories'))->render();
             }else{
                 $categories = Category::orderBy('updated_at','desc')->paginate(8);
                 return view('includes.categories.AllCategories', compact('categories'))->render();
@@ -119,8 +120,6 @@ class CategoryController extends Controller
             $category->updated_by = Auth::user()->id;
             $category->update($input);
 
-//            dd(auth()->user()->categories()->update($category));
-
             $categories = Category::pagination();
 
             return view('includes.categories.AllCategories', compact('categories'))->render();
@@ -136,9 +135,17 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request, Category $category)
     {
+        $referer = $request->header('referer');
+
         $category->delete();
         Session::flash('danger', 'دسته بندی با موفقیت پاک شد');
-        return redirect(route('categories.index'));
+
+        if(strpos($referer , 'create') || strpos($referer , 'edit')){
+            $categories = Category::orderBy('created_at', 'desc')->get();
+            return view('includes.posts.PostCategories', compact('categories'))->render();
+        }else {
+            return redirect(route('categories.index'));
+        }
 //        $referer = $request->header('referer');
 //        if($request->ajax()){
 //            try {
@@ -147,7 +154,7 @@ class CategoryController extends Controller
 //                dd($exception->getMessage());
 //            }
 //
-//            if(strpos($referer , 'create') || strpos($referer , 'edit')){
+//            if($referer == URL::to('/create') || $referer == URL::to('/edit')){
 //                $categories = Category::orderBy('created_at', 'desc')->get();
 //                return view('Includes.PostCategories', compact('categories'))->render();
 //            }else {

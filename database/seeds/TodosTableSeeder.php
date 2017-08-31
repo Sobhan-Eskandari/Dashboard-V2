@@ -18,13 +18,12 @@ class TodosTableSeeder extends Seeder
 
         $faker = Faker::create("fa_IR");
         $todos = [];
-        $time = jDate::forge('now')->format('datetime', true);
 
         foreach (range(1, 20) as $index){
             $todos[] = [
-                'task' => $faker->realText(150),
-                'created_at' => $time,
-                'updated_at' => $time,
+                'task' => $faker->realText(25),
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
                 'user_id' => '1',
             ];
         }

@@ -129,7 +129,7 @@
 
                     {{--============[ Home Menu of dashboard ]===========--}}
                     <h5 role="tab" class="pt-2 mt-4" id="home">
-                        <a class="Sidebar_menu_link" href="{{url('/home')}}" >
+                        <a class="Sidebar_menu_link" href="{{ route('home') }}" >
                             صفحه اول<i class="fa fa-tachometer ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>
@@ -144,44 +144,42 @@
                     <div id="postsMenu" class="collapse white-text" role="tabpanel" aria-labelledby="posts">
                         <ul>
                             <li class="subMenu">
-                                <a>همه پست ها</a>
+                                <a href="{{ route('posts.index') }}">همه پست ها</a>
                             </li>
                             <li class="subMenu">
-                                <a>پست جدید</a>
+                                <a href="{{ route('posts.create') }}">پست جدید</a>
                             </li>
                             <li class="subMenu">
-                                <a>پیش نویس ها</a>
+                                <a href="{{ route('posts.draft') }}">پیش نویس ها</a>
                             </li>
                             <li class="subMenu">
-                                <a>دسته بندی ها</a>
+                                <a href="{{ route('categories.index') }}">دسته بندی ها</a>
                             </li>
                             <li class="subMenu">
-                                <a>تگ ها</a>
-                            </li>
-                            <li class="subMenu">
-                                <a>نسخه پشتیبانی</a>
+                                <a href="{{ route('tags.index') }}">تگ ها</a>
                             </li>
                         </ul>
 
                     </div>
 
                     {{--============[ Gallery Menu of dashboard ]===========--}}
+
                     <h5 role="tab" class="pt-2" id="gallery" data-toggle="collapse" data-parent="#accordion" href="#galleryMenu" aria-expanded="false" aria-controls="galleryMenu">
-                        <a class="Sidebar_menu_link">
-                            <i class="fa fa-chevron-left hi-fontSize-14" aria-hidden="true"></i>گالری<i class="fa fa-picture-o ml-4" aria-hidden="true"></i>
+                        <a class="Sidebar_menu_link" href="#">
+                            گالری<i class="fa fa-picture-o ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>
 
-                    <div id="galleryMenu" class="collapse white-text" role="tabpanel" aria-labelledby="gallery">
-                        <ul>
-                            <li class="subMenu">
-                                <a>همه فایل ها</a>
-                            </li>
-                            <li class="subMenu">
-                                <a>فایل جدید</a>
-                            </li>
-                        </ul>
-                    </div>
+                    {{--<div id="galleryMenu" class="collapse white-text" role="tabpanel" aria-labelledby="gallery">--}}
+                        {{--<ul>--}}
+                            {{--<li class="subMenu">--}}
+                                {{--<a>همه فایل ها</a>--}}
+                            {{--</li>--}}
+                            {{--<li class="subMenu">--}}
+                                {{--<a>فایل جدید</a>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
 
                     {{--============[ Messages Menu of dashboard ]===========--}}
                     <h5 role="tab" class="pt-3" id="messages" data-toggle="collapse" data-parent="#accordion" href="#messagesMenu" aria-expanded="false" aria-controls="messagesMenu">
@@ -193,10 +191,10 @@
                     <div id="messagesMenu" class="collapse white-text" role="tabpanel" aria-labelledby="messages">
                         <ul>
                             <li class="subMenu">
-                                <a>صندوق ورودی</a>
+                                <a href="{{ route('inbox.index') }}">صندوق ورودی</a>
                             </li>
                             <li class="subMenu">
-                                <a>صندوق خروجی</a>
+                                <a href="{{ route('outbox.index') }}">صندوق خروجی</a>
                             </li>
                         </ul>
                     </div>
@@ -211,21 +209,18 @@
                     <div id="usersMenu" class="collapse white-text" role="tabpanel" aria-labelledby="users">
                         <ul>
                             <li class="subMenu">
-                                <a>همه کاربران</a>
+                                <a href="{{ route('users.index') }}">همه کاربران</a>
                             </li>
                             <li class="subMenu">
-                                <a>کاربر جدید</a>
-                            </li>
-                            <li class="subMenu">
-                                <a>نسخه پشتیبانی</a>
+                                <a href="{{ route('users.create') }}">کاربر جدید</a>
                             </li>
                         </ul>
                     </div>
 
                     {{--============[ Comments page of dashboard ]===========--}}
                     <h5 role="tab" class="pt-2" id="comments">
-                        <a class="Sidebar_menu_link" data-parent="#accordion" href="#comments">
-                            {{--<span class="badge badge-pill badge-default mr-2 countBadge">{{ \App\Comment::whereStatus('not-checked')->count() }}</span>نظرات<i class="fa fa-commenting-o ml-4" aria-hidden="true"></i>--}}
+                        <a class="Sidebar_menu_link" data-parent="#accordion" href="{{ route('comments.index') }}">
+                            <span class="badge badge-pill badge-default mr-2 countBadge">{{ \App\Comment::whereStatus('not-checked')->count() }}</span>نظرات<i class="fa fa-commenting-o ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>
                     {{--============[ Admin Menu of dashboard ]===========--}}
@@ -237,16 +232,13 @@
                     <div id="adminsMenu" class="collapse white-text" role="tabpanel" aria-labelledby="admins">
                         <ul>
                             <li class="subMenu">
-                                <a>همه مدیران</a>
+                                <a href="{{ route('admins.index') }}">همه مدیران</a>
                             </li>
                             <li class="subMenu">
-                                <a>مدیر جدید</a>
+                                <a href="{{ route('admins.create') }}">مدیر جدید</a>
                             </li>
                             <li class="subMenu">
                                 <a>پروفایل من</a>
-                            </li>
-                            <li class="subMenu">
-                                <a>نسخه پشتیبانی</a>
                             </li>
                         </ul>
 
@@ -262,7 +254,7 @@
                     <div id="settingsMenu" class="collapse white-text" role="tabpanel" aria-labelledby="settings">
                         <ul>
                             <li class="subMenu">
-                                <a>تنظیمات سایت</a>
+                                <a href="{{ route('settings.index') }}">تنظیمات سایت</a>
                             </li>
                             <li class="subMenu">
                                 <a>اسلایدر اول</a>
@@ -271,19 +263,19 @@
                                 <a>اسلایدر دوم</a>
                             </li>
                             <li class="subMenu">
-                                <a>سوالات متداول</a>
+                                <a href="{{ route('faqs.index') }}">سوالات متداول</a>
                             </li>
                         </ul>
                     </div>
 
                     {{--============[ Backup Menu of dashboard ]===========--}}
                     <h5 role="tab" class="pt-3" id="backup">
-                        <a class="Sidebar_menu_link" data-parent="#accordion" href="#backup">
+                        <a class="Sidebar_menu_link" data-parent="#accordion" href="{{ route('backups.index') }}">
                              پشتیبانی<i class="fa fa-download ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>
                     <h5 role="tab" class="pt-3" id="backup">
-                        <a class="Sidebar_menu_link" data-parent="#accordion" href="#backup">
+                        <a class="Sidebar_menu_link" data-parent="#accordion" href="{{ route('friends.index') }}">
                             پیوند ها<i class="fa fa-link ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>

@@ -18,13 +18,12 @@ class TagsTableSeeder extends Seeder
 
         $faker = Faker::create("fa_IR");
         $tags = [];
-        $time = jDate::forge('now')->format('datetime', true);
 
         foreach (range(1, 50) as $index){
             $tags[] = [
                 'name' => $faker->unique()->firstName,
-                'created_at' => $time,
-                'updated_at' => $time,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
                 'created_by' => '1',
             ];
         }

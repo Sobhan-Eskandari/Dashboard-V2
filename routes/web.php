@@ -10,26 +10,26 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/home', 'HomeController@index')->name('home');
 /*
  * users
  */
 Route::prefix('users')->group(function(){
-    Route::get('users','UserController@index')->name('all.users');
-    Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
+//    Route::get('','UserController@index')->name('all.users');
+//    Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
     Route::post('/MultiDelete','UserController@multiDestroy')->name('user.multi.destroy');
     Route::get('/trash','UserController@trash')->name('user.trash');
-    Route::get('/create','UserController@create')->name('user.create');
-    Route::post('/','UserController@store')->name('user.store');
+//    Route::get('/create','UserController@create')->name('user.create');
+//    Route::post('/','UserController@store')->name('user.store');
 //    Route::post('photo','UserController@photo')->name('user.photo');
-    Route::get('/show/{user}','UserController@show')->name('user.show');
-    Route::get('/edit/{user}','UserController@edit')->name('user.edit');
-    Route::post('/update/{user}','UserController@update')->name('user.update');
+//    Route::get('/show/{user}','UserController@show')->name('user.show');
+//    Route::get('/edit/{user}','UserController@edit')->name('user.edit');
+//    Route::post('/update/{user}','UserController@update')->name('user.update');
     Route::delete('/forceDelete/{user}','UserController@forceDelete')->name('user.force.delete');
     Route::post('/forceMultiDelete','UserController@forceMultiDelete')->name('user.force.multiDelete');
     $this->post('/restore/{user}','UserController@restore')->name('user.restore');
 });
+
+Route::resource('/users', 'UserController');
 
 /*
  * comments
