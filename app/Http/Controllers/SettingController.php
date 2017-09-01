@@ -79,8 +79,8 @@ class SettingController extends Controller
     public function edit(Setting $setting)
     {
         $photos = Photo::orderBy('created_at', 'desc')->get();
-        $header_img = '';
-        $about_us_img = '';
+        $header_img = null;
+        $about_us_img = null;
 
         foreach ($setting->photos as $photo)
         {
