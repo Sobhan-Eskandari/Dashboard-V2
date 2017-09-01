@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
+use Morilog\Jalali\Facadesd\jDate;
 
 class User extends Authenticatable
 {
@@ -122,6 +123,16 @@ class User extends Authenticatable
     public function todos()
     {
         return $this->hasMany(Todo::class);
+    }
+
+    public function create_date()
+    {
+        return jDate::forge($this->created_at)->format('%d %B، %Y');
+    }
+
+    public function update_date()
+    {
+        return jDate::forge($this->updated_at)->format('%d %B، %Y');
     }
 
     public function getFullNameAttribute()

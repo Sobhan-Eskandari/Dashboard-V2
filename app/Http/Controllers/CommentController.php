@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -64,7 +65,7 @@ class CommentController extends Controller
     {
         $input = $request->all();
         $input['full_name'] = 'admin';
-        $input['tracking_code'] = 'jasndkajsdnasjdasdasdjkasd';
+        $input['tracking_code'] = Uuid::uuid();
         auth()->user()->comments()->save(Comment::create($input));
         return redirect(route('comments.index'));
     }

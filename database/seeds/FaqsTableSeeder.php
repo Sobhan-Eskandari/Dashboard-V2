@@ -1,6 +1,6 @@
 <?php
 
-use App\FAQ;
+use App\Faq;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;

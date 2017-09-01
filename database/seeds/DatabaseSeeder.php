@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
 //        $this->call(FriendsTableSeeder::class);
 //        $this->call(InboxesTableSeeder::class);
 //        $this->call(OutboxesTableSeeder::class);
-        $this->call(PostsTableSeeder::class);
 //        $this->call(TagsTableSeeder::class);
+        $this->call(PostsTableSeeder::class);
 //        $this->call(TodosTableSeeder::class);
     }
 }

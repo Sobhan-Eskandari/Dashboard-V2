@@ -24,8 +24,13 @@
 @section('content')
 
     <nav dir="rtl">
-        @component('components.errors.errors') @endcomponent
-        @component('components.errors.flash') @endcomponent
+        @if(count($errors) > 0)
+            @component('components.errors.errors') @endcomponent
+        @endif
+
+        @if(Session::has('success') || Session::has('warning') || Session::has('danger'))
+            @component('components.errors.flash') @endcomponent
+        @endif
     </nav>
 
     <div class="row FAQBox_direction">

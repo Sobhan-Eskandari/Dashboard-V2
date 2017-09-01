@@ -38,8 +38,8 @@
 
     <div class="row">
         <div class="col hi-subjectDashboardAdminProfile text-right">
-            <h5 class="hi-subjectDashboardAdminProfile_h5">تاریخ ثبت نام {{ $admin->created_at->format('y/m/d') }}<span> &nbsp;|&nbsp; </span>تاریخ آخرین ویرایش
-                اطلاعات : {{ $admin->updated_at->format('y/m/d') }}</h5>
+            <h5 class="hi-subjectDashboardAdminProfile_h5">تاریخ ثبت نام {{ $admin->create_date() }}<span> &nbsp;|&nbsp; </span>تاریخ آخرین ویرایش
+                اطلاعات : {{ $admin->update_date() }}</h5>
         </div>
     </div>
     {!! Form::model($admin , ['method'=>'PUT', 'action'=>['UserController@adminUpdate', $admin->id], 'files' => true, 'id'=>'form']) !!}
