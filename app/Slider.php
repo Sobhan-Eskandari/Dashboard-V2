@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Morilog\Jalali\Facades\jDate;
 
 class Slider extends Model
 {
@@ -15,8 +16,9 @@ class Slider extends Model
         return $this->morphToMany(Photo::class, 'photoable');
     }
 
-    public function admin() {
-        return $this->belongsTo(Admin::class, 'created_by');
+    public function create_date()
+    {
+        return jDate::forge($this->created_at)->format('%d %B، %Y');
     }
 
     public function user() {

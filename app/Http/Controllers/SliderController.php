@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
-use App\Http\Requests\storeSlider;
+use App\Http\Requests\EditSliderRequest;
+use App\Http\Requests\SliderRequest;
 use App\Photo;
 use App\Slider;
 use Illuminate\Http\Request;
@@ -11,15 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class SliderController extends Controller
 {
-    /**
-     * SliderController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -45,17 +36,18 @@ class SliderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param storeSlider|Request $request
+     * @param SliderRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeSlider $request)
+    public function store(SliderRequest $request)
     {
-        $request['created_by'] = auth()->user()->getAuthIdentifier();
-//        dd($request);
-        auth()->guard('admin')->user();
-        $slider = Slider::create($request->all());
+        auth()->user()->sliders()->save($slider = Slider::create($request->all()));
+
         $slider->photos()->attach($request['indexPhoto']);
-        return redirect()->action('SliderController@index')->with('success', "اسلایدر با موفقیت ذخیره شد.");
+
+        Session::flash('success', 'اسلاید با موفقیت ساخته شد');
+
+        return redirect(route('sliders.index'));
     }
 
     /**
@@ -73,30 +65,35 @@ class SliderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Slider  $slider
+     * @param SliderRequest $request
+     * @param  \App\Slider $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Slider $slider)
+    public function update(SliderRequest $request, Slider $slider)
     {
         $slider->update($request->all());
+
+        $slider->photos()->detach();
         $slider->photos()->attach($request['indexPhoto']);
-        return redirect()->action('SliderController@index')->with('success', "اسلایدر با موفقیت ویرایش شد.");
+
+        Session::flash('warning', 'اسلاید با موفقیت ویرایش شد');
+
+        return redirect(route('sliders.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Slider $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Slider $slider)
     {
-        $sliders = Slider::findOrFail($request['sliders']);
-        foreach ($sliders as $slider) {
-            $slider->photos()->detach();
-            $slider->delete();
-        }
-        return back()->with('success', "اسلایدر ها با موفقیت حذف شدند.");
+        $slider->photos()->detach();
+        $slider->delete();
+
+        Session::flash('danger', 'اسلاید مورد نظر حذف شد');
+
+        return redirect(route('sliders.index'));
     }
 }

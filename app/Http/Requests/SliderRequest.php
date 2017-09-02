@@ -13,7 +13,7 @@ class SliderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class SliderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'caption' => 'required',
+            'indexPhoto' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'caption.required' => 'وارد کردن متن اسلاید الزامی است',
+            'indexPhoto.required' => 'انتخاب تصویر اسلاید الزامی است'
         ];
     }
 }
