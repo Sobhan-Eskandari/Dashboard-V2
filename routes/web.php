@@ -206,8 +206,19 @@ Route::get('/test', function (\Illuminate\Http\Request $request){
 
 Route::post('/test', 'PhotoController@store');
 
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/movie', function (){
+
+    $client = new GuzzleHttp\Client();
+    $res = $client->request('GET', 'https://api.themoviedb.org/3/search/movie', [
+        'query' => [
+            'api_key' => '7f0ab0d5f0c589a1a9820543ca326a81',
+            'query' => 'Jack+Reacher'
+            ]
+    ]);
+
+    dd(json_decode($res->getBody()->getContents()));
+});
