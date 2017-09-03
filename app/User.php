@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Input;
 use Laravel\Scout\Searchable;
 use Morilog\Jalali\Facades\jDate;
 
@@ -22,7 +24,6 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'avatar',
         'user_name',
         'first_name',
         'last_name',
@@ -43,7 +44,7 @@ class User extends Authenticatable
         'email_token',
         'revisions',
         'last_seen',
-        'about',
+        'description',
     ];
 
     /**
@@ -192,8 +193,14 @@ class User extends Authenticatable
         return $users;
     }
 
-    public function photo()
-    {
-        return $this->belongsTo('App\Photo','avatar');
+
+//    public function photo()
+//    {
+//        return $this->belongsTo('App\Photo', 'avatar');
+//    }
+
+    public function photo(){
+        return $this->morphToMany('App\Photo','photoable');
+
     }
 }

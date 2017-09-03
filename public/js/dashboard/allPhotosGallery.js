@@ -2,12 +2,16 @@
  * Created by Nima on 8/13/2017.
  */
 var checkboxes;
+var imgUrl;
 $('input[type=checkbox]').change(function () {
     var val = [];
+    var img;
     $(':checkbox:checked').each(function(i){
         val[i] = $(this).val();
+        img = $(this).next("label").find("img").attr("src");
     });
     checkboxes = val;
+    imgUrl = img;
 });
 Dropzone.options.myAwesomeDropzone = {
     init: function() {
@@ -35,15 +39,17 @@ $('#multiDestroy').click(function (e) {
     });
 });
 $('#selectPhoto').click(function () {
-    closeModal();
-    var CSRF_TOKEN =$("input[name*='_token']").val();
-    $.ajax({
-        type: 'POST',
-        url: '/photo',
-        data: {_token: CSRF_TOKEN,checkboxes:checkboxes}
-    }).done(function (data) {
-        console.log(data);
-        $("#img").html(data);
-    }).fail(function () {
-    });
+    $('#img').attr('src',imgUrl);
+    $('#avatar').val(checkboxes[0]);
+
+    // var CSRF_TOKEN =$("input[name*='_token']").val();
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/photo',
+    //     data: {_token: CSRF_TOKEN,checkboxes:checkboxes}
+    // }).done(function (data) {
+    //     console.log(data);
+    //     $("#img").html(data);
+    // }).fail(function () {
+    // });
 });

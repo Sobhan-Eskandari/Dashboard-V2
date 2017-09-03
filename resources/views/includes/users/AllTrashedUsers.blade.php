@@ -35,46 +35,46 @@
             @foreach($users as $user)
                 {{--==========[ Table Row ]========= --}}
                 <tr>
-                    @component('components.UsersTableRow')
 
-                        @slot('chk_name')
-                            {{ $user->id }}
-                        @endslot
-                            @slot('avatar')
-                                <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo) ? asset('UserImage/'.$user->photo->address) : asset('images/avatar.png') }}">
-                            @endslot
-                        @slot('user_username')
-                            {{$user->name}}
-                        @endslot
+                    {{--==========[ Table Row items ]========= --}}
+                    <td>
+                        <div class="pure-checkbox mt-2 mr-2">
+                            <input id="users_checkbox-{{$user->id}}" class="checkbox-{{$user->id}}" onclick="selectCmntCheckbox(event)" name="users_checkbox-{{$user->id}}" type="checkbox" value="{{$user->id}}">
+                            <label for="users_checkbox-{{$user->id}}"></label>
+                        </div>
+                    </td>
+                    <td class="py-1 text-right userInfoPlace">
+                        <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo[0]) ? asset('UserImage/'.$user->photo[0]->name) : asset('images/avatar.png') }}">
+                        <p class="username"> {{$user->user_name}}</p>
+                    </td>
+                    <td>{{$user->getFullNameAttribute()}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>{{is_null($user->mobile) ? 'شماره همراه وارد نشده':$user->mobile}}</td>
+                    <td><img class="img-fluid userConfirmTick" src="{{ asset('images/tick.png') }}"></td>
 
-                        @slot('user_fullname')
-                                {{$user->getFullNameAttribute()}}
-                        @endslot
+                    {{--==========[ More Button Dropdown ]========= --}}
+                    <td>
+                        <div class="Topbar_dropdown dropdown table_dropDown">
+                            <button class="btn btn-secondary dropdown-toggle py-1 px-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v black-text hi-fontSize-20" aria-hidden="true"></i>
+                            </button>
 
-                        @slot('user_email')
-                            {{$user->email}}
-                        @endslot
-
-                        @slot('user_number')
-                                {{is_null($user->mobile) ? 'شماره همراه وارد نشده':$user->mobile}}
-                        @endslot
-
-                        @slot('trash')
-                            yes
-                        @endslot
-                        @slot('settings')
-                                {!! Form::open(['method'=>'POST','action'=>['API\UserController@restore',$user->id]]) !!}
+                            {{--==========[ Dropdown Menu ]========= --}}
+                            <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
+                                {!! Form::open(['method'=>'POST','action'=>['UserController@restore',$user->id]]) !!}
                                 <button class="dropdown-item text-right py-0 mt-1" id="restore" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>بازگردانی</button>
                                 {!! Form::close() !!}
-                                {!! Form::open(['method'=>'DELETE','action'=>['API\UserController@forceDelete',$user->id]]) !!}
+                                {!! Form::open(['method'=>'DELETE','action'=>['UserController@forceDelete',$user->id]]) !!}
                                 <button class="dropdown-item text-right py-0 mt-1" id="forceDestroyUser" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
                                 {!! Form::close() !!}
-                            @endslot
+                                </div>
 
-                    @endcomponent
-                </tr>
+                        </div>
+                    </td>
+
             @endforeach
         @endif
+                </tr>
             </tbody>
         </table>
     </div>

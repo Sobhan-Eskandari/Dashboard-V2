@@ -53,41 +53,88 @@
             @foreach($users as $user)
                 {{--==========[ Table Row ]========= --}}
                 <tr>
-                    @component('components.UsersTableRow')
+                    {{--==========[ Table Row items ]========= --}}
+                    <td>
+                        <div class="pure-checkbox mt-2 mr-2">
+                            <input id="users_checkbox-{{$user->id}}" class="checkbox-{{$user->id}}" onclick="selectCmntCheckbox(event)" name="users_checkbox-{{$user->id}}" type="checkbox" value="{{$user->id}}">
+                            <label for="users_checkbox-{{$user->id}}"></label>
+                        </div>
+                    </td>
+                    <td class="py-1 text-right userInfoPlace">
+                        <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo[0]) ? asset('photoGallery/'.$user->photo[0]->name) : asset('images/avatar.png') }}">
+                        <p class="username">{{$user->username}}</p>
+                    </td>
+                    <td>{{$user->getFullNameAttribute()}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>{{is_null($user->mobile) ? 'شماره همراه وارد نشده':$user->mobile}}</td>
+                    <td><img class="img-fluid userConfirmTick" src="{{ asset('images/tick.png') }}"></td>
 
-                        @slot('chk_name')
-                            {{ $user->id }}
-                        @endslot
-                        @slot('avatar')
-                                <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo) ? asset('photos/'.$user->photo->name) : asset('images/avatar.png') }}">
-                            @endslot
-                        @slot('user_username')
-                            {{$user->username}}
-                        @endslot
+                    {{--==========[ More Button Dropdown ]========= --}}
+                    <td>
+                        <div class="Topbar_dropdown dropdown table_dropDown">
+                            <button class="btn btn-secondary dropdown-toggle py-1 px-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v black-text hi-fontSize-20" aria-hidden="true"></i>
+                            </button>
 
-                        @slot('user_fullname')
-                          {{$user->getFullNameAttribute()}}
-                        @endslot
+                            {{--@if(isset($trash))--}}
+                            {{--==========[ Dropdown Menu ]========= --}}
+                            {{--<div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">--}}
+                            {{--<a class="dropdown-item text-right py-0" href="#"><i class="fa fa-undo ml-2" aria-hidden="true"></i>بازگردانی</a>--}}
+                            {{--<a class="dropdown-item text-right py-0 mt-1" href="#"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</a>--}}
+                            {{--</div>--}}
+                            {{--@else--}}
 
-                        @slot('user_email')
-                            {{$user->email}}
-                        @endslot
-
-                        @slot('user_number')
-                           {{is_null($user->mobile) ? 'شماره همراه وارد نشده':$user->mobile}}
-                        @endslot
-
-                        @slot('trash')@endslot
-                        @slot('settings')
+                            {{--==========[ Dropdown Menu ]========= --}}
+                            <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item text-right py-0" href="{{route('user.show',$user->id)}}"><i class="fa fa-eye ml-2" aria-hidden="true"></i>مشاهده</a>
                                 <a class="dropdown-item text-right py-0" href="{{route('user.edit',$user->id)}}"><i class="fa fa-pencil ml-2" aria-hidden="true"></i> ویرایش</a>
                                 <div class="dropdown-divider my-1"></div>
-                            {!! Form::open(['method'=>'DELETE','action'=>['API\UserController@destroy',$user->id]]) !!}
+                                {!! Form::open(['method'=>'DELETE','action'=>['UserController@destroy',$user->id]]) !!}
                                 <button class="dropdown-item text-right py-0 mt-1" id="destroyUser" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
-                            {!! Form::close() !!}
-                            @endslot
+                                {!! Form::close() !!}
+                                {{--<a class="dropdown-item text-right py-0" href="#"><i class="fa fa-eye ml-2" aria-hidden="true"></i>مشاهده</a>--}}
+                                {{--<a class="dropdown-item text-right py-0" href="#"><i class="fa fa-pencil ml-2" aria-hidden="true"></i> ویرایش</a>--}}
+                                {{--<div class="dropdown-divider my-1"></div>--}}
+                                {{--<a class="dropdown-item text-right py-0 mt-1" href="#"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</a>--}}
+                            </div>
+                            {{--@endif--}}
+                        </div>
+                    </td>
+                    {{--@component('components.users.UsersTableRow')--}}
 
-                    @endcomponent
+                        {{--@slot('chk_name')--}}
+                            {{--{{ $user->id }}--}}
+                        {{--@endslot--}}
+                        {{--@slot('avatar')--}}
+                                {{--<img class="rounded-circle Topbar_avatar" src="{{isset($user->photo) ? asset('photos/'.$user->photo->name) : asset('images/avatar.png') }}">--}}
+                            {{--@endslot--}}
+                        {{--@slot('user_username')--}}
+                            {{--{{$user->username}}--}}
+                        {{--@endslot--}}
+
+                        {{--@slot('user_fullname')--}}
+                          {{--{{$user->getFullNameAttribute()}}--}}
+                        {{--@endslot--}}
+
+                        {{--@slot('user_email')--}}
+                            {{--{{$user->email}}--}}
+                        {{--@endslot--}}
+
+                        {{--@slot('user_number')--}}
+                           {{--{{is_null($user->mobile) ? 'شماره همراه وارد نشده':$user->mobile}}--}}
+                        {{--@endslot--}}
+
+                        {{--@slot('trash')@endslot--}}
+                        {{--@slot('settings')--}}
+                                {{--<a class="dropdown-item text-right py-0" href="{{route('user.show',$user->id)}}"><i class="fa fa-eye ml-2" aria-hidden="true"></i>مشاهده</a>--}}
+                                {{--<a class="dropdown-item text-right py-0" href="{{route('user.edit',$user->id)}}"><i class="fa fa-pencil ml-2" aria-hidden="true"></i> ویرایش</a>--}}
+                                {{--<div class="dropdown-divider my-1"></div>--}}
+                            {{--{!! Form::open(['method'=>'DELETE','action'=>['UserController@destroy',$user->id]]) !!}--}}
+                                {{--<button class="dropdown-item text-right py-0 mt-1" id="destroyUser" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>--}}
+                            {{--{!! Form::close() !!}--}}
+                            {{--@endslot--}}
+
+                    {{--@endcomponent--}}
                 </tr>
 
             @endforeach
@@ -101,26 +148,26 @@
 {{--============[ Pagination of Page ]===========--}}
 {{$users->links()}}
 <script>
-    $( "button[id='destroyUser']" ).click(function (e) {
-        e.preventDefault();
-        var query = $('#searchUser').val();
-        var commentId = $(this).attr('data-id');
-        var CSRF_TOKEN =$("input[name*='_token']").val();
-//        console.log(commentId);
-        $.ajax({
-            type: 'DELETE',
-            url: '/users/delete/'+commentId,
-            data: {_token: CSRF_TOKEN,query:query}
-        }).done(function (data) {
-            $("#user").html(data);
-            if(query === "") {
-                window.history.pushState("", "", "http://dash.dev/users");
-            }else {
-                window.history.pushState(data, "Title", " /users?query=" + query);
-            }
-        }).fail(function () {
-        });
-    });
+//    $( "button[id='destroyUser']" ).click(function (e) {
+//        e.preventDefault();
+//        var query = $('#searchUser').val();
+//        var commentId = $(this).attr('data-id');
+//        var CSRF_TOKEN =$("input[name*='_token']").val();
+////        console.log(commentId);
+//        $.ajax({
+//            type: 'DELETE',
+//            url: '/users/delete/'+commentId,
+//            data: {_token: CSRF_TOKEN,query:query}
+//        }).done(function (data) {
+//            $("#user").html(data);
+//            if(query === "") {
+//                window.history.pushState("", "", "http://dash.dev/users");
+//            }else {
+//                window.history.pushState(data, "Title", " /users?query=" + query);
+//            }
+//        }).fail(function () {
+//        });
+//    });
 
     var checkboxes;
     $('input[type=checkbox]').change(function () {
@@ -143,7 +190,7 @@
             $("#user").html(data);
 //            console.log(query);
             if(query === "") {
-                window.history.pushState("", "", "http://dash.dev/users");
+                window.history.pushState("", "", "http://dash2.dev/users");
             }else {
                 window.history.pushState(data, "Title", " /users?query=" + query);
             }

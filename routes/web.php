@@ -14,8 +14,13 @@
  * users
  */
 Route::prefix('users')->group(function(){
+
 //    Route::get('','UserController@index')->name('all.users');
 //    Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
+
+    Route::get('/','UserController@index')->name('all.users');
+    Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
+
     Route::post('/MultiDelete','UserController@multiDestroy')->name('user.multi.destroy');
     Route::get('/trash','UserController@trash')->name('user.trash');
 //    Route::get('/create','UserController@create')->name('user.create');
