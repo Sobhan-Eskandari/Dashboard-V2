@@ -14,7 +14,7 @@
                     {{--</select>--}}
                 </div>
             </div>
-            <div class="col-4 px-2 hi-profileCard_PictureSelectorBox_pictureBox" id="img">
+            <div class="col-4 px-2 hi-profileCard_PictureSelectorBox_pictureBox">
 
                 @include('includes.users.UserImage')
             </div>

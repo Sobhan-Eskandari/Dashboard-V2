@@ -57,19 +57,20 @@ class UserController extends Controller
         } else {
             $users = User::pagination();
         }
-        return view('Includes.AllUsers', compact('users'))->render();
+        return view('includes.users.AllUsers', compact('users'))->render();
     }
     public function create(){
         $photos = Photo::all();
         return view('dashboard.users.create',compact('users','photos'));
     }
     public function store(Request $request){
-//        dd($request->all());
+        dd($request->all());
         $input= $request->all();
         $input['verified'] = 1;
         $input['created_by'] = 1;
         $input['password'] = bcrypt($request->password);
-        User::create($input);
+        $user = User::create($input);
+        $user->photo()->attach([$request->input('avatar')]);
         return redirect()->route('all.users');
     }
     public function photo(Request $request){
@@ -95,12 +96,14 @@ class UserController extends Controller
         return view('dashboard.users.edit', compact('user','photo','photos'));
     }
     public function update(Request $request,User $user){
+//        dd($request->all());
         $input = $request->all();
         if($request->has('password')){
             $input['password'] = bcrypt($request->password);
         }else{
             $input['password'] = $user->password;
         }
+        $user->photo()->sync([$request->input('avatar')]);
         $user->update($input);
         return redirect()->route('all.users');
     }
@@ -121,8 +124,9 @@ class UserController extends Controller
     public function forceDelete($user){
         $users = User::onlyTrashed()->find($user);
         $users->forceDelete();
-        $users = User::onlyTrashed()->paginate();
-        return view('Includes.AllTrashedUsers',compact('users'))->render();
+        return redirect()->route('user.trash');
+//        $users = User::onlyTrashed()->paginate();
+//        return view('Includes.AllTrashedUsers',compact('users'))->render();
     }
 
     public function forceMultiDelete(Request $request){
@@ -139,7 +143,6 @@ class UserController extends Controller
     public function restore($user){
         $users = User::onlyTrashed()->find($user);
         $users->restore();
-        $users = User::onlyTrashed()->paginate();
-        return view('Includes.AllTrashedUsers',compact('users'))->render();
+        return redirect()->route('user.trash');
     }
 }

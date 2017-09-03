@@ -23,7 +23,6 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'avatar',
         'user_name',
         'first_name',
         'last_name',
@@ -44,7 +43,7 @@ class User extends Authenticatable
         'email_token',
         'revisions',
         'last_seen',
-        'about',
+        'description',
     ];
 
     /**
@@ -141,6 +140,6 @@ class User extends Authenticatable
         return $users;
     }
     public function photo(){
-        return $this->belongsTo('App\Photo','avatar');
+        return $this->morphToMany('App\Photo','photoable');
     }
 }

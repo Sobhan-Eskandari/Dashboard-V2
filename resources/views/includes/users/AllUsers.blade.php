@@ -61,7 +61,7 @@
                         </div>
                     </td>
                     <td class="py-1 text-right userInfoPlace">
-                        <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo) ? asset('photos/'.$user->photo->name) : asset('images/avatar.png') }}">
+                        <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo[0]) ? asset('photoGallery/'.$user->photo[0]->name) : asset('images/avatar.png') }}">
                         <p class="username">{{$user->username}}</p>
                     </td>
                     <td>{{$user->getFullNameAttribute()}}</td>
@@ -190,7 +190,7 @@
             $("#user").html(data);
 //            console.log(query);
             if(query === "") {
-                window.history.pushState("", "", "http://dash.dev/users");
+                window.history.pushState("", "", "http://dash2.dev/users");
             }else {
                 window.history.pushState(data, "Title", " /users?query=" + query);
             }
