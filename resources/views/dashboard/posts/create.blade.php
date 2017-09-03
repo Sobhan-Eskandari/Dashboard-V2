@@ -78,9 +78,9 @@
                         {!! Form::text('indexPhoto', null, ['style' => 'display: none;']) !!}
 
                         <div class="row">
-                            {!! Form::submit('انتشار', ['class'=>'btn btn-primary createPostPublicationButton px-4 light-blue darken-2', 'id'=>'releaseButton']) !!}
+                            {!! Form::submit('انتشار', ['class'=>'hi-button-simple createPostPublicationButton px-3 py-0 light-blue darken-2', 'id'=>'releaseButton']) !!}
                             &nbsp;
-                            {!! Form::submit('پیش نویس کن', ['class'=>'btn btn-primary createPostPublicationButton px-4 light-blue darken-2', 'id'=>'draftButton']) !!}
+                            {!! Form::submit('پیش نویس کن', ['class'=>'hi-button-simple createPostPublicationButton px-3 py-0 light-blue darken-2 mr-3', 'id'=>'draftButton']) !!}
                         </div>
                     </div>
                     {{--============[ image box ]===========--}}

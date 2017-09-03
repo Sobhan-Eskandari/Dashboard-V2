@@ -36,12 +36,12 @@
             <div class="row mt-2">
                 <div class="col-1 push-9 ml-5">
                     <a class="hi-button-btn1 orange ml-5 darken-2 hi-shadow-1 hi-size-4" href="{{ route('admins.trash') }}">
-                        <i class="fa fa-trash white-text  hi-fontSize-20" aria-hidden="true"></i>
+                        <i class="fa fa-trash white-text hi-fontSize-20" aria-hidden="true"></i>
                     </a>
                 </div>
 
                 <div class="col-1 push-9">
-                    <a href="{{ route('admins.create') }}" class="hi-button-simple hi-shadow-0 ml-4 green darken-3">ایجاد</a>
+                    <a href="{{ route('admins.create') }}" class="hi-button-simple hi-shadow-0 mt-1 ml-4 green darken-3">ایجاد</a>
                 </div>
             </div>
 

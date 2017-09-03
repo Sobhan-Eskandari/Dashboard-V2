@@ -3,7 +3,7 @@
      {{-----------[ Row Of Search and Menu Opener ] ------------}}
     <div class="row menuDetector">
         <div class="col-12">
-            <div class="list-group-item justify-content-between pl-4 pr-3 hi-infoPostListGroupFlip py-2">
+            <div class="list-group-item hi-infoPostListGroup border-bottom-zero justify-content-between pl-4 pr-3 hi-infoPostListGroupFlip py-2">
                 <span class="categoryTitle">{{ $title }}</span>
                 <div class="row">
                     {{-----------[ Search Icon ] ------------}}

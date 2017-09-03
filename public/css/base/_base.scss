@@ -14,6 +14,38 @@ body {
   display: flex;
 }
 
+/* ============[ Placeholder of input ]=========== */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-size: 12px;
+  font-family: IRANSans;
+  direction: rtl;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-size: 12px;
+  font-family: IRANSans;
+  direction: rtl;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-size: 12px;
+  font-family: IRANSans;
+  direction: rtl;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-size: 12px;
+  font-family: IRANSans;
+  direction: rtl;
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+
+  &:focus, &:hover{
+    text-decoration: none !important;
+    color: white !important;
+  }
+}
+
 .overflowBox{
   height: 300px;
   overflow: scroll;
@@ -241,10 +273,14 @@ body {
   direction: rtl;
 }
 
+.border-bottom-zero{
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
 .hi-infoPostListGroup {
   border-radius: 10px;
   padding: 0;
-  width: 300px;
   box-shadow: 0 0 5px $light-row-table;
 }
 
@@ -459,6 +495,32 @@ body {
 
   .gallery_files{
     height: 100%;
+
+    .pure-checkbox input[type="checkbox"] + label:before,
+    .pure-radiobutton input[type="checkbox"] + label:before,
+    .pure-checkbox input[type="radio"] + label:before,
+    .pure-radiobutton input[type="radio"] + label:before {
+      top: 30% !important;
+      right: 55px !important;
+    }
+
+    .pure-checkbox input[type="checkbox"] + label:after,
+    .pure-radiobutton input[type="checkbox"] + label:after,
+    .pure-checkbox input[type="radio"] + label:after,
+    .pure-radiobutton input[type="radio"] + label:after {
+      top: 30.7% !important;
+      right: 60px !important;
+      width: 10px;
+      height: 10px;
+    }
+
+    .pure-checkbox input[type="checkbox"] + label:after,
+    .pure-radiobutton input[type="checkbox"] + label:after {
+      background-color: transparent;
+      top: 30% !important;
+      left: 4px !important;
+      width: 8px;
+    }
   }
 
   .galleryFiles_info{

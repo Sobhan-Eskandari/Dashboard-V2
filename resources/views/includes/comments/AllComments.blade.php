@@ -1,6 +1,6 @@
 {{--==========[ Row of buttons abpve table ]========= --}}
-<div class="row">
-    <div class="col-1 pl-0">
+<div class="row justify-content-between">
+    <div class="col-auto pl-0">
         <a href="{{route('comments.trash')}}">
         <button class="hi-button-btn1 orange darken-2 hi-shadow-1 hi-size-4">
             <i class="fa fa-trash white-text hi-fontSize-20" aria-hidden="true"></i>
@@ -19,7 +19,7 @@
         {{--</div>--}}
     </div>
 
-    <div class="col-auto offset-6 text-right mr-2">
+    <div class="col-auto text-right mr-2">
         {!! Form::open(['method'=>'POST','action'=>'CommentController@multiDestroy', 'id'=>'deleteForm']) !!}
             {!! Form::text('ids', null, ['style' => 'display:none']) !!}
             <button class="hi-button-simple hi-shadow-0 red darken-3 text-right" id="multiDestroy">حذف</button>

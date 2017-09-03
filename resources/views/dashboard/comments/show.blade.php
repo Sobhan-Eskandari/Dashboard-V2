@@ -39,11 +39,11 @@
             </div>
             <div class="card-block p-0">
                 {!! Form::textarea('message',null,['class'=>'form-control inputCategory','id'=>'inputCategory','tabindex'=>'1']) !!}
-                {!! Form::text('post_id',$comment->post_id,['class'=>'form-control inputCategory','id'=>'inputCategory','tabindex'=>'1']) !!}
-                {!! Form::text('parent_id',$comment->id,['class'=>'form-control inputCategory','id'=>'inputCategory','tabindex'=>'1']) !!}
+                {{--{!! Form::text('post_id',$comment->post_id,['class'=>'form-control inputCategory','id'=>'inputCategory','tabindex'=>'1']) !!}--}}
+                {{--{!! Form::text('parent_id',$comment->id,['class'=>'form-control inputCategory','id'=>'inputCategory','tabindex'=>'1']) !!}--}}
             </div>
-            {!! Form::submit('ارسال پاسخ') !!}
         </div>
+        {!! Form::submit('ارسال پاسخ', ['class' => 'darkgreen-color hi-button-simple mt-3']) !!}
         {!! Form::close() !!}
     </div>
 @endsection
