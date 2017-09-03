@@ -7037,6 +7037,38 @@ body {
 .l-flex {
   display: flex; }
 
+/* ============[ Placeholder of input ]=========== */
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-size: 12px;
+  font-family: IRANSans;
+  direction: rtl; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  font-size: 12px;
+  font-family: IRANSans;
+  direction: rtl; }
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  font-size: 12px;
+  font-family: IRANSans;
+  direction: rtl; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  font-size: 12px;
+  font-family: IRANSans;
+  direction: rtl; }
+
+a {
+  color: inherit;
+  cursor: pointer; }
+  a:focus, a:hover {
+    text-decoration: none !important;
+    color: white !important; }
+
 .overflowBox {
   height: 300px;
   overflow: scroll; }
@@ -7220,10 +7252,13 @@ body {
 .hi-createPostBox {
   direction: rtl; }
 
+.border-bottom-zero {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important; }
+
 .hi-infoPostListGroup {
   border-radius: 10px;
   padding: 0;
-  width: 300px;
   box-shadow: 0 0 5px #d9dfe9; }
 
 .hi-infoPostListGroup li:last-child {
@@ -7389,6 +7424,26 @@ body {
     padding: 15px; }
 .galleryModal .gallery_files {
   height: 100%; }
+  .galleryModal .gallery_files .pure-checkbox input[type="checkbox"] + label:before,
+  .galleryModal .gallery_files .pure-radiobutton input[type="checkbox"] + label:before,
+  .galleryModal .gallery_files .pure-checkbox input[type="radio"] + label:before,
+  .galleryModal .gallery_files .pure-radiobutton input[type="radio"] + label:before {
+    top: 30% !important;
+    right: 55px !important; }
+  .galleryModal .gallery_files .pure-checkbox input[type="checkbox"] + label:after,
+  .galleryModal .gallery_files .pure-radiobutton input[type="checkbox"] + label:after,
+  .galleryModal .gallery_files .pure-checkbox input[type="radio"] + label:after,
+  .galleryModal .gallery_files .pure-radiobutton input[type="radio"] + label:after {
+    top: 30.7% !important;
+    right: 60px !important;
+    width: 10px;
+    height: 10px; }
+  .galleryModal .gallery_files .pure-checkbox input[type="checkbox"] + label:after,
+  .galleryModal .gallery_files .pure-radiobutton input[type="checkbox"] + label:after {
+    background-color: transparent;
+    top: 30% !important;
+    left: 4px !important;
+    width: 8px; }
 .galleryModal .galleryFiles_info {
   background-color: #F3F4F5; }
   .galleryModal .galleryFiles_info .file_info {
@@ -8017,7 +8072,8 @@ h6.card-header.backupMainTitleCard {
 
 .createPostPublicationButton, .createPostPublicationButton:focus, .createPostPublicationButton:hover {
   background-color: #027398;
-  border-radius: 8px; }
+  border-radius: 8px !important;
+  transition: all 0.3s ease; }
 
 .createPostPublicationButton:focus {
   box-shadow: 0 0 0 2px rgba(2, 115, 152, 0.5); }
@@ -8612,5 +8668,8 @@ a:focus, a:hover {
 .clockCard {
   height: 255px;
   background-color: black; }
+
+.darkgreen-color {
+  background-color: #09686a !important; }
 
 /*# sourceMappingURL=application.css.map */

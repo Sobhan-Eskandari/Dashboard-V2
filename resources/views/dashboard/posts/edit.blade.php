@@ -82,9 +82,9 @@
                         @endif
 
                         <div class="row">
-                            {!! Form::submit('ویرایش و انتشار', ['class'=>'btn btn-primary createPostPublicationButton px-4 light-blue darken-2', 'id'=>'releaseButton']) !!}
+                            {!! Form::submit('ویرایش و انتشار', ['class'=>'hi-button-simple createPostPublicationButton px-3 py-0 light-blue darken-2', 'id'=>'releaseButton']) !!}
                             &nbsp;
-                            {!! Form::submit('ویرایش و پیش نویس کن', ['class'=>'btn btn-primary createPostPublicationButton px-4 light-blue darken-2', 'id'=>'draftButton']) !!}
+                            {!! Form::submit('ویرایش و پیش نویس کن', ['class'=>'hi-button-simple createPostPublicationButton px-3 py-0 mr-3 light-blue darken-2', 'id'=>'draftButton']) !!}
                         </div>
                     </div>
                     {{--============[ image box ]===========--}}
@@ -103,24 +103,26 @@
         <div class="col-4 mt-1">
             <br>
             <div class="row">
-                <ul class="list-group hi-infoPostListGroup">
-                    <li class="list-group-item justify-content-between pl-4 pr-3 flip py-2" id="hi-infoPostListGroupFlip">
-                        اطلاعات پست
-                        <i class="fa fa-caret-down pull-left" aria-hidden="true"></i>
-                    </li>
-                    <div id="hi-infoPostListGroupPanel" class="panel">
-                        <li class="list-group-item justify-content-between list-group-item_border">
-                            <button class="btn btn-secondary btn-secondary-postInfo btn-sm active p-2">پیش نویس</button>
-                            <button class="btn btn-secondary btn-secondary-postInfo btn-sm active p-2">پیش نمایش</button>
+                <div class="col-10 p-0">
+                    <ul class="list-group hi-infoPostListGroup">
+                        <li class="list-group-item justify-content-between pl-4 pr-3 flip py-2" id="hi-infoPostListGroupFlip">
+                            اطلاعات پست
+                            <i class="fa fa-caret-down pull-left" aria-hidden="true"></i>
                         </li>
-                        <li class="list-group-item"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; {{ $post->views }} بازدید</li>
-                        <li class="list-group-item"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;{{ count($post->comments) }} نظر</li>
-                        <li class="list-group-item"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ $post->create_date() }}</li>
-                        <li class="list-group-item">ایجاد شده توسط : {{ $post->creator->full_name }}</li>
-                        <li class="list-group-item">تعداد ویرایش&nbsp;<span class="badge badge-pill badge-default">{{ $post->revisions }}</span></li>
-                        <li class="list-group-item">آخرین ویرایش : {{ $post->update_date() }} - {{ $post->updater->full_name }}</li>
-                    </div>
-                </ul>
+                        <div id="hi-infoPostListGroupPanel" class="panel">
+                            <li class="list-group-item justify-content-between list-group-item_border">
+                                <button class="btn btn-secondary btn-secondary-postInfo btn-sm active p-2">پیش نویس</button>
+                                <button class="btn btn-secondary btn-secondary-postInfo btn-sm active p-2">پیش نمایش</button>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; {{ $post->views }} بازدید</li>
+                            <li class="list-group-item"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;{{ count($post->comments) }} نظر</li>
+                            <li class="list-group-item"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ $post->create_date() }}</li>
+                            <li class="list-group-item">ایجاد شده توسط : {{ $post->creator->full_name }}</li>
+                            <li class="list-group-item">تعداد ویرایش&nbsp;<span class="badge badge-pill badge-default">{{ $post->revisions }}</span></li>
+                            <li class="list-group-item">آخرین ویرایش : {{ $post->update_date() }} - {{ $post->updater->full_name }}</li>
+                        </div>
+                    </ul>
+                </div>
             </div>
             <br>
 

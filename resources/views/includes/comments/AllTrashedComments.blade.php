@@ -1,6 +1,6 @@
 {{--==========[ Row of buttons abpve table ]=========--}}
-<div class="row">
-    <div class="col-1 push-11 ml-2 text-right">
+<div class="row justify-content-end">
+    <div class="col-auto text-right">
         {!! Form::open(['method'=>'POST','action'=>'CommentController@multiForceDelete', 'id'=>'deleteForm']) !!}
             {!! Form::text('ids', null, ['style' => 'display:none']) !!}
             <button class="hi-button-simple hi-shadow-0 yellow darken-3" id="forceMultiDestroy">حذف دائمی</button>
@@ -69,11 +69,11 @@
                 {{--==========[ Dropdown Menu ]========= --}}
                 <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
                     {{Form::open(['method'=>'POST','action'=>['CommentController@restore',$comment->id]])}}
-                        <button class="dropdown-item text-right py-0" id="restoreComment" data-id="{{$comment->id}}"><i class="fa fa-check ml-2" aria-hidden="true"></i>بازگردانی</button>
+                        <button class="dropdown-item hi-shadow-0 text-right py-0" id="restoreComment" data-id="{{$comment->id}}"><i class="fa fa-check ml-2" aria-hidden="true"></i>بازگردانی</button>
                     {{Form::close()}}
 
                     {{Form::open(['method'=>'DELETE','action'=>['CommentController@forceDelete',$comment->id]])}}
-                        <button class="dropdown-item text-right py-0 mt-1" id="forceDestroyComment" data-id="{{$comment->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
+                        <button class="dropdown-item hi-shadow-0 text-right py-0 mt-1" id="forceDestroyComment" data-id="{{$comment->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
                     {{Form::close()}}
                 </div>
             </div>

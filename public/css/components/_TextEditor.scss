@@ -19,7 +19,8 @@
 
 .createPostPublicationButton, .createPostPublicationButton:focus, .createPostPublicationButton:hover {
   background-color: $confirm-button;
-  border-radius: 8px;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
 }
 
 .createPostPublicationButton:focus {
