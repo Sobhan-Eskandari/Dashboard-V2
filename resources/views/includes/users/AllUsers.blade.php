@@ -18,7 +18,7 @@
     {{--</div>--}}
 
     <div class="col-auto ml-2 text-right">
-        <a href="{{route('user.create')}}">
+        <a href="{{route('users.create')}}">
              <button class="hi-button-simple hi-shadow-0 green darken-3">ایجاد</button>
         </a>
     </div>
@@ -42,7 +42,7 @@
                 <th>نام</th>
                 <th>پست الکترونیکی</th>
                 <th>تلفن همراه</th>
-                <th>وضعیت</th>
+                <th>وضعیت</t
                 <th>
                 </th>
             </tr>
@@ -86,8 +86,8 @@
 
                             {{--==========[ Dropdown Menu ]========= --}}
                             <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item text-right py-0" href="{{route('user.show',$user->id)}}"><i class="fa fa-eye ml-2" aria-hidden="true"></i>مشاهده</a>
-                                <a class="dropdown-item text-right py-0" href="{{route('user.edit',$user->id)}}"><i class="fa fa-pencil ml-2" aria-hidden="true"></i> ویرایش</a>
+                                <a class="dropdown-item text-right py-0" href="{{route('users.show',$user->id)}}"><i class="fa fa-eye ml-2" aria-hidden="true"></i>مشاهده</a>
+                                <a class="dropdown-item text-right py-0" href="{{route('users.edit',$user->id)}}"><i class="fa fa-pencil ml-2" aria-hidden="true"></i> ویرایش</a>
                                 <div class="dropdown-divider my-1"></div>
                                 {!! Form::open(['method'=>'DELETE','action'=>['UserController@destroy',$user->id]]) !!}
                                 <button class="dropdown-item text-right py-0 mt-1" id="destroyUser" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
