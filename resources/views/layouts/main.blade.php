@@ -164,7 +164,7 @@
 
                     {{--============[ Gallery Menu of dashboard ]===========--}}
 
-                    <h5 role="tab" class="pt-2" id="gallery" data-toggle="collapse" data-parent="#accordion" href="#galleryMenu" aria-expanded="false" aria-controls="galleryMenu">
+                    <h5 role="tab" class="pt-2" id="gallery">
                         <a class="Sidebar_menu_link" href="{{ route('photo.all') }}">
                             گالری<i class="fa fa-picture-o ml-4" aria-hidden="true"></i>
                         </a>

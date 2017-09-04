@@ -192,15 +192,4 @@ class User extends Authenticatable
 
         return $users;
     }
-
-
-//    public function photo()
-//    {
-//        return $this->belongsTo('App\Photo', 'avatar');
-//    }
-
-    public function photo(){
-        return $this->morphToMany('App\Photo','photoable');
-
-    }
 }
