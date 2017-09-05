@@ -23,7 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $todos = Todo::all();
-        return view('dashboard.home.index', compact('todos'));
+        return view('home');
+//        $todos = Todo::all();
+//        return view('dashboard.home.index', compact('todos'));
     }
 }

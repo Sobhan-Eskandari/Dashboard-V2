@@ -40,6 +40,7 @@ class ComposerStaticInit1cb1b66922f143d3e66d4fafa76635c2
         ),
         'T' => 
         array (
+            'Traitor\\' => 8,
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'TeamTNT\\TNTSearch\\' => 18,
@@ -87,6 +88,7 @@ class ComposerStaticInit1cb1b66922f143d3e66d4fafa76635c2
             'Laravel\\Tinker\\' => 15,
             'Laravel\\Socialite\\' => 18,
             'Laravel\\Scout\\' => 14,
+            'Laratrust\\' => 10,
         ),
         'I' => 
         array (
@@ -143,6 +145,10 @@ class ComposerStaticInit1cb1b66922f143d3e66d4fafa76635c2
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Traitor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kkszymanowski/traitor/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -271,6 +277,10 @@ class ComposerStaticInit1cb1b66922f143d3e66d4fafa76635c2
         'Laravel\\Scout\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/scout/src',
+        ),
+        'Laratrust\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -420,18 +430,18 @@ class ComposerStaticInit1cb1b66922f143d3e66d4fafa76635c2
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\AdminRequest' => __DIR__ . '/../..' . '/app/Http/Requests/AdminRequest.php',
         'App\\Http\\Requests\\CategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryRequest.php',
-        'App\\Http\\Requests\\EditSliderRequest' => __DIR__ . '/../..' . '/app/Http/Requests/EditSliderRequest.php',
         'App\\Http\\Requests\\FaqRequest' => __DIR__ . '/../..' . '/app/Http/Requests/FaqRequest.php',
         'App\\Http\\Requests\\FriendRequest' => __DIR__ . '/../..' . '/app/Http/Requests/FriendRequest.php',
         'App\\Http\\Requests\\OutboxRequest' => __DIR__ . '/../..' . '/app/Http/Requests/OutboxRequest.php',
         'App\\Http\\Requests\\PostRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PostRequest.php',
         'App\\Http\\Requests\\SettingRequest' => __DIR__ . '/../..' . '/app/Http/Requests/SettingRequest.php',
-        'App\\Http\\Requests\\StoreSliderRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreSliderRequest.php',
+        'App\\Http\\Requests\\SliderRequest' => __DIR__ . '/../..' . '/app/Http/Requests/SliderRequest.php',
         'App\\Http\\Requests\\TagRequest' => __DIR__ . '/../..' . '/app/Http/Requests/TagRequest.php',
         'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
         'App\\Inbox' => __DIR__ . '/../..' . '/app/Inbox.php',
         'App\\Mail\\AnswerInboxMessage' => __DIR__ . '/../..' . '/app/Mail/AnswerInboxMessage.php',
         'App\\Outbox' => __DIR__ . '/../..' . '/app/Outbox.php',
+        'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',
         'App\\Photo' => __DIR__ . '/../..' . '/app/Photo.php',
         'App\\Post' => __DIR__ . '/../..' . '/app/Post.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -439,6 +449,7 @@ class ComposerStaticInit1cb1b66922f143d3e66d4fafa76635c2
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\Setting' => __DIR__ . '/../..' . '/app/Setting.php',
         'App\\Slider' => __DIR__ . '/../..' . '/app/Slider.php',
         'App\\Tag' => __DIR__ . '/../..' . '/app/Tag.php',
@@ -2045,6 +2056,37 @@ class ComposerStaticInit1cb1b66922f143d3e66d4fafa76635c2
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'LaratrustSeeder' => __DIR__ . '/../..' . '/database/seeds/LaratrustSeeder.php',
+        'LaratrustSetupTables' => __DIR__ . '/../..' . '/database/migrations/2017_09_05_181852_laratrust_setup_tables.php',
+        'Laratrust\\AddLaratrustUserTraitUseCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/AddLaratrustUserTraitUseCommand.php',
+        'Laratrust\\Contracts\\LaratrustPermissionInterface' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Contracts/LaratrustPermissionInterface.php',
+        'Laratrust\\Contracts\\LaratrustRoleInterface' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Contracts/LaratrustRoleInterface.php',
+        'Laratrust\\Contracts\\LaratrustTeamInterface' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Contracts/LaratrustTeamInterface.php',
+        'Laratrust\\Contracts\\LaratrustUserInterface' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Contracts/LaratrustUserInterface.php',
+        'Laratrust\\Contracts\\Ownable' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Contracts/Ownable.php',
+        'Laratrust\\Laratrust' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Laratrust.php',
+        'Laratrust\\LaratrustFacade' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/LaratrustFacade.php',
+        'Laratrust\\LaratrustPermission' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/LaratrustPermission.php',
+        'Laratrust\\LaratrustRegistersBladeDirectives' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/LaratrustRegistersBladeDirectives.php',
+        'Laratrust\\LaratrustRole' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/LaratrustRole.php',
+        'Laratrust\\LaratrustServiceProvider' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/LaratrustServiceProvider.php',
+        'Laratrust\\LaratrustTeam' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/LaratrustTeam.php',
+        'Laratrust\\MakePermissionCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/MakePermissionCommand.php',
+        'Laratrust\\MakeRoleCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/MakeRoleCommand.php',
+        'Laratrust\\MakeSeederCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/MakeSeederCommand.php',
+        'Laratrust\\MakeTeamCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/MakeTeamCommand.php',
+        'Laratrust\\Middleware\\LaratrustAbility' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Middleware/LaratrustAbility.php',
+        'Laratrust\\Middleware\\LaratrustPermission' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Middleware/LaratrustPermission.php',
+        'Laratrust\\Middleware\\LaratrustRole' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Middleware/LaratrustRole.php',
+        'Laratrust\\MigrationCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/MigrationCommand.php',
+        'Laratrust\\SetupCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/SetupCommand.php',
+        'Laratrust\\SetupTeamsCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/SetupTeamsCommand.php',
+        'Laratrust\\Traits\\LaratrustDynamicUserRelationsCalls' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Traits/LaratrustDynamicUserRelationsCalls.php',
+        'Laratrust\\Traits\\LaratrustPermissionTrait' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Traits/LaratrustPermissionTrait.php',
+        'Laratrust\\Traits\\LaratrustRoleTrait' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Traits/LaratrustRoleTrait.php',
+        'Laratrust\\Traits\\LaratrustTeamTrait' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Traits/LaratrustTeamTrait.php',
+        'Laratrust\\Traits\\LaratrustUserTrait' => __DIR__ . '/..' . '/santigarcor/laratrust/src/Laratrust/Traits/LaratrustUserTrait.php',
+        'Laratrust\\UpgradeCommand' => __DIR__ . '/..' . '/santigarcor/laratrust/src/commands/UpgradeCommand.php',
         'Laravel\\Scout\\Builder' => __DIR__ . '/..' . '/laravel/scout/src/Builder.php',
         'Laravel\\Scout\\Console\\FlushCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/FlushCommand.php',
         'Laravel\\Scout\\Console\\ImportCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/ImportCommand.php',
@@ -4083,6 +4125,10 @@ class ComposerStaticInit1cb1b66922f143d3e66d4fafa76635c2
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'TodosTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TodosTableSeeder.php',
+        'Traitor\\Handlers\\AbstractTreeHandler' => __DIR__ . '/..' . '/kkszymanowski/traitor/src/Handlers/AbstractTreeHandler.php',
+        'Traitor\\Handlers\\Handler' => __DIR__ . '/..' . '/kkszymanowski/traitor/src/Handlers/Handler.php',
+        'Traitor\\TraitUseAdder' => __DIR__ . '/..' . '/kkszymanowski/traitor/src/TraitUseAdder.php',
+        'Traitor\\Traitor' => __DIR__ . '/..' . '/kkszymanowski/traitor/src/Traitor.php',
         'UCDN' => __DIR__ . '/..' . '/mpdf/mpdf/classes/ucdn.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersTableSeeder.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',

@@ -152,10 +152,22 @@ class UserController extends Controller
     public function adminIndex(Request $request)
     {
         if($request->has('query')){
-            $admins = User::search($request->input('query'))->whereIsAdmin(1)->orderBy('updated_at', 'desc')->get();
-            $admins->load(['parent', 'photos']);
+            $admins = User::search($request->input('query'))
+                ->orderBy('updated_at', 'desc')
+                ->get()
+                ->filter(function ($admin , $key){
+                    return isset($admin->roles[0]->name) && ($admin->roles[0]->name == 'administrator' || $admin->roles[0]->name == 'superadministrator');
+                })
+                ->all();
+            $admins->load(['parent', 'photos', 'roles']);
         }else{
-            $admins = User::with(['parent', 'photos'])->whereIsAdmin(1)->orderBy('updated_at', 'desc')->get();
+            $admins = User::with(['parent', 'photos', 'roles'])
+                ->orderBy('updated_at', 'desc')
+                ->get()
+                ->filter(function ($admin , $key){
+                    return isset($admin->roles[0]->name) && ($admin->roles[0]->name == 'administrator' || $admin->roles[0]->name == 'superadministrator');
+                })
+                ->all();
         }
 
         if ($request->ajax()) {

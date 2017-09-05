@@ -9,9 +9,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Input;
 use Laravel\Scout\Searchable;
 use Morilog\Jalali\Facades\jDate;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
+    use LaratrustUserTrait;
     use Notifiable;
     use SoftDeletes;
     use Searchable;

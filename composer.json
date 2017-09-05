@@ -17,6 +17,7 @@
         "maatwebsite/excel": "^2.1",
         "morilog/jalali": "^2.2",
         "mpdf/mpdf": "^6.1",
+        "santigarcor/laratrust": "4.0.*",
         "teamtnt/laravel-scout-tntsearch-driver": "^3.0"
     },
     "require-dev": {

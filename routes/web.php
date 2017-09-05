@@ -2,10 +2,10 @@
 /*
  * users
  */
+
+//Route::middleware('role:superadministrator|administrator')->group(function() {
 Route::prefix('users')->group(function(){
 
-//    Route::get('/','UserController@index')->name('all.users');
-//    Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
     Route::post('/MultiDelete','UserController@multiDestroy')->name('user.multi.destroy');
     Route::get('/trash','UserController@trash')->name('user.trash');
     Route::delete('/forceDelete/{user}','UserController@forceDelete')->name('user.force.delete');
@@ -124,7 +124,6 @@ Route::prefix('admins')->group(function()
         Route::post('/forceMultiDestroy', 'UserController@adminForceMultiDestroy')->name('admins.forceMultiDestroy');
     });
 
-    //Route::middleware('role:SuperAdministrator|Administrator')->group(function() {
     Route::post('/restore/{admin}', 'UserController@adminRestore')->name('admins.restore');
     Route::get('/', 'UserController@adminIndex')->name('admins.index');
     Route::get('/create', 'UserController@adminCreate')->name('admins.create');
@@ -133,7 +132,6 @@ Route::prefix('admins')->group(function()
     Route::get('/{admin}/edit', 'UserController@adminEdit')->name('admins.edit');
     Route::put('/{admin}', 'UserController@adminUpdate')->name('admins.update');
     Route::delete('/{admin}', 'UserController@adminDestroy')->name('admins.destroy');
-    //});
 });
 
 /*
@@ -168,9 +166,12 @@ Route::prefix('/gallery/photos')->group(function(){
     Route::get('/','PhotoController@index')->name('photo.all');
     Route::post('/','PhotoController@store')->name('photo.store');
     Route::post('/multiDelete','PhotoController@multiDestroy')->name('photo.multi.delete');
-    Route::get('/photo_loader', 'PhotoController@galleryModalAjaxLoader')->name('photo_loader');
 });
 
+Route::get('/photo_loader', 'PhotoController@galleryModalAjaxLoader')->name('photo_loader');
+
+
+//});
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
