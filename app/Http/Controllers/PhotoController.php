@@ -38,4 +38,12 @@ class PhotoController extends Controller
         $photos = Photo::all();
         return view('includes.galleries.AllPhotosGallery', compact('photos'));
     }
+
+    public function galleryModalAjaxLoader(Request $request)
+    {
+        if($request->ajax()){
+            $photos = Photo::orderBy('created_at', 'desc')->get();
+            return view('includes.galleries.AllPhotos', compact('photos'));
+        }
+    }
 }

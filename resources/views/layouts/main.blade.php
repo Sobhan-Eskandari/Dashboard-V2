@@ -51,7 +51,7 @@
 
                             {{--============[ Profile icon in topbar ]===========--}}
                             <div class="col-1 text-right Topbar_avatar_container px-0">
-                                <img class="rounded-circle Topbar_avatar" src="{{ asset('images/avatar.png') }}">
+                                <img class="rounded-circle Topbar_avatar" src="{{ asset('images/nobody_m.original.jpg') }}">
                             </div>
 
                             {{--============[ Profile dropdown in topbar ]===========--}}
@@ -169,17 +169,6 @@
                             گالری<i class="fa fa-picture-o ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>
-
-                    {{--<div id="galleryMenu" class="collapse white-text" role="tabpanel" aria-labelledby="gallery">--}}
-                        {{--<ul>--}}
-                            {{--<li class="subMenu">--}}
-                                {{--<a>همه فایل ها</a>--}}
-                            {{--</li>--}}
-                            {{--<li class="subMenu">--}}
-                                {{--<a>فایل جدید</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                    {{--</div>--}}
 
                     {{--============[ Messages Menu of dashboard ]===========--}}
                     <h5 role="tab" class="pt-3" id="messages" data-toggle="collapse" data-parent="#accordion" href="#messagesMenu" aria-expanded="false" aria-controls="messagesMenu">

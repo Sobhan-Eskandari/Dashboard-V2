@@ -1,37 +1,16 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 /*
  * users
  */
 Route::prefix('users')->group(function(){
 
-//    Route::get('','UserController@index')->name('all.users');
+//    Route::get('/','UserController@index')->name('all.users');
 //    Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
-
-    Route::get('/','UserController@index')->name('all.users');
-    Route::Delete('/delete/{user}','UserController@destroy')->name('users.destroy');
-
     Route::post('/MultiDelete','UserController@multiDestroy')->name('user.multi.destroy');
     Route::get('/trash','UserController@trash')->name('user.trash');
-//    Route::get('/create','UserController@create')->name('user.create');
-//    Route::post('/','UserController@store')->name('user.store');
-//    Route::post('photo','UserController@photo')->name('user.photo');
-//    Route::get('/show/{user}','UserController@show')->name('user.show');
-//    Route::get('/edit/{user}','UserController@edit')->name('user.edit');
-//    Route::post('/update/{user}','UserController@update')->name('user.update');
     Route::delete('/forceDelete/{user}','UserController@forceDelete')->name('user.force.delete');
     Route::post('/forceMultiDelete','UserController@forceMultiDelete')->name('user.force.multiDelete');
-    $this->post('/restore/{user}','UserController@restore')->name('user.restore');
+    Route::post('/restore/{user}','UserController@restore')->name('user.restore');
 });
 
 Route::resource('/users', 'UserController');
@@ -48,11 +27,14 @@ Route::prefix('comments')->group(function(){
     Route::Delete('/forceDelete/{id}','CommentController@forceDelete')->name('comments.forceDelete');
     Route::post('/multiForceDelete','CommentController@multiForceDelete')->name('comments.multiForceDelete');
 });
+
 Route::resource('comments','CommentController');
+
 /*
  * sliders
  */
 Route::resource('sliders', 'SliderController');
+
 /*
  * categories
  */
@@ -62,21 +44,18 @@ Route::resource('/categories', 'CategoryController');
 /*
  * faqs
  */
-
 Route::post('/faqs/multiDestroy', 'FaqController@multiDestroy')->name('faqs.multiDestroy');
 Route::resource('/faqs', 'FaqController');
 
 /*
  * friends
  */
-
 Route::post('/friends/multiDestroy', 'FriendController@multiDestroy')->name('friends.multiDestroy');
 Route::resource('/friends', 'FriendController');
 
 /*
  * inboxes
  */
-
 Route::prefix('inbox')->group(function()
 {
     Route::prefix('trash')->group(function()
@@ -95,7 +74,6 @@ Route::resource('/inbox', 'InboxController');
 /*
  * outboxes
  */
-
 Route::prefix('outbox')->group(function()
 {
     Route::prefix('trash')->group(function () {
@@ -113,12 +91,11 @@ Route::resource('/outbox', 'OutboxController');
 /*
  * tags
  */
-Route::resource('/tags','tagController');
+Route::resource('/tags','TagController');
 
 /*
  * backups
  */
-
 Route::prefix('backups')->group(function()
 {
     Route::get('/', 'BackupController@index')->name('backups.index');
@@ -132,7 +109,6 @@ Route::prefix('backups')->group(function()
 /*
  * settings
  */
-
 Route::resource('/settings','SettingController');
 
 /*
@@ -160,12 +136,9 @@ Route::prefix('admins')->group(function()
     //});
 });
 
-
-
 /*
  * posts
  */
-
 Route::prefix('posts')->group(function()
 {
     Route::prefix('trash')->group(function()
@@ -186,44 +159,18 @@ Route::resource('/posts', 'PostController');
 /*
  * todos
  */
-
 Route::resource('/todos','TodoController');
 
 /*
  * galleries
  */
-
 Route::prefix('/gallery/photos')->group(function(){
-    $this->get('','PhotoController@index')->name('photo.all');
-    $this->post('','PhotoController@store')->name('photo.store');
-    $this->post('/multiDelete','PhotoController@multiDestroy')->name('photo.multi.delete');
+    Route::get('/','PhotoController@index')->name('photo.all');
+    Route::post('/','PhotoController@store')->name('photo.store');
+    Route::post('/multiDelete','PhotoController@multiDestroy')->name('photo.multi.delete');
+    Route::get('/photo_loader', 'PhotoController@galleryModalAjaxLoader')->name('photo_loader');
 });
-/*
- * test gallery
- */
-Route::get('/test', function (\Illuminate\Http\Request $request){
-    $photos = \App\Photo::orderBy('created_at', 'desc')->get();
-    if($request->ajax()){
-        return view('includes.galleries.AllPhotos', compact('photos'));
-    }
-    return view('test', compact('photos'));
-})->name('test');
-
-Route::post('/test', 'PhotoController@store');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/movie', function (){
-
-    $client = new GuzzleHttp\Client();
-    $res = $client->request('GET', 'https://api.themoviedb.org/3/search/movie', [
-        'query' => [
-            'api_key' => '7f0ab0d5f0c589a1a9820543ca326a81',
-            'query' => 'Jack+Reacher'
-            ]
-    ]);
-
-    dd(json_decode($res->getBody()->getContents()));
-});
+Route::get('/', 'HomeController@index')->name('home');

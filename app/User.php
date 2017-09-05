@@ -12,7 +12,6 @@ use Morilog\Jalali\Facades\jDate;
 
 class User extends Authenticatable
 {
-//    use HasApiTokens;
     use Notifiable;
     use SoftDeletes;
     use Searchable;
@@ -148,18 +147,6 @@ class User extends Authenticatable
     }
 //    Todo Methods End
 
-//    Setting Methods Begin
-    public function saveSetting(Setting $setting)
-    {
-        $this->setting()->save($setting);
-    }
-
-    public function updateSetting(Setting $setting)
-    {
-        $setting->update();
-    }
-//    Setting Methods End
-
     public function toSearchableArray()
     {
         return [
@@ -170,21 +157,16 @@ class User extends Authenticatable
             'last_name' => $this->last_name,
         ];
     }
-    public static function pagination()
+    public static function pagination($path)
     {
-        $allUsers = User::orderByRaw('updated_at desc')->get();
-        $usersArray = [];
-        foreach ($allUsers as $user){
-            $usersArray[] = $user;
-        }
+        $allUsers = User::orderByRaw('updated_at desc')->get()->toArray();
 
         $page = Input::get('page', 1); // Get the current page or default to 1
         $perPage = 8;
         $offset = ($page * $perPage) - $perPage;
-        $path = "http://dash.dev/users";
 
-        $users = new LengthAwarePaginator(array_slice($usersArray, $offset, $perPage, true),
-            count($usersArray),
+        $users = new LengthAwarePaginator(array_slice($allUsers, $offset, $perPage, true),
+            count($allUsers),
             $perPage,
             $page,
             ['path' => $path]

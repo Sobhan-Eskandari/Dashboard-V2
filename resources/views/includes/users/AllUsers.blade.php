@@ -42,9 +42,8 @@
                 <th>نام</th>
                 <th>پست الکترونیکی</th>
                 <th>تلفن همراه</th>
-                <th>وضعیت</t
-                <th>
-                </th>
+                <th>وضعیت</th>
+                <th></th>
             </tr>
 
             </thead>
@@ -61,7 +60,7 @@
                         </div>
                     </td>
                     <td class="py-1 text-right userInfoPlace">
-                        <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo[0]) ? asset('photoGallery/'.$user->photo[0]->name) : asset('images/avatar.png') }}">
+                        <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo[0]) ? asset('gallery/'.$user->photo[0]->name) : asset('images/nobody_m.original.jpg') }}">
                         <p class="username">{{$user->username}}</p>
                     </td>
                     <td>{{$user->getFullNameAttribute()}}</td>
@@ -76,14 +75,6 @@
                                 <i class="fa fa-ellipsis-v black-text hi-fontSize-20" aria-hidden="true"></i>
                             </button>
 
-                            {{--@if(isset($trash))--}}
-                            {{--==========[ Dropdown Menu ]========= --}}
-                            {{--<div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">--}}
-                            {{--<a class="dropdown-item text-right py-0" href="#"><i class="fa fa-undo ml-2" aria-hidden="true"></i>بازگردانی</a>--}}
-                            {{--<a class="dropdown-item text-right py-0 mt-1" href="#"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</a>--}}
-                            {{--</div>--}}
-                            {{--@else--}}
-
                             {{--==========[ Dropdown Menu ]========= --}}
                             <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item text-right py-0" href="{{route('users.show',$user->id)}}"><i class="fa fa-eye ml-2" aria-hidden="true"></i>مشاهده</a>
@@ -92,54 +83,12 @@
                                 {!! Form::open(['method'=>'DELETE','action'=>['UserController@destroy',$user->id]]) !!}
                                 <button class="dropdown-item text-right py-0 mt-1" id="destroyUser" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
                                 {!! Form::close() !!}
-                                {{--<a class="dropdown-item text-right py-0" href="#"><i class="fa fa-eye ml-2" aria-hidden="true"></i>مشاهده</a>--}}
-                                {{--<a class="dropdown-item text-right py-0" href="#"><i class="fa fa-pencil ml-2" aria-hidden="true"></i> ویرایش</a>--}}
-                                {{--<div class="dropdown-divider my-1"></div>--}}
-                                {{--<a class="dropdown-item text-right py-0 mt-1" href="#"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</a>--}}
                             </div>
-                            {{--@endif--}}
                         </div>
                     </td>
-                    {{--@component('components.users.UsersTableRow')--}}
-
-                        {{--@slot('chk_name')--}}
-                            {{--{{ $user->id }}--}}
-                        {{--@endslot--}}
-                        {{--@slot('avatar')--}}
-                                {{--<img class="rounded-circle Topbar_avatar" src="{{isset($user->photo) ? asset('photos/'.$user->photo->name) : asset('images/avatar.png') }}">--}}
-                            {{--@endslot--}}
-                        {{--@slot('user_username')--}}
-                            {{--{{$user->username}}--}}
-                        {{--@endslot--}}
-
-                        {{--@slot('user_fullname')--}}
-                          {{--{{$user->getFullNameAttribute()}}--}}
-                        {{--@endslot--}}
-
-                        {{--@slot('user_email')--}}
-                            {{--{{$user->email}}--}}
-                        {{--@endslot--}}
-
-                        {{--@slot('user_number')--}}
-                           {{--{{is_null($user->mobile) ? 'شماره همراه وارد نشده':$user->mobile}}--}}
-                        {{--@endslot--}}
-
-                        {{--@slot('trash')@endslot--}}
-                        {{--@slot('settings')--}}
-                                {{--<a class="dropdown-item text-right py-0" href="{{route('user.show',$user->id)}}"><i class="fa fa-eye ml-2" aria-hidden="true"></i>مشاهده</a>--}}
-                                {{--<a class="dropdown-item text-right py-0" href="{{route('user.edit',$user->id)}}"><i class="fa fa-pencil ml-2" aria-hidden="true"></i> ویرایش</a>--}}
-                                {{--<div class="dropdown-divider my-1"></div>--}}
-                            {{--{!! Form::open(['method'=>'DELETE','action'=>['UserController@destroy',$user->id]]) !!}--}}
-                                {{--<button class="dropdown-item text-right py-0 mt-1" id="destroyUser" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>--}}
-                            {{--{!! Form::close() !!}--}}
-                            {{--@endslot--}}
-
-                    {{--@endcomponent--}}
                 </tr>
-
             @endforeach
-                @endif
-
+            @endif
             </tbody>
         </table>
     </div>
@@ -148,26 +97,6 @@
 {{--============[ Pagination of Page ]===========--}}
 {{$users->links()}}
 <script>
-//    $( "button[id='destroyUser']" ).click(function (e) {
-//        e.preventDefault();
-//        var query = $('#searchUser').val();
-//        var commentId = $(this).attr('data-id');
-//        var CSRF_TOKEN =$("input[name*='_token']").val();
-////        console.log(commentId);
-//        $.ajax({
-//            type: 'DELETE',
-//            url: '/users/delete/'+commentId,
-//            data: {_token: CSRF_TOKEN,query:query}
-//        }).done(function (data) {
-//            $("#user").html(data);
-//            if(query === "") {
-//                window.history.pushState("", "", "http://dash.dev/users");
-//            }else {
-//                window.history.pushState(data, "Title", " /users?query=" + query);
-//            }
-//        }).fail(function () {
-//        });
-//    });
 
     var checkboxes;
     $('input[type=checkbox]').change(function () {
@@ -198,17 +127,4 @@
         });
 //            console.log(checkboxes);
     });
-    </script>
-{{--<div class="row mt-4">--}}
-    {{--<div class="col-auto">--}}
-        {{--<nav aria-label="Page navigation example">--}}
-            {{--<ul class="pagination">--}}
-                {{--<li class="page-item"><a class="page-link nextBtn" href="#">بعدی</a></li>--}}
-                {{--<li class="page-item"><a class="page-link" href="#">۱</a></li>--}}
-                {{--<li class="page-item"><a class="page-link" href="#">۲</a></li>--}}
-                {{--<li class="page-item"><a class="page-link" href="#">۳</a></li>--}}
-                {{--<li class="page-item"><a class="page-link prevBtn" href="#">قبلی</a></li>--}}
-            {{--</ul>--}}
-        {{--</nav>--}}
-    {{--</div>--}}
-{{--</div>--}}
+</script>

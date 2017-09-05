@@ -25,8 +25,7 @@
                 <th>پست الکترونیکی</th>
                 <th>تلفن همراه</th>
                 <th>وضعیت</th>
-                <th>
-                </th>
+                <th></th>
             </tr>
 
             </thead>
@@ -44,7 +43,7 @@
                         </div>
                     </td>
                     <td class="py-1 text-right userInfoPlace">
-                        <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo[0]) ? asset('UserImage/'.$user->photo[0]->name) : asset('images/avatar.png') }}">
+                        <img class="rounded-circle Topbar_avatar" src="{{isset($user->photo[0]) ? asset('gallery/'.$user->photo[0]->name) : asset('images/nobody_m.original.jpg') }}">
                         <p class="username"> {{$user->user_name}}</p>
                     </td>
                     <td>{{$user->getFullNameAttribute()}}</td>
@@ -62,13 +61,13 @@
                             {{--==========[ Dropdown Menu ]========= --}}
                             <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
                                 {!! Form::open(['method'=>'POST','action'=>['UserController@restore',$user->id]]) !!}
-                                <button class="dropdown-item text-right py-0 mt-1" id="restore" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>بازگردانی</button>
+                                    <button class="dropdown-item text-right py-0 mt-1" id="restore" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>بازگردانی</button>
                                 {!! Form::close() !!}
-                                {!! Form::open(['method'=>'DELETE','action'=>['UserController@forceDelete',$user->id]]) !!}
-                                <button class="dropdown-item text-right py-0 mt-1" id="forceDestroyUser" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
-                                {!! Form::close() !!}
-                                </div>
 
+                                {!! Form::open(['method'=>'DELETE','action'=>['UserController@forceDelete',$user->id]]) !!}
+                                    <button class="dropdown-item text-right py-0 mt-1" id="forceDestroyUser" data-id="{{$user->id}}"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
+                                {!! Form::close() !!}
+                            </div>
                         </div>
                     </td>
 

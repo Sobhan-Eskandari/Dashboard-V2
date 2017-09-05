@@ -13,60 +13,34 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index(Request $request){
-//        $user = User::find(1);
-//        dd($user->photo);
-//        $currentPage = 3; // You can set this to any page you want to paginate to
-//
-//        // Make sure that you call the static method currentPageResolver()
-//        // before querying users
-//        Paginator::currentPageResolver(function () use ($currentPage) {
-//            return $currentPage;
-//        });
+    public function index(Request $request)
+    {
+        $users = User::latest()->whereIsAdmin(0)->paginate(8);
 
-        $users = User::latest()->paginate(8);
         if ($request->has('query')) {
-            $users = User::search($request->input('query'))->paginate(8);
-//            dd($users);
+            $users = User::search($request->input('query'))->whereIsAdmin(0)->paginate(8);
         }
+
         if ($request->ajax()) {
             return view('includes.users.AllUsers', compact('users'));
         }
+
         return view('dashboard.users.index',compact('users'));
     }
-    public function destroy(Request $request,User $user){
-        $user->delete();
-        return redirect()->back();
-//        if ($request->has('query')) {
-//            $users = User::search($request->input('query'))->paginate(8);
-////        }
-//        return view('Includes.AllUsers', compact('users'))->render();
-    }
-    public function multiDestroy(Request $request){
-        foreach ($request->input('checkboxes') as $checkbox) {
-            if ($checkbox === "on") {
-                continue;
-            }
-            $user = User::find($checkbox);
-            $user->delete();
-        }
-//            sleep(5);
-        if ($request->has('query')) {
-            $users = User::search($request->input('query'))->paginate(8);
-        } else {
-            $users = User::pagination();
-        }
-        return view('includes.users.AllUsers', compact('users'))->render();
-    }
-    public function create(){
+
+    public function create()
+    {
         $photos = Photo::all();
         return view('dashboard.users.create',compact('users','photos'));
     }
-    public function store(Request $request){
+
+    public function store(Request $request)
+    {
         dd($request->all());
         $input= $request->all();
         $input['verified'] = 1;
@@ -76,63 +50,79 @@ class UserController extends Controller
         $user->photo()->attach([$request->input('avatar')]);
         return redirect()->route('all.users');
     }
-    public function photo(Request $request){
-//        if ($request->has('avatarId')) {
-//            $photo = Photo::findOrFail($request->input('avatarId'));
-//            File::delete('UserImage/' . $photo->address);
-//            $photo->forceDelete();
-//        }
-//        if ($file = $request->file('avatar')) {
-//            $name = time() . $file->getClientOriginalName();
-//            $file->move('UserImage', $name);
-//            $photo = Photo::create(['address' => $name, 'created_by' => 1, 'position' => '1']);
-        $photo = Photo::find($request->checkboxes[0]);
-        return view('Includes.UserImage', compact('photo'));
-//        }
-    }
-    public function show(User $user){
+
+    public function show(User $user)
+    {
         return view('dashboard.users.show', compact('user'));
     }
-    public function edit(User $user){
+
+    public function edit(User $user)
+    {
         $photo = $user->photo;
         $photos = Photo::all();
         return view('dashboard.users.edit', compact('user','photo','photos'));
     }
-    public function update(Request $request,User $user){
-//        dd($request->all());
+
+    public function update(Request $request,User $user)
+    {
         $input = $request->all();
+
         if($request->has('password')){
             $input['password'] = bcrypt($request->password);
         }else{
             $input['password'] = $user->password;
         }
+
         $user->photo()->sync([$request->input('avatar')]);
         $user->update($input);
         return redirect()->route('all.users');
     }
-    public function trash(Request $request){
+
+    public function destroy(Request $request,User $user)
+    {
+        $user->delete();
+        return redirect()->back();
+    }
+
+    public function multiDestroy(Request $request)
+    {
+        foreach ($request->input('checkboxes') as $checkbox) {
+            if ($checkbox === "on") {
+                continue;
+            }
+            $user = User::find($checkbox);
+            $user->delete();
+        }
+
+        if ($request->has('query')) {
+            $users = User::search($request->input('query'))->paginate(8);
+        } else {
+            $users = User::pagination(URL::to('/users'));
+        }
+
+        return view('includes.users.AllUsers', compact('users'))->render();
+    }
+
+    public function trash(Request $request)
+    {
         $users = User::onlyTrashed()->paginate(8);
-//        dd($comments);
-//        if($request->has('query')) {
-//            $comment= Comment::onlyTrashed()->search($request->input('query'));
-////            $comments = $comment->where('deleted_at','==',NULL)->get();
-//            dd($comment);
-////            $comments = Comment::search($request->input('query'))->paginate(8);
-//        }
+
         if ($request->ajax()){
             return view('Includes.AllTrashedUsers',compact('users'));
         }
+
         return view('dashboard.users.trash', compact('users'));
     }
-    public function forceDelete($user){
+
+    public function forceDelete($user)
+    {
         $users = User::onlyTrashed()->find($user);
         $users->forceDelete();
         return redirect()->route('user.trash');
-//        $users = User::onlyTrashed()->paginate();
-//        return view('Includes.AllTrashedUsers',compact('users'))->render();
     }
 
-    public function forceMultiDelete(Request $request){
+    public function forceMultiDelete(Request $request)
+    {
         foreach ($request->input('checkboxes') as $checkbox) {
             if ($checkbox === "on") {
                 continue;
@@ -143,10 +133,17 @@ class UserController extends Controller
         return view('Includes.AllTrashedUsers',compact('users'))->render();
     }
 
-    public function restore($user){
+    public function restore($user)
+    {
         $users = User::onlyTrashed()->find($user);
         $users->restore();
         return redirect()->route('user.trash');
+    }
+
+    public function photo(Request $request)
+    {
+        $photo = Photo::find($request->checkboxes[0]);
+        return view('Includes.UserImage', compact('photo'));
     }
 
     /*
@@ -226,8 +223,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param AdminRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function AdminUpdate(AdminRequest $request, $id)
@@ -278,21 +275,6 @@ class UserController extends Controller
 
         Session::flash('danger', 'ادمین مورد نظر با موفقیت پاک شد');
         return redirect(route('admins.index'));
-//        if($request->ajax()){
-//            try {
-//                foreach ($relations as $relation) {
-//                    foreach ($admin->{$relation} as $item){
-//                        $item->delete();
-//                    }
-//                }
-//                $admin->delete();
-//            }catch (\Exception $exception){
-//                dd($exception->getMessage());
-//            }
-//
-//            $admins = User::with(['parent', 'photos'])->orderBy('updated_at', 'desc')->get();
-//            return view('includes.admins.AllAdmins', compact('admins'))->render();
-//        }
     }
 
     public function adminTrash(Request $request)
@@ -322,23 +304,6 @@ class UserController extends Controller
 
         Session::flash('danger', 'ادمین مورد نظر به صورت دائمی حذف شد');
         return redirect(route('admins.trash'));
-//        if($request->ajax()){
-//            try {
-//                foreach ($relations as $relation) {
-//                    foreach ($admin->{$relation} as $item){
-//                        $item->forceDelete();
-//                    }
-//                }
-//                $admin->photos()->detach();
-//                $admin->forceDelete();
-//            }catch (\Exception $exception){
-//                dd($exception->getMessage());
-//            }
-//
-//            $admins = Admin::pagination();
-//            $roles = Role::all();
-//            return view('Includes.AllAdminsTrash', compact('admins', 'roles'))->render();
-//        }
     }
 
     public function adminForceMultiDestroy(Request $request)
@@ -360,28 +325,6 @@ class UserController extends Controller
 
         Session::flash('danger', 'ادمین های مورد نظر به صورت دائمی حذف شدند');
         return redirect(route('admins.trash'));
-//        if($request->ajax()){
-//            $input = $request->all();
-//            $ids = explode(',', $input['ids']);
-//            try {
-//                foreach ($ids as $id){
-//                    $admin = Admin::with($relations)->onlyTrashed()->findOrFail($id);
-//                    foreach ($relations as $relation) {
-//                        foreach ($admin->{$relation} as $item){
-//                            $item->forceDelete();
-//                        }
-//                    }
-//                    $admin->photos()->detach();
-//                    $admin->forceDelete();
-//                }
-//            }catch (\Exception $exception){
-//                dd($exception->getMessage());
-//            }
-//
-//            $admins = Admin::pagination();
-//            $roles = Role::all();
-//            return view('Includes.AllAdminsTrash', compact('admins', 'roles'))->render();
-//        }
     }
 
     public function adminRestore(Request $request, $id)
@@ -403,25 +346,5 @@ class UserController extends Controller
 
         Session::flash('warning', 'ادمین مورد نظر با موفقیت بازگردانی شد');
         return redirect(route('admins.trash'));
-//        if($request->ajax()){
-//            try {
-//                foreach ($relations as $relation) {
-//                    foreach ($admin->{$relation} as $item){
-//                        $item->updated_by = Auth::user()->id;
-//                        $item->save();
-//                        $item->restore();
-//                    }
-//                }
-//                $admin->updated_by = $user;
-//                $admin->save();
-//                $admin->restore();
-//            }catch (\Exception $exception){
-//                dd($exception->getMessage());
-//            }
-//
-//            $admins = Admin::pagination();
-//            $roles = Role::all();
-//            return view('Includes.AllAdminsTrash', compact('admins', 'roles'))->render();
-//        }
     }
 }

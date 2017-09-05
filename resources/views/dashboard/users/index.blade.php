@@ -7,9 +7,12 @@
         {!! Form::close() !!}
     </div>
 @endsection
+
 @section('breadcrumb')
     @component('components.Breadcrumb')
-
+        <li><a href="{{ route('home') }}">داشبورد</a></li>
+        <li><a href="#">کاربران</a></li>
+        <li><a class="breadcrumb_currentPage" href="{{ route('users.index') }}">همه کاربران</a></li>
     @endcomponent
 @endsection
 

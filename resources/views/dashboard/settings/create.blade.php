@@ -328,7 +328,7 @@
                 this.on("success", function() {
                     $.ajax({
                         type: "GET",
-                        url: "/test",
+                        url: "/photo_loader",
                         data: [],
                         success: function (data) {
                             $('#loadPhotos').html(data);
