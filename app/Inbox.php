@@ -8,6 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\URL;
 use Laravel\Scout\Searchable;
+use Morilog\Jalali\Facades\jDate;
 
 class Inbox extends Model
 {
@@ -38,6 +39,11 @@ class Inbox extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'seen_by');
+    }
+
+    public function createdAgo()
+    {
+        return jDate::forge($this->created_at)->ago();
     }
 
     public static function pagination($path)

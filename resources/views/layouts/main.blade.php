@@ -50,48 +50,52 @@
                             </div>
 
                             {{--============[ Profile icon in topbar ]===========--}}
-                            <div class="col-1 text-right Topbar_avatar_container px-0">
-                                <img class="rounded-circle Topbar_avatar" src="{{ asset('images/nobody_m.original.jpg') }}">
-                            </div>
+                            @if(auth()->user())
+                                <div class="col-1 text-right Topbar_avatar_container px-0">
+                                    @if(isset(auth()->user()->photos[0]->name))
+                                        <img class="rounded-circle Topbar_avatar" src="{{ asset('gallery/' . '/' . auth()->user()->photos[0]->name) }}">
+                                    @else
+                                        <img class="rounded-circle Topbar_avatar" src="{{ asset('images/nobody_m.original.jpg') }}">
+                                    @endif
+                                </div>
 
-                            {{--============[ Profile dropdown in topbar ]===========--}}
-                            <div class="col-2 Topbar_dropdown_container">
-                                <div class="Topbar_dropdown dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        حمید وتر
-                                    </button>
-                                    <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item text-right py-1" href="#"><i class="fa fa-user ml-2" aria-hidden="true"></i> پروفایل من</a>
-                                        <a class="dropdown-item text-right py-1" href="#"><i class="fa fa-file-text-o ml-2" aria-hidden="true"></i> مدیران</a>
-                                        <a class="dropdown-item text-right py-1" href="#"><i class="fa fa-download ml-2" aria-hidden="true"></i> نسخه پشتیبانی</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-right py-1" href="#"><i class="fa fa-power-off ml-2" aria-hidden="true"></i>خروج</a>
+                                {{--============[ Profile dropdown in topbar ]===========--}}
+                                <div class="col-2 Topbar_dropdown_container">
+                                    <div class="Topbar_dropdown dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->full_name }}</button>
+                                        <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item text-right py-1" href="{{ route('admins.edit', auth()->user()->id) }}"><i class="fa fa-user ml-2" aria-hidden="true"></i> پروفایل من</a>
+                                            <a class="dropdown-item text-right py-1" href="{{ route('admins.index') }}"><i class="fa fa-file-text-o ml-2" aria-hidden="true"></i> مدیران</a>
+                                            <div class="dropdown-divider"></div>
+                                            {!! Form::open(['method' => 'POST', 'action' => 'Auth\LoginController@logout']) !!}
+                                                <button class="dropdown-item text-right py-1">
+                                                    <i class="fa fa-power-off ml-2" aria-hidden="true"></i>خروج
+                                                </button>
+                                            {!! Form::close() !!}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            @endif
                             {{--============[ Search in topbar ]===========--}}
                             <div class="col-3 pull-4  pt-2">
                                 @yield('search')
-                                {{--<div class="hi-search-1">--}}
-                                    {{--<input placeholder="جست و جو کنید..." class="hi-search_field" type="text">--}}
-                                    {{--<button class="hi-button-btn1 pull-left"><i class="fa fa-search white-text hi-fontSize-19" aria-hidden="true"></i></button>--}}
-                                {{--</div>--}}
                             </div>
 
                             {{--============[ Notifications with Badge in topbar ]===========--}}
                             <div class="col-1 pull-4 pt-0">
                                 <button class="hi-button-btn1 Topbar_notificationBtn pull-left pt-3 px-2">
-                                    <span class="badge badge-pill badge-danger">۱۰۰</span>
+                                    <span class="badge badge-pill badge-danger">{{ $unSeenInboxes + $unSeenComments }}</span>
                                     <i class="fa fa-envelope-o white-text hi-fontSize-23" aria-hidden="true"></i>
                                 </button>
                             </div>
 
                             {{--============[ Logout in topbar ]===========--}}
                             <div class="col-1 pull-4 pt-2">
-                                <button class="hi-button-btn1 Topbar_logoutBtn py-1 px-2">
-                                    <i class="fa fa-power-off white-text hi-fontSize-23" aria-hidden="true"></i>
-                                </button>
+                                {!! Form::open(['method' => 'POST', 'action' => 'Auth\LoginController@logout']) !!}
+                                    <button class="hi-button-btn1 Topbar_logoutBtn py-1 px-2">
+                                        <i class="fa fa-power-off white-text hi-fontSize-23" aria-hidden="true"></i>
+                                    </button>
+                                {!! Form::close() !!}
                             </div>
 
 
@@ -116,8 +120,8 @@
         {{--============[ This is the Navigation Menu of dashboard ]===========--}}
         <nav class="col-2 Sidebar">
             <div class="Sidebar_logo">
-                <a href="#">
-                    <h1 class="white-text">داشبرد مدیریتی</h1>
+                <a href="{{ route('home') }}">
+                    <h1 class="white-text">داشبورد مدیریتی</h1>
                     <img class="img-fluid hi-size-4" src="{{ asset('images/logo.png') }}">
                 </a>
             </div>
@@ -173,7 +177,7 @@
                     {{--============[ Messages Menu of dashboard ]===========--}}
                     <h5 role="tab" class="pt-3" id="messages" data-toggle="collapse" data-parent="#accordion" href="#messagesMenu" aria-expanded="false" aria-controls="messagesMenu">
                         <a class="Sidebar_menu_link">
-                            <i class="fa fa-chevron-left hi-fontSize-14" aria-hidden="true"></i><span class="badge badge-pill badge-default mr-2 countBadge">{{ \App\Inbox::whereSeenBy(null)->count() }}</span>پیام ها<i class="fa fa-envelope-o ml-4" aria-hidden="true"></i>
+                            <i class="fa fa-chevron-left hi-fontSize-14" aria-hidden="true"></i><span class="badge badge-pill badge-default mr-2 countBadge">{{ $unSeenInboxes }}</span>پیام ها<i class="fa fa-envelope-o ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>
 
@@ -209,7 +213,7 @@
                     {{--============[ Comments page of dashboard ]===========--}}
                     <h5 role="tab" class="pt-2" id="comments">
                         <a class="Sidebar_menu_link" data-parent="#accordion" href="{{ route('comments.index') }}">
-                            <span class="badge badge-pill badge-default mr-2 countBadge">{{ \App\Comment::whereStatus('not-checked')->count() }}</span>نظرات<i class="fa fa-commenting-o ml-4" aria-hidden="true"></i>
+                            <span class="badge badge-pill badge-default mr-2 countBadge">{{ $unSeenComments }}</span>نظرات<i class="fa fa-commenting-o ml-4" aria-hidden="true"></i>
                         </a>
                     </h5>
                     {{--============[ Admin Menu of dashboard ]===========--}}

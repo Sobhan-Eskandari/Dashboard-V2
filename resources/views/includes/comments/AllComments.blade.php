@@ -8,17 +8,6 @@
         </a>
     </div>
 
-    <div id="commentDate">
-        {{--<div class="col-2 btn-group-justified backupGroupButton">--}}
-            {{--<h6 class="card-title pt-2 backupExportCard_title">از:&nbsp;</h6>--}}
-            {{--<input name="from" type="text" class="backup_dateSelector backupSelect" id="start" value="{{isset($start) ? $start :''}}">--}}
-        {{--</div>--}}
-        {{--<div class="col-2 btn-group-justified backupGroupButton">--}}
-            {{--<h6 class="card-title pt-2 backupExportCard_title">&nbsp;&nbsp;تا:&nbsp;</h6>--}}
-            {{--<input name="till" type="text" class="backup_dateSelector backupSelect" id="end" value="{{isset($end) ? $end :''}}">--}}
-        {{--</div>--}}
-    </div>
-
     <div class="col-auto text-right mr-2">
         {!! Form::open(['method'=>'POST','action'=>'CommentController@multiDestroy', 'id'=>'deleteForm']) !!}
             {!! Form::text('ids', null, ['style' => 'display:none']) !!}

@@ -8,6 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\URL;
 use Laravel\Scout\Searchable;
+use Morilog\Jalali\Facades\jDate;
 
 class Comment extends Model
 {
@@ -67,6 +68,11 @@ class Comment extends Model
     public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function createdAgo()
+    {
+        return jDate::forge($this->created_at)->ago();
     }
 
     public function toSearchableArray()
