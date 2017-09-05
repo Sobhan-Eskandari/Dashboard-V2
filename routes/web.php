@@ -3,7 +3,7 @@
  * users
  */
 
-Route::middleware('role:superadministrator|administrator')->group(function() {
+//Route::middleware('role:superadministrator|administrator')->group(function() {
     Route::prefix('users')->group(function(){
 
         Route::post('/MultiDelete','UserController@multiDestroy')->name('user.multi.destroy');
@@ -170,7 +170,7 @@ Route::middleware('role:superadministrator|administrator')->group(function() {
 
     Route::get('/photo_loader', 'PhotoController@galleryModalAjaxLoader')->name('photo_loader');
 
-});
+//});
 
 Auth::routes();
 

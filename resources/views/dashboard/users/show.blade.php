@@ -2,7 +2,9 @@
 
 @section('breadcrumb')
     @component('components.Breadcrumb')
-
+        <li><a href="{{ route('home') }}">داشبورد</a></li>
+        <li><a class="breadcrumb_currentPage" href="{{ route('users.index') }}">همه کاربران</a></li>
+        <li><a href="#">مشاهده کاربر</a></li>
     @endcomponent
 @endsection
 

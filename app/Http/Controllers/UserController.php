@@ -41,14 +41,16 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $input= $request->all();
         $input['verified'] = 1;
-        $input['created_by'] = 1;
         $input['password'] = bcrypt($request->password);
         $user = User::create($input);
-        $user->photo()->attach([$request->input('avatar')]);
-        return redirect()->route('all.users');
+        auth()->user()->children()->save($user);
+        if($request->has('avatar')) {
+            $user->photos()->attach([$request->input('avatar')]);
+        }
+        Session::flash('success', 'کاربر جدید با موفقیت ساخته شد');
+        return redirect()->route('users.index');
     }
 
     public function show(User $user)
@@ -66,21 +68,24 @@ class UserController extends Controller
     public function update(Request $request,User $user)
     {
         $input = $request->all();
-
+        $input['updated_by'] = \auth()->user()->id;
         if($request->has('password')){
             $input['password'] = bcrypt($request->password);
         }else{
             $input['password'] = $user->password;
         }
-
-        $user->photo()->sync([$request->input('avatar')]);
+        if($request->has('avatar')) {
+            $user->photo()->sync([$request->input('avatar')]);
+        }
         $user->update($input);
-        return redirect()->route('all.users');
+        Session::flash('success', 'کاربر با موفقیت بروز رسانی شد');
+        return redirect()->route('users.index');
     }
 
     public function destroy(Request $request,User $user)
     {
         $user->delete();
+        Session::flash('success', 'کاربر با موفقیت حذف شد');
         return redirect()->back();
     }
 
@@ -118,6 +123,7 @@ class UserController extends Controller
     {
         $users = User::onlyTrashed()->find($user);
         $users->forceDelete();
+        Session::flash('success', 'کاربر با موفقیت حذف دائم شد');
         return redirect()->route('user.trash');
     }
 
@@ -137,6 +143,7 @@ class UserController extends Controller
     {
         $users = User::onlyTrashed()->find($user);
         $users->restore();
+        Session::flash('success', 'کاربر با موفقیت بازگردانی شد');
         return redirect()->route('user.trash');
     }
 

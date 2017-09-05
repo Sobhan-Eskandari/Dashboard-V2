@@ -2,7 +2,9 @@
 
 @section('breadcrumb')
     @component('components.Breadcrumb')
-
+        <li><a href="{{ route('home') }}">داشبورد</a></li>
+        <li><a class="breadcrumb_currentPage" href="{{ route('users.index') }}">همه کاربران</a></li>
+        <li><a href="#">ویرایش کاربر</a></li>
     @endcomponent
 @endsection
 
@@ -20,7 +22,7 @@
 
 {{--</div>--}}
 {{--<button data-toggle="modal" data-target="#galleryModal"></button>--}}
-    {!! Form::model($user,['method'=>'POST','action'=>['UserController@update',$user->id]]) !!}
+    {!! Form::model($user,['method'=>'PATCH','action'=>['UserController@update',$user->id]]) !!}
         <div class="row">
             <!-- about me -->
             <div class="col-8 mt-3">

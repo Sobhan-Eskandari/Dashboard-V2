@@ -119,7 +119,7 @@
             $("#user").html(data);
 //            console.log(query);
             if(query === "") {
-                window.history.pushState("", "", "http://dash2.dev/users");
+                window.history.pushState("", "", "/users");
             }else {
                 window.history.pushState(data, "Title", " /users?query=" + query);
             }

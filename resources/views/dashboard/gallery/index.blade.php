@@ -1,5 +1,12 @@
 @extends('layouts.main')
 
+@section('breadcrumb')
+    @component('components.Breadcrumb')
+        <li><a href="{{ route('home') }}">داشبورد</a></li>
+        <li><a href="#">عکس ها</a></li>
+    @endcomponent
+@endsection
+
 @section('content')
 
     <section class="usersSection">

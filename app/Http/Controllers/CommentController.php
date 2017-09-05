@@ -67,6 +67,7 @@ class CommentController extends Controller
         $input['full_name'] = 'admin';
         $input['tracking_code'] = Uuid::uuid();
         auth()->user()->comments()->save(Comment::create($input));
+        Session::flash('success', 'پاسخ با موفقیت ارسال شد');
         return redirect(route('comments.index'));
     }
 
@@ -92,6 +93,7 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $comment->update($request->all());
+        Session::flash('success', 'نظر با موفقیت بروز رسانی شد');
         return redirect()->route('comments.index');
     }
 
@@ -116,6 +118,7 @@ class CommentController extends Controller
         if($request->ajax()){
             return view('includes.comments.AllComments', compact('comments'))->render();
         }else{
+            Session::flash('success', 'نظر با موفقیت حذف شد');
             return redirect(route('comments.index'));
         }
     }
@@ -160,7 +163,6 @@ class CommentController extends Controller
         if ($request->ajax()){
             return view('includes.comments.AllTrashedComments',compact('comments'));
         }
-
         return view('dashboard.comments.trash', compact('comments'));
     }
 
@@ -178,6 +180,7 @@ class CommentController extends Controller
         if ($request->ajax()){
             return view('includes.comments.AllComments', compact('comments'))->render();
         }else{
+            Session::flash('success', 'نظر با موفقیت بازگردانی شد');
             return redirect(route('comments.trash'));
         }
     }
@@ -196,6 +199,7 @@ class CommentController extends Controller
         if ($request->ajax()){
             return view('includes.comments.AllComments', compact('comments'))->render();
         }else{
+            Session::flash('success', 'نظر با موفقیت حذف دائم شد');
             return redirect(route('comments.trash'));
         }
     }
