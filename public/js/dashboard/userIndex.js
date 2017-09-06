@@ -1,6 +1,3 @@
-/**
- * Created by Nima on 8/8/2017.
- */
 var collect = {};
 $('#searchUser').keyup(function (e) {
     collect['query'] = $('#searchUser').val();
@@ -20,4 +17,20 @@ $('#searchUser').keyup(function (e) {
             alert('Users could not be loaded.');
         });
     }
+});
+
+var checkboxes = [];
+
+$('input[type=checkbox]').click(function () {
+    var checkedId = this.id;
+    if(this.checked){
+        checkboxes.push(checkedId);
+    }else{
+        $.each(checkboxes, function (index, value) {
+            if(checkedId === value){
+                checkboxes.splice(index, 1);
+            }
+        });
+    }
+    $('#deleteForm').find('input[name=ids]').val(checkboxes);
 });

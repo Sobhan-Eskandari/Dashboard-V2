@@ -2,7 +2,10 @@
 {{--==========[ Row of buttons abpve table ]========= --}}
 <div class="row">
     <div class="col-1 push-11 ml-2 text-right">
-        <button class="hi-button-simple hi-shadow-0 yellow darken-3" id="userForceMultiDestroy">زباله</button>
+        {!! Form::open(['method'=>'POST', 'action'=>'UserController@forceMultiDelete', 'id'=>'deleteForm']) !!}
+            {!! Form::text('ids', null, ['style' => 'display: none']) !!}
+            <button id="multiDestroy" class="hi-button-simple hi-shadow-0 yellow darken-3">حذف دائمی</button>
+        {!! Form::close() !!}
     </div>
 </div>
 
@@ -38,8 +41,8 @@
                     {{--==========[ Table Row items ]========= --}}
                     <td>
                         <div class="pure-checkbox mt-2 mr-2">
-                            <input id="users_checkbox-{{$user->id}}" class="checkbox-{{$user->id}}" onclick="selectCmntCheckbox(event)" name="users_checkbox-{{$user->id}}" type="checkbox" value="{{$user->id}}">
-                            <label for="users_checkbox-{{$user->id}}"></label>
+                            <input id="{{$user->id}}" class="checkbox-{{$user->id}}" onclick="selectCmntCheckbox(event)" name="users_checkbox-{{$user->id}}" type="checkbox" value="{{$user->id}}">
+                            <label for="{{$user->id}}"></label>
                         </div>
                     </td>
                     <td class="py-1 text-right userInfoPlace">

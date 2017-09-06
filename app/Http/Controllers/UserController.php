@@ -41,11 +41,9 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $input= $request->all();
-        $input['verified'] = 1;
-        $input['password'] = bcrypt($request->password);
-        $user = User::create($input);
-        auth()->user()->children()->save($user);
+        $request['verified'] = 1;
+        $request['password'] = bcrypt($request->password);
+        auth()->user()->children()->save($user = User::create($request->all()));
         if($request->has('avatar')) {
             $user->photos()->attach([$request->input('avatar')]);
         }
@@ -69,43 +67,57 @@ class UserController extends Controller
     {
         $input = $request->all();
         $input['updated_by'] = \auth()->user()->id;
+
         if($request->has('password')){
             $input['password'] = bcrypt($request->password);
         }else{
             $input['password'] = $user->password;
         }
+
         if($request->has('avatar')) {
             $user->photo()->sync([$request->input('avatar')]);
         }
+
         $user->update($input);
-        Session::flash('success', 'کاربر با موفقیت بروز رسانی شد');
+        Session::flash('warning', 'کاربر با موفقیت بروز رسانی شد');
         return redirect()->route('users.index');
     }
 
     public function destroy(Request $request,User $user)
     {
+        $relations = ['faqs', 'categories', 'outboxes', 'tags'];
+        $user->updated_by = Auth::user()->id;
+
+        foreach ($relations as $relation) {
+            foreach ($user->{$relation} as $item) {
+                $item->delete();
+            }
+        }
+
         $user->delete();
-        Session::flash('success', 'کاربر با موفقیت حذف شد');
-        return redirect()->back();
+        Session::flash('danger', 'کاربر با موفقیت حذف شد');
+        return redirect(route('users.index'));
     }
 
     public function multiDestroy(Request $request)
     {
-        foreach ($request->input('checkboxes') as $checkbox) {
-            if ($checkbox === "on") {
-                continue;
+        $relations = ['faqs', 'categories', 'outboxes', 'tags'];
+        $ids = explode(',', $request['ids']);
+
+        foreach ($ids as $id) {
+            $user = User::with($relations)->findOrFail($id);
+            $user->updated_by = Auth::user()->id;
+
+            foreach ($relations as $relation) {
+                foreach ($user->{$relation} as $item) {
+                    $item->delete();
+                }
             }
-            $user = User::find($checkbox);
             $user->delete();
         }
 
-        if ($request->has('query')) {
-            $users = User::search($request->input('query'))->paginate(8);
-        } else {
-            $users = User::pagination(URL::to('/users'));
-        }
-
-        return view('includes.users.AllUsers', compact('users'))->render();
+        Session::flash('danger', 'کاربران مورد نظر حذف شدند');
+        return redirect(route('users.index'));
     }
 
     public function trash(Request $request)
@@ -113,7 +125,7 @@ class UserController extends Controller
         $users = User::onlyTrashed()->paginate(8);
 
         if ($request->ajax()){
-            return view('Includes.AllTrashedUsers',compact('users'));
+            return view('includes.users.AllTrashedUsers',compact('users'));
         }
 
         return view('dashboard.users.trash', compact('users'));
@@ -121,30 +133,59 @@ class UserController extends Controller
 
     public function forceDelete($user)
     {
+        $relations = ['faqs', 'categories', 'outboxes', 'tags'];
         $users = User::onlyTrashed()->find($user);
+
+        foreach ($relations as $relation) {
+            foreach ($users->{$relation} as $item) {
+                $item->forceDelete();
+            }
+        }
+
         $users->forceDelete();
-        Session::flash('success', 'کاربر با موفقیت حذف دائم شد');
-        return redirect()->route('user.trash');
+        Session::flash('danger', 'کاربر با موفقیت حذف شد');
+        return redirect(route('user.trash'));
     }
 
     public function forceMultiDelete(Request $request)
     {
-        foreach ($request->input('checkboxes') as $checkbox) {
-            if ($checkbox === "on") {
-                continue;
+        $relations = ['faqs', 'categories', 'outboxes', 'tags'];
+        $ids = explode(',', $request['ids']);
+
+        foreach ($ids as $id){
+            $user = User::with($relations)->onlyTrashed()->findOrFail($id);
+            foreach ($relations as $relation) {
+                foreach ($user->{$relation} as $item){
+                    $user->forceDelete();
+                }
             }
-            User::onlyTrashed()->find($checkbox)->forceDelete();;
+            $user->photos()->detach();
+            $user->forceDelete();
         }
-        $users = User::onlyTrashed()->paginate();
-        return view('Includes.AllTrashedUsers',compact('users'))->render();
+
+        Session::flash('danger', 'کاربران مورد نظر به صورت دائمی حذف شدند');
+        return redirect(route('user.trash'));
     }
 
     public function restore($user)
     {
+        $relations = ['faqs', 'categories', 'outboxes', 'tags'];
         $users = User::onlyTrashed()->find($user);
+        $logedInUser = Auth::user()->id;
+
+        foreach ($relations as $relation) {
+            foreach ($users->{$relation} as $item){
+                $item->updated_by = $logedInUser;
+                $item->save();
+                $item->restore();
+            }
+        }
+        $users->updated_by = $logedInUser;
+        $users->save();
         $users->restore();
-        Session::flash('success', 'کاربر با موفقیت بازگردانی شد');
-        return redirect()->route('user.trash');
+
+        Session::flash('warning', 'کاربر مورد نظر با موفقیت بازگردانی شد');
+        return redirect(route('user.trash'));
     }
 
     public function photo(Request $request)

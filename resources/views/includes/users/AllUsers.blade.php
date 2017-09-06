@@ -10,12 +10,11 @@
     </div>
 
     <div class="col-auto offset-8 text-right mr-2">
-        <button class="hi-button-simple hi-shadow-0 red darken-3 text-right" id="userMultiDestroy">حذف</button>
+        {!! Form::open(['method'=>'POST', 'action'=>'UserController@multiDestroy', 'id'=>'deleteForm']) !!}
+            {!! Form::text('ids', null, ['style' => 'display: none']) !!}
+            <button id="multiDestroy" class="hi-button-simple hi-shadow-0 yellow darken-3">حذف</button>
+        {!! Form::close() !!}
     </div>
-
-    {{--<div class="col-auto text-right">--}}
-        {{--<button class="hi-button-simple hi-shadow-0 blue darken-1">ویرایش</button>--}}
-    {{--</div>--}}
 
     <div class="col-auto ml-2 text-right">
         <a href="{{route('users.create')}}">
@@ -55,8 +54,8 @@
                     {{--==========[ Table Row items ]========= --}}
                     <td>
                         <div class="pure-checkbox mt-2 mr-2">
-                            <input id="users_checkbox-{{$user->id}}" class="checkbox-{{$user->id}}" onclick="selectCmntCheckbox(event)" name="users_checkbox-{{$user->id}}" type="checkbox" value="{{$user->id}}">
-                            <label for="users_checkbox-{{$user->id}}"></label>
+                            <input id="{{$user->id}}" class="checkbox-{{$user->id}}" onclick="selectCmntCheckbox(event)" name="users_checkbox-{{$user->id}}" type="checkbox" value="{{$user->id}}">
+                            <label for="{{$user->id}}"></label>
                         </div>
                     </td>
                     <td class="py-1 text-right userInfoPlace">
@@ -96,35 +95,3 @@
 
 {{--============[ Pagination of Page ]===========--}}
 {{$users->links()}}
-<script>
-
-    var checkboxes;
-    $('input[type=checkbox]').change(function () {
-        var val = [];
-        $(':checkbox:checked').each(function(i){
-            val[i] = $(this).val();
-        });
-        checkboxes = val;
-    });
-
-    $('#userMultiDestroy').click(function (e) {
-        e.preventDefault();
-        var query = $('#searchUser').val();
-        var CSRF_TOKEN =$("input[name*='_token']").val();
-        $.ajax({
-            type: 'POST',
-            url: 'users/MultiDelete',
-            data: {_token: CSRF_TOKEN,query:query,checkboxes:checkboxes}
-        }).done(function (data) {
-            $("#user").html(data);
-//            console.log(query);
-            if(query === "") {
-                window.history.pushState("", "", "/users");
-            }else {
-                window.history.pushState(data, "Title", " /users?query=" + query);
-            }
-        }).fail(function () {
-        });
-//            console.log(checkboxes);
-    });
-</script>

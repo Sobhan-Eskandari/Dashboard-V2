@@ -37,5 +37,9 @@
             </div>
         </div>
     </section>
+
+@endsection
+
+@section('javascript')
     <script src="{{asset('/js/dashboard/userIndex.js')}}"></script>
 @endsection

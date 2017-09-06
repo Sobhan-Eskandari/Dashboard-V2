@@ -37,27 +37,34 @@
 //     });
 // });
 
-var checkboxes;
-$('input[type=checkbox]').change(function () {
-    var val = [];
-    $(':checkbox:checked').each(function(i){
-        val[i] = $(this).val();
-    });
-    checkboxes = val;
+var checkboxes = [];
+
+$('input[type=checkbox]').click(function () {
+    var checkedId = this.id;
+    if(this.checked){
+        checkboxes.push(checkedId);
+    }else{
+        $.each(checkboxes, function (index, value) {
+            if(checkedId === value){
+                checkboxes.splice(index, 1);
+            }
+        });
+    }
+    $('#deleteForm').find('input[name=ids]').val(checkboxes);
 });
 
-$('#userForceMultiDestroy').click(function (e) {
-    e.preventDefault();
-    var CSRF_TOKEN =$("input[name*='_token']").val();
-    $.ajax({
-        type: 'POST',
-        url: '/users/forceMultiDelete',
-        data: {_token: CSRF_TOKEN,checkboxes:checkboxes}
-    }).done(function (data) {
-        $("#user").html(data);
-        window.history.pushState("", "", "http://dash.dev/users/trash");
-        notify(' حذف دائم کاریران انجام شد');
-    }).fail(function () {
-        notify(' حذف دائم کاریر انجام نشد');
-    });
-});
+// $('#userForceMultiDestroy').click(function (e) {
+//     e.preventDefault();
+//     var CSRF_TOKEN =$("input[name*='_token']").val();
+//     $.ajax({
+//         type: 'POST',
+//         url: '/users/forceMultiDelete',
+//         data: {_token: CSRF_TOKEN,checkboxes:checkboxes}
+//     }).done(function (data) {
+//         $("#user").html(data);
+//         window.history.pushState("", "", "http://dash.dev/users/trash");
+//         notify(' حذف دائم کاریران انجام شد');
+//     }).fail(function () {
+//         notify(' حذف دائم کاریر انجام نشد');
+//     });
+// });
