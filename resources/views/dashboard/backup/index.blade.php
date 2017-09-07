@@ -20,7 +20,7 @@
         </div>
         <div class="col-4">
             @component('components.backups.ExportCard')
-                @slot('title')<i class="fa fa-envelope-o" aria-hidden="true"></i>نسخه پشتیبانی نظرات@endslot
+                @slot('title')<i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;نسخه پشتیبانی نظرات@endslot
                 @slot('color')background-color:#3e4d9e;@endslot
                 @slot('address'){{ route('backups.comments') }}@endslot
             @endcomponent
@@ -49,9 +49,8 @@
                 @slot('address') {{ route('backups.posts') }}@endslot
             @endcomponent
         </div>
-        <div class="col-4"></div>
+        <div class="col-4 l-rtl"></div>
     </div>
-
 
 @endsection
 

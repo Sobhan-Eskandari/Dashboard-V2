@@ -55,6 +55,10 @@ a:focus, a:hover {
   color: $edit-button;
 }
 
+.hi-roundedDashboardTagsTable_tbody_tr_td_edit a:hover, .hi-roundedDashboardTagsTable_tbody_tr_td_edit a:focus {
+  color: $edit-button !important;
+}
+
 .hi-roundedDashboardTagsTable_tbody_tr_td_delete a {
   color: $delete;
   margin-left: 10px;
@@ -95,6 +99,18 @@ a:focus, a:hover {
 
 .hi-roundedDashboardTagsTable_tbody_tr_td_li {
   list-style-type: none;
+}
+
+.delete-btn-table {
+  background: none;
+  border: none;
+  color: #b32e2e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete-btn-table:focus {
+  outline: none !important;
 }
 
 

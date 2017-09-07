@@ -20,135 +20,221 @@
     </nav>
 
     <form action="/sliders/destroy" method="post">
-    {{csrf_field()}}
-    {{method_field('DELETE')}}
-    <section class="usersSection">
-        <div class="row">
-            <div class="col-12 bgCard hi-shadow-2">
-                <div class="container-fluid">
+        {{csrf_field()}}
+        {{method_field('DELETE')}}
+        <section class="usersSection">
+            <div class="row">
+                <div class="col-12 bgCard hi-shadow-2">
+                    <div class="container-fluid">
+                        <div>
+                            {{--==========[ Row of buttons abpve table ]=========--}}
+                            <div class="row l-rtl">
+                                <div class="col-1 text-right pt-1">
+                                    <a href="/sliders/create"
+                                       class="hi-button-simple hi-shadow-0 green darken-3 abv-btn-table">ایجاد</a>
+                                </div>
 
-                    {{--==========[ Row of buttons abpve table ]========= --}}
-                    <div class="row">
-                        <div class="col-1 pl-0">
-                            <button class="hi-button-btn1 orange darken-2 hi-shadow-1 hi-size-4">
-                                <i class="fa fa-trash white-text hi-fontSize-20" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                                <div class="col-1 text-right pt-1">
+                                    <form action="/sliders"></form>
+                                    <button class="hi-button-simple hi-shadow-0 red darken-3">حذف</button>
+                                </div>
 
-                        <div class="col-auto offset-9 text-right mr-2">
-                            <form action="/sliders"></form>
-                            <button class="hi-button-simple hi-shadow-0 red darken-3 text-right">حذف</button>
-                        </div>
+                                {{--<div class="col-1">--}}
+                                    {{--<button class="hi-button-btn1 orange darken-2 hi-shadow-1 hi-size-4">--}}
+                                        {{--<i class="fa fa-trash white-text hi-fontSize-20" aria-hidden="true"></i>--}}
+                                    {{--</button>--}}
+                                {{--</div>--}}
 
-                        <div class="col-auto ml-2 text-right">
-                            <a href="/sliders/create" class="hi-button-simple hi-shadow-0 green darken-3">ایجاد</a>
-                        </div>
-                    </div>
+                            </div>
 
-                    {{--==========[ Table Of Users ]========= --}}
-                    <div class="row mt-3">
-                        <div class="col-12 px-0">
-                            <table class="sliders_table">
-                                <thead class="table_tableHeader white-text">
+                            {{--==========[ Table Of Users ]=========--}}
+                            {{--<div class="row mt-3">--}}
+                            {{--<div class="col-12 px-0">--}}
+                            {{--<table class="sliders_table">--}}
+                            {{--<thead class="table_tableHeader white-text">--}}
 
-                                {{--==========[ Table Headers ]========= --}}
-                                <tr>
-                                    <th class="pl-0">
-                                        <div class="pure-checkbox mt-2">
-                                            <input id="selectAllSliders" class="selectAllCheckboxes" name="checkbox" type="checkbox" onclick="selectAllCmnt()">
-                                            <label for="selectAllSliders"></label>
-                                        </div>
-                                    </th>
-                                    <th class="text-right">علامت زدن همه</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
+                            {{--==========[ Table Headers ]=========--}}
+                            {{--<tr>--}}
+                            {{--<th class="pl-0">--}}
+                            {{--<div class="pure-checkbox mt-2">--}}
+                            {{--<input id="selectAllSliders" class="selectAllCheckboxes" name="checkbox" type="checkbox" onclick="selectAllCmnt()">--}}
+                            {{--<label for="selectAllSliders"></label>--}}
+                            {{--</div>--}}
+                            {{--</th>--}}
+                            {{--<th class="text-right">علامت زدن همه</th>--}}
+                            {{--<th></th>--}}
+                            {{--<th></th>--}}
+                            {{--</tr>--}}
 
-                                </thead>
-                                <tbody>
+                            {{--</thead>--}}
+                            {{--<tbody>--}}
 
-                                @foreach($sliders as $slider)
-                                    <tr>
-                                        {{--==========[ Gallery Table Row items ]========= --}}
-                                        <td>
-                                            <div class="pure-checkbox mt-2 mr-2">
-                                                <input id="sliders_checkbox-{{ $slider->id }}" class="checkbox-{{ $slider->id }}" value="{{ $slider->id }}" onclick="selectCmntCheckbox(event)" name="sliders[]" type="checkbox" >
-                                                <label for="sliders_checkbox-{{ $slider->id }}"></label>
-                                            </div>
-                                        </td>
-                                        <td class="py-1 text-center">
-                                            <div class="userInfoPlace">
-                                                @if(isset($slider->user->photos[0]->name))
-                                                    <img class="rounded img-fluid hi-size-7" src="{{ asset('gallery/' . $slider->user->photos[0]->name) }}">
-                                                @else
-                                                    <img class="rounded-circle hi-size-9 mb-3" src="{{ asset('images/nobody_m.original.jpg') }}">
-                                                @endif
-                                                <div>
-                                                    <p class="username mt-3"> {{ strip_tags($slider->caption) }} </p>
-                                                    <p class="grey-text hi-fontSize-12 text-right pr-2">
-                                                        توسط {{ $slider->user->full_name }} ایجاد شده در : {{ $slider->create_date() }}
-                                                    </p>
+                            {{--@foreach($sliders as $slider)--}}
+                            {{--<tr>--}}
+                            {{--==========[ Gallery Table Row items ]=========--}}
+                            {{--<td>--}}
+                            {{--<div class="pure-checkbox mt-2 mr-2">--}}
+                            {{--<input id="sliders_checkbox-{{ $slider->id }}" class="checkbox-{{ $slider->id }}" value="{{ $slider->id }}" onclick="selectCmntCheckbox(event)" name="sliders[]" type="checkbox" >--}}
+                            {{--<label for="sliders_checkbox-{{ $slider->id }}"></label>--}}
+                            {{--</div>--}}
+                            {{--</td>--}}
+                            {{--<td class="py-1 text-center">--}}
+                            {{--<div class="userInfoPlace">--}}
+                            {{--@if(isset($slider->user->photos[0]->name))--}}
+                            {{--<img class="rounded img-fluid hi-size-7" src="{{ asset('gallery/' . $slider->user->photos[0]->name) }}">--}}
+                            {{--@else--}}
+                            {{--<img class="rounded-circle hi-size-9 mb-3" src="{{ asset('images/nobody_m.original.jpg') }}">--}}
+                            {{--@endif--}}
+                            {{--<div>--}}
+                            {{--<p class="username mt-3"> {{ strip_tags($slider->caption) }} </p>--}}
+                            {{--<p class="grey-text hi-fontSize-12 text-right pr-2">--}}
+                            {{--توسط {{ $slider->user->full_name }} ایجاد شده در : {{ $slider->create_date() }}--}}
+                            {{--</p>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</td>--}}
+
+                            {{--==========[ Order of Slider Button ]=========--}}
+                            {{--<td class="px-1">--}}
+                            {{--<select class="slidersDropDown">--}}
+                            {{--<option value="1">۱</option>--}}
+                            {{--<option value="2">۲</option>--}}
+                            {{--<option value="3">۳</option>--}}
+                            {{--<option value="4">۴</option>--}}
+                            {{--</select>--}}
+                            {{--</td>--}}
+
+                            {{--==========[ More Button ]=========--}}
+                            {{--<td class="px-1">--}}
+                            {{--<div class="Topbar_dropdown dropdown table_dropDown">--}}
+                            {{--<button class="btn btn-secondary dropdown-toggle py-1 px-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                            {{--<i class="fa fa-ellipsis-v black-text hi-fontSize-20" aria-hidden="true"></i>--}}
+                            {{--</button>--}}
+                            {{--==========[ Dropdown Menu ]=========--}}
+                            {{--<div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">--}}
+                            {{--<a class="dropdown-item text-right py-0" href="/sliders/{{$slider->id}}/edit"><i class="fa fa-pencil ml-2" aria-hidden="true"></i>ویرایش</a>--}}
+                            {{--<div class="dropdown-divider my-1"></div>--}}
+                            {{--<form action="/sliders/{{$slider->id}}" method="post">--}}
+                            {{--{{csrf_field()}}--}}
+                            {{--{{method_field("DELETE")}}--}}
+                            {{--<button type="submit" class="dropdown-item text-right py-0 mt-1" href="#"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>--}}
+                            {{--</form>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</td>--}}
+                            {{--==========[ Gallery Table Row items ]=========--}}
+                            {{--</tr>--}}
+                            {{--@endforeach--}}
+
+                            {{--</tbody>--}}
+                            {{--</table>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+
+                            {{--==========[ Submit Button ]=========--}}
+                            {{--<div class="row">--}}
+                            {{--<div class="col-12 text-right mt-3 pr-0">--}}
+                            {{--<button class="btn btn-primary hi-shadow-1">--}}
+                            {{--تایید--}}
+                            {{--</button>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            <br>
+                            <div class="row l-rtl">
+                                <div class="col-12">
+                                    <table class="table table-bordered sliders_table">
+                                        <thead class="table_tableHeader white-text">
+
+                                        <!--==========[ Table Headers ]=========-->
+                                        <tr>
+                                            <th class="pl-0 border-left-width-table" width="50px">
+                                                <div class="pure-checkbox selectAllMsgInboxMargin pb-2">
+                                                    <input id="selectAllSliders" class="selectAllCheckboxes"
+                                                           name="checkbox" type="checkbox" onclick="selectAllCmnt()">
+                                                    <label for="selectAllSliders"></label>
                                                 </div>
-                                            </div>
-                                        </td>
-
-                                        {{--==========[ Order of Slider Button ]========= --}}
-                                        <td class="px-1">
-                                            <select class="slidersDropDown">
-                                                <option value="1">۱</option>
-                                                <option value="2">۲</option>
-                                                <option value="3">۳</option>
-                                                <option value="4">۴</option>
-                                            </select>
-                                        </td>
-
-                                        {{--==========[ More Button ]========= --}}
-                                        <td class="px-1">
-                                            <div class="Topbar_dropdown dropdown table_dropDown">
-                                                <button class="btn btn-secondary dropdown-toggle py-1 px-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-ellipsis-v black-text hi-fontSize-20" aria-hidden="true"></i>
-                                                </button>
-                                                {{--==========[ Dropdown Menu ]========= --}}
-                                                <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" class="dropdown-menu hi-shadow-2" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-right py-0" href="/sliders/{{$slider->id}}/edit"><i class="fa fa-pencil ml-2" aria-hidden="true"></i>ویرایش</a>
-                                                    <div class="dropdown-divider my-1"></div>
-                                                    <form action="/sliders/{{$slider->id}}" method="post">
-                                                        {{csrf_field()}}
-                                                        {{method_field("DELETE")}}
-                                                        <button type="submit" class="dropdown-item text-right py-0 mt-1" href="#"><i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف</button>
-                                                    </form>
+                                            </th>
+                                            <th class="text-right px-0 border-right-width-table" colspan="5">علامت زدن
+                                                همه
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th class="pl-0 border-left-width-table pt-4">
+                                                <div class="pure-checkbox mt-2">
+                                                    <input id="selectAllSliders" class="selectAllCheckboxes"
+                                                           name="checkbox" type="checkbox" onclick="selectAllCmnt()">
+                                                    <label for="selectAllSliders"></label>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        {{--==========[ Gallery Table Row items ]========= --}}
-                                    </tr>
-                                @endforeach
-
-                                </tbody>
-                            </table>
+                                            </th>
+                                            <td width="105px"
+                                                class="text-right border-right-width-table border-left-width-table">
+                                                <img src="{{ asset('images/avatar.png') }}" width="70px" height="70px">
+                                            </td>
+                                            <td class="pr-0 border-right-width-table border-left-width-table">
+                                                <p class="username mt-3 text-right font-weight-normal">بحران نظام بانکی
+                                                    را قبول ندارم وضع بانک ها بهتر از سال گذشته است</p>
+                                                <p class="grey-text hi-fontSize-12 text-right pr-4 font-weight-normal pt-1">
+                                                    توسط حمید وتر ایجاد شده در :95/5/4</p>
+                                            </td>
+                                            <td class="border-right-width-table">
+                                                <select class="slidersDropDown">
+                                                    <option value="1">۱</option>
+                                                    <option value="2">۲</option>
+                                                    <option value="3">۳</option>
+                                                    <option value="4">۴</option>
+                                                </select>
+                                            </td>
+                                            <!--==========[ More Button ]=========-->
+                                            <td class="px-1">
+                                                <div class="Topbar_dropdown dropdown table_dropDown">
+                                                    <button class="btn btn-secondary dropdown-toggle py-1 px-1"
+                                                            type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-ellipsis-v black-text hi-fontSize-20"
+                                                           aria-hidden="true"></i>
+                                                    </button>
+                                                    <!--==========[ Dropdown Menu ]=========-->
+                                                    <div data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
+                                                         class="dropdown-menu hi-shadow-2"
+                                                         aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item text-right py-0" href="#"><i
+                                                                    class="fa fa-pencil ml-2" aria-hidden="true"></i>ویرایش</a>
+                                                        <div class="dropdown-divider my-1"></div>
+                                                        <form method="post">
+                                                            <button type="submit"
+                                                                    class="dropdown-item text-right py-0 mt-1" href="#">
+                                                                <i class="fa fa-trash ml-2" aria-hidden="true"></i>حذف
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--==========[ Submit Button ]=========-->
+                            <div class="row">
+                                <div class="col-12 text-right mt-3">
+                                    <button class="btn  hi-shadow-1 px-4 blue darken-3 white-text">تایید</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    {{--==========[ Submit Button ]========= --}}
-                    <div class="row">
-                        <div class="col-12 text-right mt-3 pr-0">
-                            <button class="btn btn-primary hi-shadow-1">
-                                تاییید
-                            </button>
-                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-    </section>
-</form>
+        </section>
+    </form>
 @endsection
 
 @section('js_resources')
     <script src="{{ asset('js/bootstrap-multiselect.js') }}"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.slidersDropDown').multiselect();
         });
     </script>

@@ -148,5 +148,8 @@ $color-4: #edeff0; // Porcelain
   .breadcrumb_currentPage{
     color: #12a3d9;
   }
+  .breadcrumb_currentPage:hover{
+    color: #12a3d9 !important;
+  }
 }
 
