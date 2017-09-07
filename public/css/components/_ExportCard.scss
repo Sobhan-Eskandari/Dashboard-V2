@@ -60,3 +60,22 @@ h6.card-header.backupMainTitleCard{
   box-shadow: 0 0 0 2px transparent;
   border-color: transparent;
 }
+.ExportCard_SelectorBox_selector{
+  .metro .selected{
+    border: 1px solid #1F232C!important;
+  }
+  .metro div {
+    border: 1px solid #1F232C;
+  }
+
+  .metro li.focus {
+    background: #1F232C;
+  }
+
+  .metro li.active {
+    background: #1F232C;
+  }
+  .metro .selected ,.metro li{
+    font-size: 14px;
+  }
+}

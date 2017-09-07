@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="row pr-1 pl-0">
-                        {!! Form::submit('ساخت', ['class'=>'btn hi-whiteCategoryDashboardBox_button light-blue darken-2', 'id' => 'submit']) !!}
+                        {!! Form::submit('ساخت', ['class'=>'btn hi-whiteCategoryDashboardBox_button light-blue darken-2 hi-fontSize-16 waves-effect waves-light', 'id' => 'submit']) !!}
                     </div>
                 {!! Form::close() !!}
             </div>

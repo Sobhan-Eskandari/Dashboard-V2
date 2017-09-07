@@ -10,28 +10,35 @@
                 <h6 class="card-title backupExportCard_title">نوع فایل خروجی خود را انتخاب کنید:</h6>
             </div>
             <br>
-            <div class="row px-3">
-                <select name="type">
-                    <option value="pdf">PDF</option>
-                    <option value="xlsx">Excel</option>
-                </select>
+            <div class="row justify-content-center">
+                <div class="col-5">
+                {{--<select name="type" class="mx-auto">--}}
+                    {{--<option value="pdf">PDF</option>--}}
+                    {{--<option value="xlsx">Excel</option>--}}
+                {{--</select>--}}
+                    <div class="hi-profileCard_PictureSelectorBox_selector  ExportCard_SelectorBox_selector mr-1">
+                        <select class="dropdown" data-settings='{"wrapperClass":"metro"}'>
+                            <option value="1" selected>PDF</option>
+                            <option value="0">Excel</option>
+                        </select>
+                    </div>
                 {{--<div class="col-6 pr-4">--}}
                     {{--<button type="button" class="btn btn-primary pull-right backupExportTypeButton">Excel</button>--}}
                 {{--</div>--}}
                 {{--<div class="col-6 pl-4">--}}
                     {{--<button type="button" class="btn btn-primary pull-left backupExportTypeButton">PDF</button>--}}
                 {{--</div>--}}
+                </div>
             </div>
-            <br>
             <div class="row px-3">
                 <h6 class="card-title backupExportCard_title">بازه زمانی خود مد نظر خود را وارد کنید:</h6>
             </div>
             <br>
             <div class="row pl-3 pr-3 btn-group-justified backupGroupButton">
                 <h6 class="card-title pt-2 backupExportCard_title">از:&nbsp;</h6>
-                <input name="from" type="text" class="backup_dateSelector backupSelect" />
+                <input name="from" type="text" class="backup_dateSelector backupSelect text-center" />
                 <h6 class="card-title pt-2 backupExportCard_title">&nbsp;&nbsp;تا:&nbsp;</h6>
-                <input name="till" type="text" class="backup_dateSelector backupSelect" />
+                <input name="till" type="text" class="backup_dateSelector backupSelect text-center" />
             </div>
             <br>
             <div class="row px-3">

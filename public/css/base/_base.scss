@@ -2,15 +2,15 @@ body {
   font-family: IRANSans !important;
 }
 
-.l-rtl{
+.l-rtl {
   direction: rtl;
 }
 
-.l-ltr{
+.l-ltr {
   direction: ltr;
 }
 
-.l-flex{
+.l-flex {
   display: flex;
 }
 
@@ -20,16 +20,19 @@ body {
   font-family: IRANSans;
   direction: rtl;
 }
+
 ::-moz-placeholder { /* Firefox 19+ */
   font-size: 12px;
   font-family: IRANSans;
   direction: rtl;
 }
+
 :-ms-input-placeholder { /* IE 10+ */
   font-size: 12px;
   font-family: IRANSans;
   direction: rtl;
 }
+
 :-moz-placeholder { /* Firefox 18- */
   font-size: 12px;
   font-family: IRANSans;
@@ -40,13 +43,13 @@ a {
   color: inherit;
   cursor: pointer;
 
-  &:focus, &:hover{
+  &:focus, &:hover {
     text-decoration: none !important;
     color: white !important;
   }
 }
 
-.overflowBox{
+.overflowBox {
   height: 300px;
   overflow: scroll;
 }
@@ -133,6 +136,7 @@ a {
   font-family: IRANSans;
   background-color: $delete;
   color: white;
+  cursor: pointer !important;
 }
 
 .hi-roundedDashboardTagsTable_thead_tr_td_button:focus {
@@ -163,6 +167,7 @@ a {
   font-size: larger;
   padding-top: 8px;
   padding-bottom: 8px;
+  cursor: pointer;
 }
 
 .hi-whiteCategoryDashboardBox_button:active,
@@ -249,20 +254,21 @@ a {
   padding: 20px 30px;
 }
 
-.homeCard canvas{
+.homeCard canvas {
   width: 470px !important;
   height: 80% !important;
   padding: 0 20px 5px 20px;
   margin: 5px;
 }
-.homeCard{
-  .flickity-page-dots{
+
+.homeCard {
+  .flickity-page-dots {
     margin-top: 0;
     margin-bottom: 10px;
     position: sticky !important;
   }
 
-  .flickity-prev-next-button{
+  .flickity-prev-next-button {
     background-color: aliceblue;
   }
 
@@ -273,7 +279,7 @@ a {
   direction: rtl;
 }
 
-.border-bottom-zero{
+.border-bottom-zero {
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
@@ -406,7 +412,8 @@ a {
 .FAQ_hr {
   width: 82%;
 }
-.FAQInput:focus{
+
+.FAQInput:focus {
   border: 1px solid #3B4452;
 }
 
@@ -437,17 +444,17 @@ a {
   display: none;
 }
 
-
 /* ============[ Custom Check boxes ]=========== */
 .pure-checkbox input[type="checkbox"] + label:before,
 .pure-radiobutton input[type="checkbox"] + label:before,
 .pure-checkbox input[type="radio"] + label:before,
-.pure-radiobutton input[type="radio"] + label:before  {
+.pure-radiobutton input[type="radio"] + label:before {
   border-radius: 5px !important;
   padding: 1px !important;
 }
+
 .pure-checkbox input[type="checkbox"] + label:after,
-.pure-radiobutton input[type="checkbox"] + label:after  {
+.pure-radiobutton input[type="checkbox"] + label:after {
   top: 59%;
   left: 5px;
   width: 8px;
@@ -456,34 +463,34 @@ a {
 }
 
 /* ============[ Gallery ]=========== */
-.galleryModal{
+.galleryModal {
   @media (min-width: 992px) {
-    .modal-lg{
+    .modal-lg {
       max-width: 1000px;
     }
   }
 
-  #gallery_row{
+  #gallery_row {
     height: 160px;
   }
-  .modal-content{
+  .modal-content {
     height: 720px;
   }
 
-  .gallery_uploadedImage{
-    height:380px !important;
+  .gallery_uploadedImage {
+    height: 380px !important;
     overflow-y: scroll;
   }
 
-  .gallery_category{
+  .gallery_category {
     list-style: none;
 
-    li{
+    li {
       padding: 0;
       text-align: right;
     }
 
-    .gallery_category_btn{
+    .gallery_category_btn {
       background-color: transparent;
       border: none;
       box-shadow: none;
@@ -493,7 +500,7 @@ a {
     }
   }
 
-  .gallery_files{
+  .gallery_files {
     height: 100%;
 
     .pure-checkbox input[type="checkbox"] + label:before,
@@ -523,12 +530,12 @@ a {
     }
   }
 
-  .galleryFiles_info{
+  .galleryFiles_info {
     background-color: #F3F4F5;
 
-    .file_info{
+    .file_info {
       margin-top: 10px;
-      list-style:none;
+      list-style: none;
       color: #959596;
       font-size: 14px;
       text-align: left;
@@ -536,25 +543,25 @@ a {
     }
   }
 
-  .img-radioBtn{
+  .img-radioBtn {
     padding-left: 0 !important;
-    &:after{
+    &:after {
       top: 21.0% !important;
       left: 13.0% !important;
     }
-    &:before{
+    &:before {
       top: 20.5% !important;
       left: 10% !important;
     }
   }
 }
 
-#my-awesome-dropzone{
+#my-awesome-dropzone {
   background-color: #EAEBEC;
   border: 1px dashed;
   border-radius: 5px;
 
-  &:before{
+  &:before {
     font-family: FontAwesome !important;
     content: '\f093';
     position: absolute;
@@ -563,7 +570,7 @@ a {
     top: 40px;
     margin-top: 8px;
   }
-  .dz-message{
+  .dz-message {
     margin-top: 75px !important;
   }
 }
@@ -575,7 +582,7 @@ a {
 }
 
 /* ============[ Tag ]=========== */
-.tag{
+.tag {
   background-color: darkslateblue;
   display: -webkit-inline-box;
   height: 32px;
@@ -585,40 +592,45 @@ a {
   margin-right: 3px;
 }
 
-.tag__text{
+.tag__text {
   margin-right: 7px;
   font-size: 13px;
   font-weight: 500;
   line-height: 32px;
 }
-.tag__close{
+
+.tag__close {
   vertical-align: bottom;
   cursor: pointer;
 }
 
-.tag_lightMode{
+.tag_lightMode {
   color: #5C5C5C;
 }
-.tag_darkMode{
+
+.tag_darkMode {
   color: white;
 }
-.direction_create_slider{
+
+.direction_create_slider {
   direction: rtl;
 }
 
 /* ============[ Sliders Page ]=========== */
-.multiselect-container{
+.multiselect-container {
   min-width: 50px !important;
   text-align: right;
-  label{
+  label {
     padding: 10px !important;
   }
 }
+
 /* ============[ Settings page ]=========== */
 .upload-button input[type="file"] {
   display: block;
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   margin-left: -75px; /* gets that button with no-pointer-cursor off to the left and out of the way */
   width: 200%; /* over compensates for the above - I would use calc or sass math if not here*/
   height: 100%;
@@ -631,8 +643,31 @@ a {
   /* key */
   position: relative;
   overflow: hidden;
-
   /* just positioning */
   float: left;
   clear: left;
+}
+
+a:hover, a:focus {
+  color: inherit !important;
+}
+
+.selectAllMsgInboxMargin {
+  margin-top: -11px
+}
+
+.selectCheckboxMargin {
+  margin-top: -13px
+}
+
+.border-left-width-table {
+  border-left-width: 0 !important;
+}
+
+.border-right-width-table {
+  border-right-width: 0 !important;
+}
+
+.abv-btn-table:hover {
+  color: white !important;
 }

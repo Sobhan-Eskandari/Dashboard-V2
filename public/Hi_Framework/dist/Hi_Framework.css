@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ============[ components import ]=========== */
 /* ==========[ Transparent FA Button ]========= */
 .hi-button-btn1 {
@@ -560,6 +561,11 @@ span.multiselect-native-select select {
 
 /* ============[ Firefox Only Styles ]=========== */
 @-moz-document url-prefix() {}
+/*------------∞
+|  reset.css  |
+∞------------*/
+/* ∞∞ postcss ∞∞ */
+/* ∞∞ font ∞∞ */
 /* ============[ css import ]=========== */
 /* ============[ Waves Library Import ]=========== */
 /*!

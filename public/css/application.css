@@ -7140,7 +7140,8 @@ a {
   font-weight: 500;
   font-family: IRANSans;
   background-color: #b32e2e;
-  color: white; }
+  color: white;
+  cursor: pointer !important; }
 
 .hi-roundedDashboardTagsTable_thead_tr_td_button:focus {
   box-shadow: 0 0 0 2px rgba(179, 46, 46, 0.5); }
@@ -7165,7 +7166,8 @@ a {
   color: white;
   font-size: larger;
   padding-top: 8px;
-  padding-bottom: 8px; }
+  padding-bottom: 8px;
+  cursor: pointer; }
 
 .hi-whiteCategoryDashboardBox_button:active,
 .hi-whiteCategoryDashboardBox_button:focus,
@@ -7542,6 +7544,24 @@ a {
   float: left;
   clear: left; }
 
+a:hover, a:focus {
+  color: inherit !important; }
+
+.selectAllMsgInboxMargin {
+  margin-top: -11px; }
+
+.selectCheckboxMargin {
+  margin-top: -13px; }
+
+.border-left-width-table {
+  border-left-width: 0 !important; }
+
+.border-right-width-table {
+  border-right-width: 0 !important; }
+
+.abv-btn-table:hover {
+  color: white !important; }
+
 /* ============[ Components Css Import ]=========== */
 .hi-profileCard {
   border-radius: 8px;
@@ -7839,6 +7859,17 @@ h6.card-header.backupMainTitleCard {
 .backupExportButton:focus, .backupExportButton:hover {
   box-shadow: 0 0 0 2px transparent;
   border-color: transparent; }
+
+.ExportCard_SelectorBox_selector .metro .selected {
+  border: 1px solid #1F232C !important; }
+.ExportCard_SelectorBox_selector .metro div {
+  border: 1px solid #1F232C; }
+.ExportCard_SelectorBox_selector .metro li.focus {
+  background: #1F232C; }
+.ExportCard_SelectorBox_selector .metro li.active {
+  background: #1F232C; }
+.ExportCard_SelectorBox_selector .metro .selected, .ExportCard_SelectorBox_selector .metro li {
+  font-size: 14px; }
 
 .FAQ_card-header {
   background-color: #3B4452;
@@ -8237,6 +8268,9 @@ a:focus, a:hover {
 .hi-roundedDashboardTagsTable_tbody_tr_td_edit a {
   color: #2e98b3; }
 
+.hi-roundedDashboardTagsTable_tbody_tr_td_edit a:hover, .hi-roundedDashboardTagsTable_tbody_tr_td_edit a:focus {
+  color: #2e98b3 !important; }
+
 .hi-roundedDashboardTagsTable_tbody_tr_td_delete a {
   color: #b32e2e;
   margin-left: 10px; }
@@ -8270,6 +8304,16 @@ a:focus, a:hover {
 
 .hi-roundedDashboardTagsTable_tbody_tr_td_li {
   list-style-type: none; }
+
+.delete-btn-table {
+  background: none;
+  border: none;
+  color: #b32e2e;
+  font-weight: bold;
+  cursor: pointer; }
+
+.delete-btn-table:focus {
+  outline: none !important; }
 
 .ListCellWithIcon {
   padding: 0 15px 5px 15px; }
@@ -8421,6 +8465,8 @@ a:focus, a:hover {
     background-position: -60px -20px; }
   .cd-breadcrumb .breadcrumb_currentPage, .cd-multi-steps .breadcrumb_currentPage {
     color: #12a3d9; }
+  .cd-breadcrumb .breadcrumb_currentPage:hover, .cd-multi-steps .breadcrumb_currentPage:hover {
+    color: #12a3d9 !important; }
 
 /* ============[ category box ]=========== */
 #hi-categoryListGroupFlip, #hi-CategoryListGroupPanel {
