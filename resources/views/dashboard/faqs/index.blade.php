@@ -33,8 +33,8 @@
         @endif
     </nav>
 
-    <div class="row FAQBox_direction">
-        <div class="col-6" id="create-div">
+    <div class="row FAQBox_direction justify-content-around">
+        <div class="col-5 pl-0" id="create-div">
             {!! Form::open(['method'=>'POST', 'action'=>'FaqController@store', 'id'=>'createForm']) !!}
                 <div class="row">
                     <label>متن سوال را وارد کنید:</label>
@@ -56,7 +56,7 @@
             {!! Form::close() !!}
         </div>
 
-        <div class="col-6" id="edit-div" style="display: none">
+        <div class="col-5 pl-0" id="edit-div" style="display: none">
             {!! Form::open(['method'=>'PUT', 'id'=>'editForm']) !!}
             <div class="row">
                 <label>متن سوال را وارد کنید:</label>

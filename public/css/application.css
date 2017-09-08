@@ -7562,6 +7562,9 @@ a:hover, a:focus {
 .abv-btn-table:hover {
   color: white !important; }
 
+.FAQ-box-backColor {
+  background-color: #f7f7f7; }
+
 /* ============[ Components Css Import ]=========== */
 .hi-profileCard {
   border-radius: 8px;

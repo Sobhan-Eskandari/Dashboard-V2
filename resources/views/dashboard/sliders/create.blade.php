@@ -61,10 +61,14 @@
                     });
                 </script>
                 {!! Form::text('indexPhoto', null, ['style' => 'display: none;']) !!}
-                <div class="col-2 pr-0">
-                    <br>
-                    <img src="{{asset('images/nobody_m.original.jpg')}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
-                </div>
+
+                {{--<div class="col-2 pr-0">--}}
+                    {{--<br>--}}
+                    {{--<img src="{{asset('images/nobody_m.original.jpg')}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">--}}
+                {{--</div>--}}
+            </div>
+            <div class="col-2 pr-0 pt-5">
+                <img src="{{asset('images/nobody_m.original.jpg')}}" alt="در حال بارگذاری عکس" class="createPostImage mr-2" id="indexPhoto">
             </div>
         </div>
         {{--==========[ Submit Button ]========= --}}
