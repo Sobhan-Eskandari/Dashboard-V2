@@ -17,17 +17,11 @@
                     {{--<option value="xlsx">Excel</option>--}}
                 {{--</select>--}}
                     <div class="hi-profileCard_PictureSelectorBox_selector  ExportCard_SelectorBox_selector mr-1">
-                        <select class="dropdown" data-settings='{"wrapperClass":"metro"}'>
-                            <option value="1" selected>PDF</option>
-                            <option value="0">Excel</option>
+                        <select name="type" class="dropdown" data-settings='{"wrapperClass":"metro"}'>
+                            <option value="pdf" selected>PDF</option>
+                            <option value="xlsx">Excel</option>
                         </select>
                     </div>
-                {{--<div class="col-6 pr-4">--}}
-                    {{--<button type="button" class="btn btn-primary pull-right backupExportTypeButton">Excel</button>--}}
-                {{--</div>--}}
-                {{--<div class="col-6 pl-4">--}}
-                    {{--<button type="button" class="btn btn-primary pull-left backupExportTypeButton">PDF</button>--}}
-                {{--</div>--}}
                 </div>
             </div>
             <div class="row px-3">
